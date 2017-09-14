@@ -32,19 +32,21 @@ public class Character_Randomization : MonoBehaviour {
 	}
     public void generateCharacter()
     {
-        //if (Input.GetKeyUp(KeyCode.Space))
+        //Load text files
+        string[] fn = firstNames.text.Split("\n"[0]);
+        string[] ln = lastNames.text.Split("\n"[0]);
+        BaseCharacter tester = new BaseCharacter();
+        
+
+        for(int i = 0; i < 19; i++)
         {
             BaseCharacter newCharacter = new BaseCharacter();
 
             //Generate first name
-            string[] fn = firstNames.text.Split("\n"[0]);
             seed = Random.Range(0, fn.Length);
             firstname = fn[seed];
 
             //Generate last name;
-
-
-            string[] ln = lastNames.text.Split("\n"[0]);
             seed = Random.Range(0, ln.Length);
             lastname = ln[seed];
 
@@ -123,14 +125,18 @@ public class Character_Randomization : MonoBehaviour {
                     break;
 
             }
-            GameObject.Find("Game").GetComponent
+
+            GameObject.Find("GameSystem").GetComponent<Game>().insertCharacter(newCharacter);
+
+            
+            tester = GameObject.Find("GameSystem").GetComponent<Game>().getCharacter(i);
 
             //Output the character variables to the console
-            print("Name: " + newCharacter.getName());
-            print("Health: " + newCharacter.getHealth());
-            print("Attack: " + newCharacter.getAttack());
-            print("Magic: " + newCharacter.getMagic());
-            print("Defense: " + newCharacter.getDefense());
+            print("Name: " + tester.getName());
+            print("Health: " + tester.getHealth());
+            print("Attack: " + tester.getAttack());
+            print("Magic: " + tester.getMagic());
+            print("Defense: " + tester.getDefense());
         }
     }
 }
