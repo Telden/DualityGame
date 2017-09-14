@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseCharacter : MonoBehaviour {
+public class BaseCharacter {
 
     [SerializeField]
     float mHealth = 10;
@@ -34,7 +34,7 @@ public class BaseCharacter : MonoBehaviour {
 
     public void setMagic(float nMagic)
     {
-        mAttack = nMagic;
+        mMagic = nMagic;
     }
 
     public float getMagic()

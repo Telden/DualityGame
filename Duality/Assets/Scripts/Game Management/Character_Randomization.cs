@@ -2,125 +2,135 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using UnityEngine.UI;
 using UnityEngine;
 
-//http://answers.unity3d.com/questions/279750/loading-data-from-a-txt-file-c.html
+//
 public class Character_Randomization : MonoBehaviour {
-    BaseCharacter newCharacter;
+    public TextAsset firstNames;
+    public TextAsset lastNames;
+    public Button generateButton;
+    string text;
+    string firstname;
+    string lastname;
     int seed;
     float previousSeed;
     float stat;
     float randomStat;
-    string fileOne = "firstnames.txt";
-    string fileTwo = "lastnames.txt";
-    string firstname = "";
-    string lastname = "";
     string newName = "";
-    public TextAsset firstNames;
-    public TextAsset lastNames;
+   
     // Use this for initialization
     void Start () {
-        
+        Button btn = generateButton.GetComponent<Button>();
+        btn.onClick.AddListener(generateCharacter);
   
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
+        //generateCharacter();
 	}
     public void generateCharacter()
     {
-        StreamReader istream = new StreamReader(fileOne, Encoding.Default);
-        seed = Random.Range(0, 9);
-
-        for (int i = 0; i < seed; i++)
+        //if (Input.GetKeyUp(KeyCode.Space))
         {
-            using (istream)
+            BaseCharacter newCharacter = new BaseCharacter();
+
+            //Generate first name
+            string[] fn = firstNames.text.Split("\n"[0]);
+            seed = Random.Range(0, fn.Length);
+            firstname = fn[seed];
+
+            //Generate last name;
+
+
+            string[] ln = lastNames.text.Split("\n"[0]);
+            seed = Random.Range(0, ln.Length);
+            lastname = ln[seed];
+
+            newName = firstname + " " + lastname;
+            newCharacter.setName(newName);
+            //Debug.Log(newName);
+
+            // randomly select a random stat
+            seed = Random.Range(1, 4);
+            // Save the previous seed
+            previousSeed = seed;
+            // randomly select how much that stat will be increased by
+            stat = Random.Range(0, 9);
+            //Debug.Log("Increase seed is " + stat);
+            //Debug.Log("Random stat seed is " + seed);
+            switch (seed)
             {
-                firstname = istream.ReadLine();
-            }
-        }
-        istream.Close();
+                case 4:
+                    //Debug.Log("Health is being increased by " + stat);
+                    randomStat = newCharacter.getHealth() + stat;
+                    newCharacter.setHealth(randomStat);
+                    break;
+                case 3:
+                    //Debug.Log("Attack is being increased by " + stat);
+                    randomStat = newCharacter.getAttack() + stat;
+                    newCharacter.setAttack(randomStat);
+                    break;
+                case 2:
+                    //Debug.Log("Magic is being increased by " + stat);
+                    randomStat = newCharacter.getMagic() + stat;
+                    newCharacter.setMagic(randomStat);
+                    break;
+                case 1:
+                    //Debug.Log("Defense is being increased by " + stat);
+                    randomStat = newCharacter.getDefense() + stat;
+                    newCharacter.setDefense(randomStat);
+                    break;
 
-        StreamReader ifstream = new StreamReader(fileTwo, Encoding.Default);
-        seed = Random.Range(0, 9);
-        for (int i = 0; i < seed; i++)
-        {
-            using (istream)
+                default:
+                    print("Something didn't work in the random stat increase switch");
+                    break;
+            }
+            //make sure that the program does not select the same stat to change twice and slect a stat to decrease
+            do
             {
-                lastname = ifstream.ReadLine();
+                seed = Random.Range(1, 4);
+            } while (seed == previousSeed);
+
+            //Debug.Log("Decrease seed is " + stat);
+           // Debug.Log("Random stat seed is " + seed);
+            switch (seed)
+            {
+                case 4:
+                   // Debug.Log("Health is being decreased by " + stat);
+                    randomStat = newCharacter.getHealth() - stat;
+                    newCharacter.setHealth(randomStat);
+                    break;
+                case 3:
+                    //Debug.Log("Attack is being decreased by " + stat);
+                    randomStat = newCharacter.getAttack() - stat;
+                    newCharacter.setAttack(randomStat);
+                    break;
+                case 2:
+                   // Debug.Log("Magic is being decreased by " + stat);
+                    randomStat = newCharacter.getMagic() - stat;
+                    newCharacter.setMagic(randomStat);
+                    break;
+                case 1:
+                   // Debug.Log("Defense is being decreased by " + stat);
+                    randomStat = newCharacter.getDefense() - stat;
+                    newCharacter.setDefense(randomStat);
+                    break;
+
+                default:
+                    print("Something didn't work in the random stat decrease switch");
+                    break;
+
             }
+            GameObject.Find("Game").GetComponent
+
+            //Output the character variables to the console
+            print("Name: " + newCharacter.getName());
+            print("Health: " + newCharacter.getHealth());
+            print("Attack: " + newCharacter.getAttack());
+            print("Magic: " + newCharacter.getMagic());
+            print("Defense: " + newCharacter.getDefense());
         }
-        ifstream.Close();
-
-        newName = firstname + lastname;
-        newCharacter.setName(newName);
-
-        // randomly select a random stat
-        seed = Random.Range(0, 4);
-        // Save the previous seed
-        previousSeed = seed;
-        // randomly select how much that stat will be increased by
-        stat = Random.Range(0, 9);
-        switch (seed)
-        {
-            case 4:
-                randomStat = newCharacter.getHealth() + stat;
-                newCharacter.setHealth(randomStat);
-                break;
-            case 3:
-                randomStat = newCharacter.getAttack() + stat;
-                newCharacter.setAttack(randomStat);
-                break;
-            case 2:
-                randomStat = newCharacter.getMagic() + stat;
-                newCharacter.setMagic(randomStat);
-                break;
-            case 1:
-                randomStat = newCharacter.getDefense() + stat;
-                newCharacter.setDefense(randomStat);
-                break;
-
-            default:
-                print("Something didn't work in the random stat increase switch");
-                break;
-        }
-        //make sure that the program does not select the same stat to change twice and slect a stat to decrease
-        do
-        {
-            seed = Random.Range(0, 4);
-        } while (seed == previousSeed);
-
-        switch (seed)
-        {
-            case 4:
-                randomStat = newCharacter.getHealth() - stat;
-                newCharacter.setHealth(randomStat);
-                break;
-            case 3:
-                randomStat = newCharacter.getAttack() - stat;
-                newCharacter.setAttack(randomStat);
-                break;
-            case 2:
-                randomStat = newCharacter.getMagic() - stat;
-                newCharacter.setMagic(randomStat);
-                break;
-            case 1:
-                randomStat = newCharacter.getDefense() - stat;
-                newCharacter.setDefense(randomStat);
-                break;
-
-            default:
-                print("Something didn't work in the random stat decrease switch");
-                break;
-
-        }
-
-        //Output the character variables to the console
-        print("Name: " + newCharacter.getName());
-        print ("Health: " + newCharacter.getHealth());
-        print("Attack: " + newCharacter.getAttack());
-        print("Magic: " + newCharacter.getMagic());
-        print("Defense: " + newCharacter.getDefense());
     }
 }
