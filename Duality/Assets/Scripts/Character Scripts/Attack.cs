@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    public Rigidbody2D mAttackHitbox;
+
 	
-	// Update is called once per frame
+	void Start () {
+        mAttackHitbox = gameObject.GetComponent<Rigidbody2D>();
+        mAttackHitbox.isKinematic = false;
+
+    }
+	
+
 	void Update () {
 		
 	}
+
+    void detectEnemies()
+    {
+
+    }
 }
