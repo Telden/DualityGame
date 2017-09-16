@@ -5,7 +5,8 @@ using System.IO;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class HoverOver : MonoBehaviour {
+public class HoverOver : MonoBehaviour
+{
     public Canvas attackMenu;
     public Button Movement;
     Vector3 characterPos;
@@ -13,8 +14,9 @@ public class HoverOver : MonoBehaviour {
     bool moving = false;
     private LineRenderer line;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         Button tmp = Movement.GetComponent<Button>();
         tmp.onClick.AddListener(moveCharacter);
         attackMenu.enabled = false;
@@ -22,12 +24,13 @@ public class HoverOver : MonoBehaviour {
 
         characterPos.z = 0;
 
-       
+
     }
-	
-	// Update is called once per frame
-	void Update () {
-        if(moving)
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (moving)
         {
             characterPos.x = gameObject.transform.position.x;
             characterPos.y = gameObject.transform.position.y;
@@ -35,7 +38,7 @@ public class HoverOver : MonoBehaviour {
             moveCharacter();
             checkInput();
         }
-       
+
 
     }
 
@@ -44,7 +47,7 @@ public class HoverOver : MonoBehaviour {
         Debug.Log("Mouse Over");
         //if(Input.GetMouseButtonDown(0))
         {
-           // Debug.Log("Mouse clicked");
+            // Debug.Log("Mouse clicked");
             attackMenu.enabled = true;
             Movement.interactable = true;
         }
@@ -66,12 +69,12 @@ public class HoverOver : MonoBehaviour {
 
     void checkInput()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             gameObject.transform.position = CursorPosition;
             moving = false;
-           line.SetPosition(0, Vector3.zero);
-           line.SetPosition(1, Vector3.zero);
+            line.SetPosition(0, Vector3.zero);
+            line.SetPosition(1, Vector3.zero);
         }
     }
 }
