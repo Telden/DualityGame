@@ -637,6 +637,7 @@ GameObject:
   - component: {fileID: 581846967}
   - component: {fileID: 581846970}
   - component: {fileID: 581846969}
+  - component: {fileID: 581846972}
   - component: {fileID: 581846971}
   m_Layer: 0
   m_Name: Temp Player
@@ -829,6 +830,17 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &581846972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 581846966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b13c500c7a0e96a4d87c7a7c0612ec0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &715401504
 GameObject:
   m_ObjectHideFlags: 0
@@ -841,7 +853,7 @@ GameObject:
   - component: {fileID: 715401506}
   - component: {fileID: 715401508}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: AttackHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1980,9 +1992,10 @@ GameObject:
   - component: {fileID: 2133611332}
   - component: {fileID: 2133611331}
   - component: {fileID: 2133611330}
+  - component: {fileID: 2133611333}
   m_Layer: 0
-  m_Name: New Sprite
-  m_TagString: Untagged
+  m_Name: Temp Enemy
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2067,3 +2080,14 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2133611333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2133611329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c35cec78e27edc34089642824bd69849, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

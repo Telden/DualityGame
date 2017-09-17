@@ -14,13 +14,9 @@ public class UiController : MonoBehaviour {
 
     //Scripts for the buttons
     private Attack mAttackScript;
+    private move mMoveScript;
 
-    //Line drawing variables
-    private LineRenderer line;
-    Vector3 characterPos;
-    Vector2 CursorPosition;
-    bool moving = false;
-
+    bool active = false;
 
     // Use this for initialization
     void Start()
@@ -36,9 +32,9 @@ public class UiController : MonoBehaviour {
         tmp.onClick.AddListener(playerStay);
 
         //Set up all the scripts
-        //mAttackScript = transform.Find("AttackHitbox").GetComponent<Attack>();
-        //mAttackScript.init();
-
+        mAttackScript = transform.Find("AttackHitbox").GetComponent<Attack>();
+        mMoveScript = gameObject.GetComponent<move>();
+        
         attackMenu.enabled = false;
         Movement.interactable = false;
         Attack.interactable = false;
@@ -46,7 +42,6 @@ public class UiController : MonoBehaviour {
         Stay.interactable = false;
 
 
-        characterPos.z = 0;
 
 
     }
@@ -54,25 +49,24 @@ public class UiController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (moving)
+        if (active)
         {
-            characterPos.x = gameObject.transform.position.x;
-            characterPos.y = gameObject.transform.position.y;
-            CursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            moveCharacter();
             checkInput();
         }
+        
 
 
     }
     void checkInput()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            gameObject.transform.position = CursorPosition;
-            moving = false;
-            line.SetPosition(0, Vector3.zero);
-            line.SetPosition(1, Vector3.zero);
+            attackMenu.enabled = false;
+            Movement.interactable = false;
+            Attack.interactable = false;
+            Item.interactable = false;
+            Stay.interactable = false;
+            active = false;
         }
     }
 
@@ -87,6 +81,7 @@ public class UiController : MonoBehaviour {
             Attack.interactable = true;
             Item.interactable = true;
             Stay.interactable = true;
+            active = true;
         }
     }
 
@@ -98,11 +93,9 @@ public class UiController : MonoBehaviour {
         Attack.interactable = false;
         Item.interactable = false;
         Stay.interactable = false;
-        moving = true;
+        mMoveScript.init();
 
-        line = GetComponent<LineRenderer>();
-        line.SetPosition(0, characterPos);
-        line.SetPosition(1, CursorPosition);
+        
     }
 
     void playerAttack()
@@ -113,7 +106,7 @@ public class UiController : MonoBehaviour {
         Attack.interactable = false;
         Item.interactable = false;
         Stay.interactable = false;
-        
+        mAttackScript.init();
     }
    
     void useItem()
@@ -135,4 +128,6 @@ public class UiController : MonoBehaviour {
         Item.interactable = false;
         Stay.interactable = false;
     }
+
+    
 }
