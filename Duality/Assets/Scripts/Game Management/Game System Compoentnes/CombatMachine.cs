@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CombatMachine : MonoBehaviour {
 
-    bool mPlayerTurn = true;
+    //bool mPlayerTurn = true;
     //PlayerObject[] playerArmy;
     //EnemyObject[] enemyArmy;
 

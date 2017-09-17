@@ -9,6 +9,8 @@ public class BaseCharacter {
     float mAttack = 10;
     float mMagic = 10;
     float mDefense = 10;
+    float mMagicDefense = 10;
+    float mSpeed = 10;
     float mMovemnt = 100;
     string mName;
 
@@ -52,6 +54,26 @@ public class BaseCharacter {
         return mDefense;
     }
 
+    public void setMagicDefense(float nMagicDefense)
+    {
+        mMagicDefense = nMagicDefense;
+    }
+
+    public float getMagicDefense()
+    {
+        return mMagicDefense;
+    }
+
+    public void setSpeed(float nSpeed)
+    {
+        mMagicDefense = nSpeed;
+    }
+
+    public float getSpeed()
+    {
+        return mSpeed;
+    }
+    
     public void setMovemnt(float nMovement)
     {
         mMovemnt = nMovement;
@@ -61,6 +83,7 @@ public class BaseCharacter {
     {
         return mMovemnt;
     }
+
 
     public void setName(string nName)
     {

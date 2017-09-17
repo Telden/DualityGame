@@ -12,6 +12,9 @@ public class UiController : MonoBehaviour {
     public Button Item;
     public Button Stay;
 
+    //Scripts for the buttons
+    private Attack mAttackScript;
+
     //Line drawing variables
     private LineRenderer line;
     Vector3 characterPos;
@@ -32,7 +35,9 @@ public class UiController : MonoBehaviour {
         tmp = Stay.GetComponent<Button>();
         tmp.onClick.AddListener(playerStay);
 
-
+        //Set up all the scripts
+        //mAttackScript = transform.Find("AttackHitbox").GetComponent<Attack>();
+        //mAttackScript.init();
 
         attackMenu.enabled = false;
         Movement.interactable = false;
@@ -108,6 +113,7 @@ public class UiController : MonoBehaviour {
         Attack.interactable = false;
         Item.interactable = false;
         Stay.interactable = false;
+        
     }
    
     void useItem()

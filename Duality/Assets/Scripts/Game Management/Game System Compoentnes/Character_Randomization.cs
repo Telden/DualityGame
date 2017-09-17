@@ -55,7 +55,7 @@ public class Character_Randomization : MonoBehaviour {
             //Debug.Log(newName);
 
             // randomly select a random stat
-            seed = Random.Range(1, 4);
+            seed = Random.Range(1, 6);
             // Save the previous seed
             previousSeed = seed;
             // randomly select how much that stat will be increased by
@@ -64,27 +64,36 @@ public class Character_Randomization : MonoBehaviour {
             //Debug.Log("Random stat seed is " + seed);
             switch (seed)
             {
-                case 4:
+                case 6:
                     //Debug.Log("Health is being increased by " + stat);
                     randomStat = newCharacter.getHealth() + stat;
                     newCharacter.setHealth(randomStat);
                     break;
-                case 3:
+                case 5:
                     //Debug.Log("Attack is being increased by " + stat);
                     randomStat = newCharacter.getAttack() + stat;
                     newCharacter.setAttack(randomStat);
                     break;
-                case 2:
+                case 4:
                     //Debug.Log("Magic is being increased by " + stat);
                     randomStat = newCharacter.getMagic() + stat;
                     newCharacter.setMagic(randomStat);
                     break;
-                case 1:
+                case 3:
                     //Debug.Log("Defense is being increased by " + stat);
                     randomStat = newCharacter.getDefense() + stat;
                     newCharacter.setDefense(randomStat);
                     break;
-
+                case 2:
+                    //Debug.Log("Magic defense is being increased by " + stat);
+                    randomStat = newCharacter.getMagicDefense() + stat;
+                    newCharacter.setMagicDefense(randomStat);
+                    break;
+                case 1:
+                    //Debug.Log("Speed is being increased by " + stat);
+                    randomStat = newCharacter.getSpeed() + stat;
+                    newCharacter.setSpeed(randomStat);
+                    break;
                 default:
                     print("Something didn't work in the random stat increase switch");
                     break;
@@ -92,32 +101,42 @@ public class Character_Randomization : MonoBehaviour {
             //make sure that the program does not select the same stat to change twice and slect a stat to decrease
             do
             {
-                seed = Random.Range(1, 4);
+                seed = Random.Range(1, 6);
             } while (seed == previousSeed);
 
             //Debug.Log("Decrease seed is " + stat);
            // Debug.Log("Random stat seed is " + seed);
             switch (seed)
             {
-                case 4:
+                case 6:
                    // Debug.Log("Health is being decreased by " + stat);
                     randomStat = newCharacter.getHealth() - stat;
                     newCharacter.setHealth(randomStat);
                     break;
-                case 3:
+                case 5:
                     //Debug.Log("Attack is being decreased by " + stat);
                     randomStat = newCharacter.getAttack() - stat;
                     newCharacter.setAttack(randomStat);
                     break;
-                case 2:
+                case 4:
                    // Debug.Log("Magic is being decreased by " + stat);
                     randomStat = newCharacter.getMagic() - stat;
                     newCharacter.setMagic(randomStat);
                     break;
-                case 1:
+                case 3:
                    // Debug.Log("Defense is being decreased by " + stat);
                     randomStat = newCharacter.getDefense() - stat;
                     newCharacter.setDefense(randomStat);
+                    break;
+                case 2:
+                    //Debug.Log("Magic defense is being increased by " + stat);
+                    randomStat = newCharacter.getMagicDefense() - stat;
+                    newCharacter.setMagicDefense(randomStat);
+                    break;
+                case 1:
+                    //Debug.Log("Speed is being increased by " + stat);
+                    randomStat = newCharacter.getSpeed() - stat;
+                    newCharacter.setSpeed(randomStat);
                     break;
 
                 default:
@@ -137,6 +156,9 @@ public class Character_Randomization : MonoBehaviour {
             print("Attack: " + tester.getAttack());
             print("Magic: " + tester.getMagic());
             print("Defense: " + tester.getDefense());
+            print("Magic Defense: " + tester.getMagicDefense());
+            print("Speed: " + tester.getSpeed());
+
         }
     }
 }
