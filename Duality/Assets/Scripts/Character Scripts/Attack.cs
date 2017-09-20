@@ -71,5 +71,6 @@ public class Attack : MonoBehaviour {
             }
             
         }
+		mAttackHitbox.enabled = false;
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CombatMachine : MonoBehaviour {
 
+	//enum manager calls
     //bool mPlayerTurn = true;
     //PlayerObject[] playerArmy;
     //EnemyObject[] enemyArmy;
