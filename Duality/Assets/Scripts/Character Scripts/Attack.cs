@@ -9,13 +9,22 @@ public class Attack : MonoBehaviour {
     Collider2D[] results;
     string [] mTmpName;
     bool active = false;
-	
-	void Start () {
+    int message = 1;
+    //Pointer to the UI controller
+    UiController mUIptr;
+    //Combat  Machine pointer
+    CombatMachine mMachinePtr;
+
+    void Start () {
         mAttackHitbox = gameObject.GetComponent<BoxCollider2D>();
         mAttackHitbox.enabled = false;
         fill = gameObject.GetComponent<SpriteRenderer>();
         fill.enabled = false;
 
+        //set pointer to combat machine
+        mMachinePtr = GameObject.Find("GameSystem").GetComponent<CombatMachine>();
+
+        mUIptr = transform.parent.gameObject.GetComponent<UiController>();
     }
 	
 
@@ -53,6 +62,15 @@ public class Attack : MonoBehaviour {
                     GameObject.Find(mTmpName[i]).GetComponent<EnemyController>().resetColor();
                 }
             }
+        }
+        else if (Input.GetMouseButtonDown(0))
+        {
+            mAttackHitbox.enabled = false;
+            fill.enabled = false;
+            active = false;
+            mUIptr.finishedTurn();
+            mMachinePtr.recievePlayerMessage(1);
+            //mMachinePtr.recievePlayer();
         }
     }
     void detectEnemies()

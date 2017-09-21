@@ -16,7 +16,13 @@ public class UiController : MonoBehaviour {
     private Attack mAttackScript;
     private move mMoveScript;
 
+
+
+    //
     bool active = false;
+    bool finished = false;
+
+    CombatMachine mMachinePtr;
 
     // Use this for initialization
     void Start()
@@ -35,13 +41,16 @@ public class UiController : MonoBehaviour {
         mAttackScript = transform.Find("AttackHitbox").GetComponent<Attack>();
         mMoveScript = gameObject.GetComponent<move>();
         
+
+        //Make sure the buttons are not interactible yet
         attackMenu.enabled = false;
         Movement.interactable = false;
         Attack.interactable = false;
         Item.interactable = false;
         Stay.interactable = false;
 
-
+        //create pointer  to combat manager
+        mMachinePtr = GameObject.Find("GameSystem").GetComponent<CombatMachine>();
 
 
     }
@@ -49,10 +58,11 @@ public class UiController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (active)
-        {
-            checkInput();
-        }
+        if(!finished)
+            if (active)
+                {
+                  checkInput();
+                }
         
 
 
@@ -73,15 +83,18 @@ public class UiController : MonoBehaviour {
     void OnMouseEnter()
     {
         Debug.Log("Mouse Over");
-        //if(Input.GetMouseButtonDown(0))
+        if(!finished)
         {
-            // Debug.Log("Mouse clicked");
-            attackMenu.enabled = true;
-            Movement.interactable = true;
-            Attack.interactable = true;
-            Item.interactable = true;
-            Stay.interactable = true;
-            active = true;
+            if(!active)
+            {
+                // Debug.Log("Mouse clicked");
+                attackMenu.enabled = true;
+                Movement.interactable = true;
+                Attack.interactable = true;
+                Item.interactable = true;
+                Stay.interactable = true;
+                active = true;
+            }
         }
     }
 
@@ -117,6 +130,8 @@ public class UiController : MonoBehaviour {
         Attack.interactable = false;
         Item.interactable = false;
         Stay.interactable = false;
+        //use an item 
+        finishedTurn();
     }
 
     void playerStay()
@@ -127,7 +142,17 @@ public class UiController : MonoBehaviour {
         Attack.interactable = false;
         Item.interactable = false;
         Stay.interactable = false;
+        finishedTurn();
     }
 
-    
+    public void finishedTurn()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(255f, 0f, 0f, 0.5f);
+        finished = true;
+    }
+
+    public void resetTurn()
+    {
+        finished = false;
+    }
 }

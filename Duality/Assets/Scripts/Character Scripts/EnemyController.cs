@@ -27,6 +27,7 @@ public class EnemyController : MonoBehaviour {
 		if (Input.GetMouseButtonDown (0))
 		{
 			Debug.Log ("You're now attacking this character");
+            resetColor();
 		}
 	}
     public void Highlight()

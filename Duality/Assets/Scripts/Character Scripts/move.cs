@@ -12,10 +12,22 @@ public class move : MonoBehaviour
     Vector2 CursorPosition;
     bool active = false;
 
+    int message = 0;
+    //Pointer to the UI controller
+    UiController mUIptr;
+    //Pointer to the CombatMachine
+    CombatMachine mMachinePtr;
+
+    //EventType message;
+
     // Use this for initialization
     void Start()
     {
         characterPos.z = 0;
+       // message = EventType.MOEVMENT_EVENT;
+        mUIptr = gameObject.GetComponent<UiController>();
+
+        mMachinePtr = GameObject.Find("GameSystem").GetComponent<CombatMachine>();
     }
 
     // Update is called once per frame
@@ -42,6 +54,7 @@ public class move : MonoBehaviour
             line.SetPosition(0, Vector3.zero);
             line.SetPosition(1, Vector3.zero);
             active = false;
+            sendMessage();
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -54,5 +67,14 @@ public class move : MonoBehaviour
     public void init()
     {
         active = true;
+    }
+
+    void sendMessage()
+    {
+        //send message that the player moved to the UI manager
+        mUIptr.finishedTurn();
+        //send that the player moved to the combat manager
+        mMachinePtr.recievePlayerMessage(message);
+
     }
 }
