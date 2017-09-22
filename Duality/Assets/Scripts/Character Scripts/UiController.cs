@@ -16,7 +16,8 @@ public class UiController : MonoBehaviour {
     private Attack mAttackScript;
     private move mMoveScript;
 
-
+	//Particle System
+	public ParticleSystem parts;
 
     //
     bool active = false;
@@ -52,7 +53,7 @@ public class UiController : MonoBehaviour {
         //create pointer  to combat manager
         mMachinePtr = GameObject.Find("GameSystem").GetComponent<CombatMachine>();
 
-
+		parts.Stop();
     }
 
     // Update is called once per frame
@@ -119,7 +120,7 @@ public class UiController : MonoBehaviour {
         Attack.interactable = false;
         Item.interactable = false;
         Stay.interactable = false;
-        mAttackScript.init();
+		mAttackScript.init();
     }
    
     void useItem()
@@ -155,4 +156,19 @@ public class UiController : MonoBehaviour {
     {
         finished = false;
     }
+
+	public void RecieveEvent(EventMessage Message)
+	{
+		if(Message.myType == EventType.ATTACK_EVENT)
+		{
+			parts.Play();
+			finishedTurn();
+		}
+
+		else if(Message.myType == EventType.MOEVMENT_EVENT)
+		{
+			//do something
+		}
+		
+	}
 }

@@ -6,10 +6,17 @@ public class EnemyController : MonoBehaviour {
     
 
     bool targetable = false;
+	public ParticleSystem parts;
+
+	//Combat  Machine pointer
+	CombatMachine mMachinePtr;
+
 
 	// Use this for initialization
 	void Start () {
-        
+		parts.Stop();
+		//set pointer to combat machine
+		mMachinePtr = GameObject.Find("GameSystem").GetComponent<CombatMachine>();
     }
 	
 	// Update is called once per frame
@@ -27,7 +34,9 @@ public class EnemyController : MonoBehaviour {
 		if (Input.GetMouseButtonDown (0))
 		{
 			Debug.Log ("You're now attacking this character");
+			parts.Play();
             resetColor();
+			mMachinePtr.recieveEnemy(this.gameObject);
 		}
 	}
     public void Highlight()

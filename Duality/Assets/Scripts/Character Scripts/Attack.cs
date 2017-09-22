@@ -14,6 +14,8 @@ public class Attack : MonoBehaviour {
     UiController mUIptr;
     //Combat  Machine pointer
     CombatMachine mMachinePtr;
+	EventMessage mAttackMessage;
+
 
     void Start () {
         mAttackHitbox = gameObject.GetComponent<BoxCollider2D>();
@@ -25,6 +27,7 @@ public class Attack : MonoBehaviour {
         mMachinePtr = GameObject.Find("GameSystem").GetComponent<CombatMachine>();
 
         mUIptr = transform.parent.gameObject.GetComponent<UiController>();
+		mAttackMessage = new EventMessage(EventType.ATTACK_EVENT);
     }
 	
 
@@ -68,9 +71,9 @@ public class Attack : MonoBehaviour {
             mAttackHitbox.enabled = false;
             fill.enabled = false;
             active = false;
-            mUIptr.finishedTurn();
+			mUIptr.RecieveEvent(mAttackMessage);
             mMachinePtr.recievePlayerMessage(1);
-            //mMachinePtr.recievePlayer();
+			mMachinePtr.recievePlayer(this.gameObject);
         }
     }
     void detectEnemies()
