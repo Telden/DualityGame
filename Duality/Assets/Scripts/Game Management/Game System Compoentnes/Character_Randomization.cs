@@ -9,7 +9,8 @@ using UnityEngine;
 public class Character_Randomization : MonoBehaviour {
     public TextAsset firstNames;
     public TextAsset lastNames;
-    public Button generateButton;
+	public GameObject PlayerObject;
+
     string text;
     string firstname;
     string lastname;
@@ -18,29 +19,34 @@ public class Character_Randomization : MonoBehaviour {
     float stat;
     float randomStat;
     string newName = "";
+
+
    
     // Use this for initialization
     void Start () {
-        Button btn = generateButton.GetComponent<Button>();
-        btn.onClick.AddListener(generateCharacter);
+       
   
     }
 	
 	// Update is called once per frame
 	void Update () {
-        //generateCharacter();
+        
 	}
-    public void generateCharacter()
+
+	//Num is the number of desired characters that the game wants to be made
+	public void generateCharacter(int num)
     {
         //Load text files
         string[] fn = firstNames.text.Split("\n"[0]);
         string[] ln = lastNames.text.Split("\n"[0]);
-        BaseCharacter tester = new BaseCharacter();
-        
 
-        for(int i = 0; i < 19; i++)
+		print("creating Character");
+		GameObject newPlayer = GameObject.Instantiate(PlayerObject);
+        BaseCharacter newCharacter = newPlayer.GetComponent<BaseCharacter>();
+
+        for (int i = 0; i < num - 1; i++)
         {
-            BaseCharacter newCharacter = new BaseCharacter();
+			
 
             //Generate first name
             seed = Random.Range(0, fn.Length);
@@ -144,11 +150,12 @@ public class Character_Randomization : MonoBehaviour {
                     break;
 
             }
+			print("finished randomizing");
+            //GameObject.Find("GameSystem").GetComponent<Game>().insertCharacter(newPlayer);
 
-            GameObject.Find("GameSystem").GetComponent<Game>().insertCharacter(newCharacter);
-
-            
-            tester = GameObject.Find("GameSystem").GetComponent<Game>().getCharacter(i);
+            BaseCharacter tester = new BaseCharacter();
+			tester = newCharacter;
+			//tester = GameObject.Find("GameSystem").GetComponent<Game>().getCharacter(i).GetComponent<BaseCharacter>();
 
             //Output the character variables to the console
             print("Name: " + tester.getName());
@@ -158,7 +165,8 @@ public class Character_Randomization : MonoBehaviour {
             print("Defense: " + tester.getDefense());
             print("Magic Defense: " + tester.getMagicDefense());
             print("Speed: " + tester.getSpeed());
-
+            newPlayer = GameObject.Instantiate(PlayerObject) as GameObject;
+            newCharacter = newPlayer.GetComponent<BaseCharacter>();
         }
     }
 }

@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseCharacter {
+public class BaseCharacter : MonoBehaviour
+{
 
-    [SerializeField]
-    float mHealth = 10;
-    float mAttack = 10;
-    float mMagic = 10;
-    float mDefense = 10;
-    float mMagicDefense = 10;
-    float mSpeed = 10;
-    float mMovemnt = 100;
-    string mName;
+
+    public float mHealth = 10;
+	public float mAttack = 10;
+	public float mMagic = 10;
+	public float mDefense = 10;
+	public float mMagicDefense = 10;
+	public float mSpeed = 10;
+	public float mMovemnt = 100;
+	public string mName;
 
     public void setHealth(float nHealth)
     {

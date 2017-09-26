@@ -3,32 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Game : MonoBehaviour {
-    BaseCharacter[] mGenCharacterArray;
-    public int mMaxCharacters = 40;
+    GameObject[] mGenCharacterArray;
+    public int mMaxCharacters = 10;
     public CombatMachine combatScript;
     //public BaseCharacter[] mArmyCharacterArray;
     int mTotalCharacters = 0;
+
+
 	// Use this for initialization
 	void Start () {
         //combatScript.enabled = false;
+		gameObject.GetComponent<Character_Randomization>().generateCharacter(mMaxCharacters);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        mGenCharacterArray = new BaseCharacter[mMaxCharacters];
+		mGenCharacterArray = new GameObject[mMaxCharacters];
 
     }
 
     //Insert a randomly generated character into the generated characters array
-    public void insertCharacter(BaseCharacter nCharacter)
+    public void insertCharacter(GameObject nCharacter)
     {
-        //print(nCharacter.getAttack());
        
         mGenCharacterArray[mTotalCharacters] = nCharacter;
         increaseTotalSize();
     }
 
-    public BaseCharacter getCharacter(int index)
+	public GameObject getCharacter(int index)
     {
         return mGenCharacterArray[index];
     }
