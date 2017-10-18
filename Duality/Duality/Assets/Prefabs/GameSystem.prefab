@@ -54,8 +54,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf62998fc460add4daad9fb36f07b0cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPlayers: 10
-  maxEnemies: 10
+  maxPlayers: 20
+  maxEnemies: 20
+  mPlayerArmy: []
+  mEnemyArmy:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  playerBattleFlag: 0
+  enemyBattleFlag: 0
 --- !u!114 &114564134097664028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -81,6 +90,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstNames: {fileID: 4900000, guid: c0d3c31471289834599aea15faeee350, type: 3}
   lastNames: {fileID: 4900000, guid: 6733c13f6f3eaff4ba32abc1f2b8299f, type: 3}
+  PlayerObject: {fileID: 1969862544799216, guid: 15a4f6b44168c9545986de6a3a81b4a5,
+    type: 2}
+  mMaxCharacters: 20
 --- !u!114 &114931419997065974
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -93,4 +105,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mMaxCharacters: 20
-  combatScript: {fileID: 0}

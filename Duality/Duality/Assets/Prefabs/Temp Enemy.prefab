@@ -88,8 +88,10 @@ MonoBehaviour:
   mDefense: 10
   mMagicDefense: 10
   mSpeed: 10
-  mMovemnt: 100
+  mMovemnt: 10
   mName: Enemy Grunt
+  mLoaded: 0
+  mSelected: 0
 --- !u!114 &114512724866738616
 MonoBehaviour:
   m_ObjectHideFlags: 1

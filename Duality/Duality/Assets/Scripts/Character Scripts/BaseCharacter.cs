@@ -13,7 +13,7 @@ public class BaseCharacter : MonoBehaviour
 	public float mDefense = 10;
 	public float mMagicDefense = 10;
 	public float mSpeed = 10;
-	public float mMovemnt = 100;
+	public float mMovemnt = 10;
 	public string mName;
 
 	float mResetHealth;
@@ -24,6 +24,8 @@ public class BaseCharacter : MonoBehaviour
 	float mResetSpeed;
 	float mResetMovement;
 
+    public bool mLoaded = false;
+    public bool mSelected = false;
 
 	void Update()
 	{
@@ -38,7 +40,11 @@ public class BaseCharacter : MonoBehaviour
         mHealth = nHealth;
 		if(mHealth < 1)
 			isDead = true;
-		//mResetHealth = mHealth;
+        if(!mLoaded)
+        {
+            mResetHealth = mHealth;
+        }
+            
     }
 
     public float getHealth()
@@ -49,7 +55,9 @@ public class BaseCharacter : MonoBehaviour
     public void setAttack(float nAttack)
     {
         mAttack = nAttack;
-		mResetAttack = mAttack;
+        if (!mLoaded)
+            mResetAttack = mAttack;
+            
     }
 
     public float getAttack()
@@ -60,7 +68,8 @@ public class BaseCharacter : MonoBehaviour
     public void setMagic(float nMagic)
     {
         mMagic = nMagic;
-		mResetMagic = mMagic;
+        if (!mLoaded)
+            mResetMagic = mMagic;
     }
 
     public float getMagic()
@@ -71,7 +80,8 @@ public class BaseCharacter : MonoBehaviour
     public void setDefense(float nDefense)
     {
         mDefense = nDefense;
-		mResetMagic = mDefense;
+        if (!mLoaded)
+            mResetMagic = mDefense;
     }
 
     public float getDefense()
@@ -82,7 +92,8 @@ public class BaseCharacter : MonoBehaviour
     public void setMagicDefense(float nMagicDefense)
     {
         mMagicDefense = nMagicDefense;
-		mresetMagicDefense = mMagicDefense;
+        if (!mLoaded)
+            mresetMagicDefense = mMagicDefense;
     }
 
     public float getMagicDefense()
@@ -93,7 +104,8 @@ public class BaseCharacter : MonoBehaviour
     public void setSpeed(float nSpeed)
     {
         mSpeed = nSpeed;
-		mResetSpeed = mSpeed;
+        if (!mLoaded)
+            mResetSpeed = mSpeed;
     }
 
     public float getSpeed()
@@ -104,7 +116,8 @@ public class BaseCharacter : MonoBehaviour
     public void setMovemnt(float nMovement)
     {
         mMovemnt = nMovement;
-		mResetMovement = mResetMovement;
+        if (!mLoaded)
+            mResetMovement = mMovemnt;
     }
 
     public float getMovement()
@@ -123,6 +136,15 @@ public class BaseCharacter : MonoBehaviour
         return mName;
     }
 
+    public float getMaxHealth()
+    {
+        return mResetHealth;
+    }
+    
+    public float getMaxMovement()
+    {
+        return mResetMovement;
+    }
 	public void reset()
 	{
 		mHealth = mResetHealth;

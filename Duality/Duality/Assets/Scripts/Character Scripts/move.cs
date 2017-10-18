@@ -5,6 +5,16 @@ using UnityEngine;
 
 public class move : MonoBehaviour
 {
+    float tmpMovement;
+    float tmpMaxMovement;
+    float prevDistance;
+    public Text tmpDistance;
+    public Text movementText;
+    float distance;
+    //Movement Bar Variables
+    public Canvas movementGroup;
+    public Image mMovementBar;
+    public Text uiMovement;
 
     //Line drawing variables
     private LineRenderer line;
@@ -18,16 +28,27 @@ public class move : MonoBehaviour
     //Pointer to the CombatMachine
     CombatMachine mMachinePtr;
 
-    //EventType message;
+    //Pointer to basecharacter script
+    BaseCharacter mBasecharacter;
 
     // Use this for initialization
     void Start()
     {
+        movementGroup.enabled = false;
+        //mMovementBar.enabled = false;
+        //uiMovement.enabled = false;
+
         characterPos.z = 0;
        // message = EventType.MOEVMENT_EVENT;
         mUIptr = gameObject.GetComponent<UiController>();
 
         mMachinePtr = GameObject.Find("GameSystem").GetComponent<CombatMachine>();
+        mBasecharacter = gameObject.GetComponent<BaseCharacter>();
+
+        tmpMovement = 10;
+        tmpMaxMovement = 10;
+        prevDistance = 0;
+
     }
 
     // Update is called once per frame
@@ -35,12 +56,8 @@ public class move : MonoBehaviour
     {
         if (active)
         {
-            characterPos.x = gameObject.transform.position.x;
-            characterPos.y = gameObject.transform.position.y;
-            CursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            line = GetComponent<LineRenderer>();
-            line.SetPosition(0, characterPos);
-            line.SetPosition(1, CursorPosition);
+            drawLine();
+            updateUI();
             checkInput();
         }
 
@@ -53,6 +70,7 @@ public class move : MonoBehaviour
             gameObject.transform.position = CursorPosition;
             line.SetPosition(0, Vector3.zero);
             line.SetPosition(1, Vector3.zero);
+            movementGroup.enabled = false;
             active = false;
             sendMessage();
         }
@@ -60,13 +78,22 @@ public class move : MonoBehaviour
         {
             line.SetPosition(0, Vector3.zero);
             line.SetPosition(1, Vector3.zero);
+            movementGroup.enabled = false;
             active = false;
+        }
+        else if (Input.GetKeyDown(KeyCode.Minus))
+        {
+            updateDistance();
         }
     }
 
     public void init()
     {
+        movementGroup.enabled = true;
+        //mMovementBar.enabled = true;
+        //uiMovement.enabled = true;
         active = true;
+
     }
 
     void sendMessage()
@@ -76,5 +103,54 @@ public class move : MonoBehaviour
         //send that the player moved to the combat manager
         //smMachinePtr.recievePlayerMessage(message);
 
+    }
+    //Update the line drawer UI
+    void drawLine()
+    {
+
+        CursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        distance = Vector2.Distance(gameObject.transform.position, CursorPosition);
+        if(distance > tmpMaxMovement)
+        {
+
+        }
+        characterPos.x = gameObject.transform.position.x;
+        characterPos.y = gameObject.transform.position.y;
+        
+        line = GetComponent<LineRenderer>();
+        line.SetPosition(0, characterPos);
+        line.SetPosition(1, CursorPosition);
+    }
+
+
+    void updateUI()
+    {
+        mMovementBar.fillAmount = updateMovementbar();
+        uiMovement.text = "Movement: " + tmpMovement.ToString();
+        updateDistance();
+        mMovementBar.fillAmount = updateMovementbar();
+    }
+
+    //Reduce the amount of movement 
+    void updateDistance()
+    {       
+        if (distance > prevDistance || distance < prevDistance)
+        {
+            tmpMovement = tmpMaxMovement;
+            tmpMovement -= distance;
+            prevDistance = distance;
+            if (tmpMovement < 0)
+                tmpMovement = 0;
+            else if (tmpMovement > tmpMaxMovement)
+                tmpMovement = tmpMaxMovement;
+        }
+        movementText.text = "Movement " + tmpMovement.ToString();
+        tmpDistance.text = "Distance: " + distance.ToString();
+       
+    }
+
+    private float updateMovementbar()
+    {
+        return (tmpMovement - 0) * (1 - 0) / (tmpMaxMovement - 0) + 0;
     }
 }

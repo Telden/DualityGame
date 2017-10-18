@@ -20,6 +20,8 @@ public class UiController : MonoBehaviour {
     public Text uiMagicDefense;
     public Text uiSpeed;
     public Image statsBackground;
+    public Image mHealthBar;
+    
 	public Slider uiHealthBar;
 
     //Scripts for the buttons
@@ -72,6 +74,8 @@ public class UiController : MonoBehaviour {
         uiMagic.enabled = false;
         uiMagicDefense.enabled = false;
         uiSpeed.enabled = false;
+        mHealthBar.enabled = false;
+
 
         //create pointer  to combat manager
         mMachinePtr = GameObject.Find("GameSystem").GetComponent<CombatMachine>();
@@ -87,7 +91,7 @@ public class UiController : MonoBehaviour {
             if (active)
                 {
                   checkInput();
-			updateUI();
+			      updateUI();
                 }
         
 
@@ -114,6 +118,11 @@ public class UiController : MonoBehaviour {
             uiMagic.enabled = false;
             uiMagicDefense.enabled = false;
             uiSpeed.enabled = false;
+            mHealthBar.enabled = false;
+        }
+        if (Input.GetKeyDown(KeyCode.Minus))
+        {
+            mBaseScript.setHealth(mBaseScript.getHealth() - 2);
         }
     }
 
@@ -141,6 +150,7 @@ public class UiController : MonoBehaviour {
                 uiMagic.enabled = true;
                 uiMagicDefense.enabled = true;
                 uiSpeed.enabled = true;
+                mHealthBar.enabled = true;
             }
         }
     }
@@ -163,8 +173,9 @@ public class UiController : MonoBehaviour {
         uiMagic.enabled = false;
         uiMagicDefense.enabled = false;
         uiSpeed.enabled = false;
+        mHealthBar.enabled = false;
 
-		active= false;
+        active = false;
 
         mMoveScript.init();
 
@@ -189,6 +200,7 @@ public class UiController : MonoBehaviour {
         uiMagic.enabled = false;
         uiMagicDefense.enabled = false;
         uiSpeed.enabled = false;
+        mHealthBar.enabled = false;
 
         mAttackScript.init();
     }
@@ -211,6 +223,7 @@ public class UiController : MonoBehaviour {
         uiMagic.enabled = false;
         uiMagicDefense.enabled = false;
         uiSpeed.enabled = false;
+        mHealthBar.enabled = false;
 
         //use an item 
         finishedTurn();
@@ -234,8 +247,9 @@ public class UiController : MonoBehaviour {
         uiMagic.enabled = false;
         uiMagicDefense.enabled = false;
         uiSpeed.enabled = false;
+        mHealthBar.enabled = false;
 
-		mMachinePtr.recievePlayerMessage(4);
+        mMachinePtr.recievePlayerMessage(4);
         finishedTurn();
     }
 
@@ -276,5 +290,18 @@ public class UiController : MonoBehaviour {
 		uiMagic.text = "Magic: " + mBaseScript.getMagic().ToString();
 		uiMagicDefense.text = "Magic Defense: " + mBaseScript.getMagicDefense().ToString();
 		uiSpeed.text = "Speed: " + mBaseScript.getSpeed().ToString();
-	}
+       //+ mBaseScript.getMovement().ToString();
+        mHealthBar.fillAmount = updateHealthBar();
+       
+
+
+
+    }
+
+    private float updateHealthBar()
+    {
+        return (mBaseScript.getHealth() - 0) * (1 - 0) / (mBaseScript.getMaxHealth() - 0) + 0;
+    }
+
+   
 }

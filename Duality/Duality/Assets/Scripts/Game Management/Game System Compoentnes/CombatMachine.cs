@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CombatMachine : MonoBehaviour {
 
-	public int maxPlayers = 5;
-	public int maxEnemies = 5;
+	public int maxPlayers = 100;
+	public int maxEnemies = 100;
    
     
 	//Player Army Values
@@ -213,9 +213,9 @@ public class CombatMachine : MonoBehaviour {
 	}
 	public void registerplayer(GameObject playerObject)
 	{
-		mPlayerArmy[mPlayerArmyIndex] = playerObject;
-		mPlayerArmyIndex++;
-		mPlayerMoves++;
+		//mPlayerArmy[mPlayerArmyIndex] = playerObject;
+		//mPlayerArmyIndex++;
+		//mPlayerMoves++;
 	}
 
 	public void registerEnemy(GameObject enemyObject)

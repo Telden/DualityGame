@@ -7,30 +7,35 @@ using UnityEngine;
 
 //
 public class Character_Randomization : MonoBehaviour {
-    public TextAsset firstNames;
-    public TextAsset lastNames;
+
+    List<GameObject> mRandomizedList = new List<GameObject>();
+
+    public TextAsset firstNames; //Text asset that contains all the possible first names
+    public TextAsset lastNames; //Text asset that contains all the possible last names
 	public GameObject PlayerObject;
 
-    string text;
-    string firstname;
-    string lastname;
-    int seed;
-    float previousSeed;
-    float stat;
-    float randomStat;
-    string newName = "";
+    public ListManager mpListManager; //Script to the list manager 
+    string firstname; //The randomly selected firstname
+    string lastname; //The randomly selected lastname
+    int seed; //The random seed generated for selecting a random stat
+    float previousSeed; //variable used for 
+    float stat; //The amount that a stat will be increased/decreased by
+    float randomStat; //Variable to set the new stat with
+    string newName = ""; //Variable to set the randomized name
+
+    bool mHasLoaded = false;
 
 	//Store the randomized units
 	GameObject[] mGenCharacterArray;
-	public int mMaxCharacters = 10;
+	public int mMaxCharacters = 20;
 	int mTotalCharacters = 0;
 
    
     // Use this for initialization
     void Start () {
-       	
 
-  
+        
+
     }
 	
 	// Update is called once per frame
@@ -41,16 +46,21 @@ public class Character_Randomization : MonoBehaviour {
 	//Num is the number of desired characters that the game wants to be made
 	public void generateCharacter(int num)
     {
-		mGenCharacterArray = new GameObject[mMaxCharacters];
+       //if(!mHasLoaded)
+       // {
+       //     mGenCharacterArray = new GameObject[mMaxCharacters];
+       //     mHasLoaded = true;
+       // }
 
         //Load text files
         string[] fn = firstNames.text.Split("\n"[0]);
         string[] ln = lastNames.text.Split("\n"[0]);
 
-//		print("creating Character");
+
 		GameObject newPlayer;
         BaseCharacter newCharacter;
-		BaseCharacter tester;
+
+        //Randomly generate possible units
         for (int i = 0; i < num; i++)
         {
 			newPlayer = GameObject.Instantiate(PlayerObject);
@@ -66,16 +76,13 @@ public class Character_Randomization : MonoBehaviour {
 
             newName = firstname + " " + lastname;
             newCharacter.setName(newName);
-            //Debug.Log(newName);
+            
 
             // randomly select a random stat
             seed = Random.Range(1, 6);
             // Save the previous seed
             previousSeed = seed;
             // randomly select how much that stat will be increased by
-           
-            //Debug.Log("Increase seed is " + stat);
-            //Debug.Log("Random stat seed is " + seed);
 			for (int j = 0; j < 10; j++)
 			{
 				stat = Random.Range (0, 9);
@@ -127,8 +134,6 @@ public class Character_Randomization : MonoBehaviour {
 					seed = Random.Range (1, 7);
 				} while (seed == previousSeed);
 				previousSeed = seed;
-				//Debug.Log("Decrease seed is " + stat);
-				// Debug.Log("Random stat seed is " + seed);
 				switch (seed) {
 				case 6:
                    // Debug.Log("Health is being decreased by " + stat);
@@ -185,23 +190,13 @@ public class Character_Randomization : MonoBehaviour {
 
 				}
 			}
-			//print("finished randomizing");
-			mGenCharacterArray [mTotalCharacters] = newPlayer;
-			mTotalCharacters++;
-
-            
-			/*tester = newCharacter;
-			//tester = GameObject.Find("GameSystem").GetComponent<Game>().getCharacter(i).GetComponent<BaseCharacter>();
-
-            //Output the character variables to the console
-            print("Name: " + tester.getName());
-            print("Health: " + tester.getHealth());
-            print("Attack: " + tester.getAttack());
-            print("Magic: " + tester.getMagic());
-            print("Defense: " + tester.getDefense());
-            print("Magic Defense: " + tester.getMagicDefense());
-            print("Speed: " + tester.getSpeed());
-			print (" ");*/
+            //mRandomizedList.Add(newPlayer);
+           mpListManager.addRandomizedUnit(newPlayer.gameObject);
+            //print("finished randomizing");
+           // newCharacter.mLoaded = true;
+			//mGenCharacterArray [mTotalCharacters] = newPlayer;
+			//mTotalCharacters++;
+         
 		}
     }
 
@@ -218,6 +213,10 @@ public class Character_Randomization : MonoBehaviour {
 		return mGenCharacterArray[index];
 	}
 
+    public GameObject[] getCharacterArray()
+    {
+        return mGenCharacterArray;
+    }
 	//Increase the total characters integer for the created characters array
 	void increaseTotalSize()
 	{
@@ -230,5 +229,9 @@ public class Character_Randomization : MonoBehaviour {
 		mTotalCharacters--;
 	}
 
+    public int getTotalCharacters()
+    {
+        return mTotalCharacters;
+    }
 
 }
