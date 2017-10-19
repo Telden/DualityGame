@@ -22,7 +22,7 @@ public class BaseCharacter : MonoBehaviour
 	float mResetMagic;
 	float mresetMagicDefense;
 	float mResetSpeed;
-	float mResetMovement;
+	float mResetMovement= 10;
 
     public bool mLoaded = false;
     public bool mSelected = false;
