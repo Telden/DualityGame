@@ -7,6 +7,7 @@ public class move : MonoBehaviour
 {
     float tmpMovement;
     float tmpMaxMovement;
+    float tmpMaxMovementReset;
     float prevDistance;
     public Text tmpDistance;
     public Text movementText;
@@ -52,6 +53,7 @@ public class move : MonoBehaviour
 
         tmpMovement = 10;
         tmpMaxMovement = 10;
+        tmpMaxMovementReset = tmpMaxMovement;
         prevDistance = 0;
 
     }
@@ -83,6 +85,7 @@ public class move : MonoBehaviour
 
             line.SetPosition(0, Vector3.zero);
             line.SetPosition(1, Vector3.zero);
+            tmpMaxMovement = tmpMovement;
             movementGroup.enabled = false;
             active = false;
             sendMessage();
