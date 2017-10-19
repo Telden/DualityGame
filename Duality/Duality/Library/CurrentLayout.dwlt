@@ -42,7 +42,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 5}
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
 MonoBehaviour:
@@ -113,7 +113,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &6
 MonoBehaviour:
@@ -176,10 +176,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 683, y: 492}
-  m_MaxSize: {x: 14004, y: 14042}
+  m_MinSize: {x: 681, y: 492}
+  m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 135
+  controlID: 9
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -323,8 +323,8 @@ MonoBehaviour:
     y: 0
     width: 391
     height: 947
-  m_MinSize: {x: 277, y: 71}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 21}
   m_Panes:
   - {fileID: 21}
@@ -435,9 +435,9 @@ MonoBehaviour:
     height: 650
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 7a98ffff
-    m_LastClickedID: -26502
-    m_ExpandedIDs: 7299ffff9cccffff1afcffff00000000
+    m_SelectedIDs: 6a670000
+    m_LastClickedID: 26474
+    m_ExpandedIDs: ec21fbff6265fbff04c9ffff38caffff90e7ffff98e7ffff1afcfffff4ffffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -487,14 +487,14 @@ MonoBehaviour:
     width: 1147
     height: 650
   m_SceneLighting: 1
-  lastFramingTime: 450.5716423734315
+  lastFramingTime: 2865.862317344896
   m_2DMode: 1
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -136.87183, y: -4.722824, z: 0}
+    m_Target: {x: -134.35281, y: -3.4646099, z: 0}
     speed: 2
-    m_Value: {x: -136.87183, y: -4.722824, z: 0}
+    m_Value: {x: -134.35281, y: -3.4646099, z: 0}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -521,9 +521,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 2.773387
+    m_Target: 13.035141
     speed: 2
-    m_Value: 2.773387
+    m_Value: 13.035141
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -598,18 +598,18 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Scripts/Character Scripts/BattleScripts
+    - Assets/Scripts/Game Management/Game System Compoentnes/Levels
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/Character Scripts/BattleScripts
+  - Assets/Scripts/Game Management/Game System Compoentnes/Levels
   m_LastFoldersGridSize: -1
   m_LastProjectPath: E:\Duality repository remake\Duality\Duality
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 86}
-    m_SelectedIDs: 9e260000
-    m_LastClickedID: 9886
+    m_SelectedIDs: b6260000
+    m_LastClickedID: 9910
     m_ExpandedIDs: 0000000072260000782600007e260000aa260000ae26000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0

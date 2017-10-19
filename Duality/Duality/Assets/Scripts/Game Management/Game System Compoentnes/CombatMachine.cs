@@ -219,8 +219,8 @@ public class CombatMachine : MonoBehaviour {
    
 	public void registerplayer(GameObject playerObject)
 	{
-        mPlayerArmy[mPlayerArmyIndex] = playerObject;
-        mPlayerArmyIndex++;
+        //mPlayerArmy[mPlayerArmyIndex] = playerObject;
+        //mPlayerArmyIndex++;
         mPlayerMoves++;
     }
 

@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Game : MonoBehaviour {
     
-    public int mMaxCharacters = 10;
-    GameObject[] mSelectedCharacters;
+    public int mMaxCharacters;
     int mCharacterIndex;
 
 	// Use this for initialization
@@ -14,7 +13,7 @@ public class Game : MonoBehaviour {
         mCharacterIndex = 0;
         DontDestroyOnLoad(gameObject.transform);
         //combatScript.enabled = false;
-        gameObject.GetComponent<Character_Randomization>().generateCharacter(mMaxCharacters);
+        //gameObject.GetComponent<Character_Randomization>().generateCharacter(mMaxCharacters);
 
     }
 	

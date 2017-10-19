@@ -16,7 +16,7 @@ public class Recruitment : MonoBehaviour {
     public Text mSlotsLeft; //Ui text of the amount of army slots left
     public int mSlots; //number representation of the number of slots left
     int mTotalUnits; //variable to store the total amount of randomized units from their list
-   
+    GameObject character;
 
 
     // Use this for initialization
@@ -50,7 +50,8 @@ public class Recruitment : MonoBehaviour {
     {
         for (int i = 0; i < mTotalUnits; i++)
             {
-            GameObject character = (GameObject)Instantiate(mCharacterButton); //Create a copy of the character button prefab
+            mpListManager.addRecruitmentButton((GameObject)Instantiate(mCharacterButton)); //Create a copy of the character button prefab
+            character = mpListManager.getRecruitmentButton(i); //Add the button to the list manager
             character.transform.SetParent(mParentPanel.transform); //Set the parent from the canvas to the panel
             character.transform.localScale = new Vector3(1, 1, 1); //Mathy Ui things
 
@@ -65,7 +66,6 @@ public class Recruitment : MonoBehaviour {
             character.transform.GetChild(6).GetComponent<Text>().text = "Speed: " + mpListManager.getRandomizedUnit(i).GetComponent<BaseCharacter>().getSpeed();
             character.transform.GetChild(7).GetComponent<Text>().text = "Movement: " + mpListManager.getRandomizedUnit(i).GetComponent<BaseCharacter>().getMovement();
             int tempInt = i;
-            mpListManager.addRecruitmentButton(character); //Add the button to the recruitment button list
             tempButton.onClick.AddListener(() => ButtonClicked(tempInt)); //Add a button listener if clicked on
         }
     }
@@ -73,7 +73,7 @@ public class Recruitment : MonoBehaviour {
     //Actions taken on the button press
     void ButtonClicked(int buttonNo)
     {
-        if(mSlots > 1)
+        if(mSlots > 0)
         {
             Debug.Log("Button clicked = " + buttonNo);
             mpListManager.addArmyUnit(mpListManager.getRandomizedUnit(buttonNo)); //Add a reference to the unit to the army list

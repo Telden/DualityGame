@@ -63,7 +63,8 @@ public class Character_Randomization : MonoBehaviour {
         //Randomly generate possible units
         for (int i = 0; i < num; i++)
         {
-			newPlayer = GameObject.Instantiate(PlayerObject);
+            mpListManager.addRandomizedUnit(Instantiate(PlayerObject));
+            newPlayer = mpListManager.getRandomizedUnit(i);
 			newCharacter = newPlayer.GetComponent<BaseCharacter>();
 
             //Generate first name
