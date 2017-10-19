@@ -14,7 +14,7 @@ public class ViewArmy : MonoBehaviour {
     public GameObject mCharacterButton;
     public RectTransform mParentPanel;
     int mTotalCharacters;
-
+    GameObject character;
 
     // Use this for initialization
     void Start () {
@@ -23,8 +23,12 @@ public class ViewArmy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            mpListManager.clearViewArmyButtonList();
+            mpMainmenu.reset();
+        }
+    }
 
     //Function to be called from the main menu script
     public void init()
@@ -40,7 +44,8 @@ public class ViewArmy : MonoBehaviour {
         
         for (int i = 0; i < mTotalCharacters; i++)
         {
-            GameObject character = (GameObject)Instantiate(mCharacterButton);
+            mpListManager.addViewArmyButton((GameObject)Instantiate(mCharacterButton));
+            character = mpListManager.getViewArmyButton(i);
             character.transform.SetParent(mParentPanel.transform);
             character.transform.localScale = new Vector3(1, 1, 1);
 

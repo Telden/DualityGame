@@ -44,10 +44,10 @@ public class MainMenu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            reset();
-        }
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    reset();
+        //}
     }
 
     public void reset()

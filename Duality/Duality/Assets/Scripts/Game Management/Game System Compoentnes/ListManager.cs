@@ -148,10 +148,16 @@ public class ListManager : MonoBehaviour {
         mArmyViewButtonList.Add(nButton);
     }
 
+    public GameObject getViewArmyButton(int index)
+    {
+        return mArmyViewButtonList[index];
+    }
+
     //Clear the view army button list
     public void clearViewArmyButtonList()
     {
         for (int i = 0; i < mArmyViewButtonList.Count; i++)
             Destroy(mArmyViewButtonList[i]);
+        mArmyViewButtonList.Clear();
     }
 }
