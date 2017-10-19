@@ -210,7 +210,13 @@ public class CombatMachine : MonoBehaviour {
 				}
 		}
 	}
-	}
+}
+
+    public void battleFlee(string name)
+    {
+
+    }
+   
 	public void registerplayer(GameObject playerObject)
 	{
         mPlayerArmy[mPlayerArmyIndex] = playerObject;
