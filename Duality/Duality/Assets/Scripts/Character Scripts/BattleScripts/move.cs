@@ -78,6 +78,7 @@ public class move : MonoBehaviour
             mMaxMovement = mMovement;  //Update the max amount of movement left 
             movementGroup.enabled = false; //Disable the UI
             mActive = false;
+            mUIptr.finishedFunction();
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -101,6 +102,7 @@ public class move : MonoBehaviour
             mMaxMovement = gameObject.GetComponent<BaseCharacter>().getMaxMovement();
             mMaxMovementReset = mMaxMovement;
             mPrevDistance = 0;
+            mUIptr = gameObject.GetComponent<UiController>();
             mInitialized = true;
         }
         //Turn on the  movement UI elements and activate its  functions   

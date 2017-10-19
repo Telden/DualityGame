@@ -33,8 +33,8 @@ public class UiController : MonoBehaviour {
 
     //
     bool active = false;
-    bool finished = false;
-
+    bool OperationFinished = true;
+    bool turnFinished = false;
     CombatMachine mMachinePtr;
 
 	BaseCharacter mBaseScript;
@@ -129,30 +129,34 @@ public class UiController : MonoBehaviour {
     void OnMouseEnter()
     {
         //Debug.Log("Mouse Over");
-        if(!finished)
+       if(!turnFinished) //If the unit has not finished  its turn
         {
-            if(!active)
+            if (OperationFinished) //if another ui operation is not active
             {
-                // Debug.Log("Mouse clicked");
-                attackMenu.enabled = true;
-                Movement.interactable = true;
-                Attack.interactable = true;
-                Item.interactable = true;
-                Stay.interactable = true;
-                active = true;
+                if (!active) //if the ui is already not active
+                {
+                    // Debug.Log("Mouse clicked");
+                    attackMenu.enabled = true;
+                    Movement.interactable = true;
+                    Attack.interactable = true;
+                    Item.interactable = true;
+                    Stay.interactable = true;
+                    active = true;
 
-                //Enable battleUI
-                statsBackground.enabled = true;
-                uiName.enabled = true;
-                uiHealth.enabled = true;
-                uiAttack.enabled = true;
-                uiDefense.enabled = true;
-                uiMagic.enabled = true;
-                uiMagicDefense.enabled = true;
-                uiSpeed.enabled = true;
-                mHealthBar.enabled = true;
+                    //Enable battleUI
+                    statsBackground.enabled = true;
+                    uiName.enabled = true;
+                    uiHealth.enabled = true;
+                    uiAttack.enabled = true;
+                    uiDefense.enabled = true;
+                    uiMagic.enabled = true;
+                    uiMagicDefense.enabled = true;
+                    uiSpeed.enabled = true;
+                    mHealthBar.enabled = true;
+                }
             }
         }
+        
     }
 
     void moveCharacter()
@@ -176,7 +180,7 @@ public class UiController : MonoBehaviour {
         mHealthBar.enabled = false;
 
         active = false;
-
+        OperationFinished = false;
         mMoveScript.init();
 
         
@@ -201,7 +205,7 @@ public class UiController : MonoBehaviour {
         uiMagicDefense.enabled = false;
         uiSpeed.enabled = false;
         mHealthBar.enabled = false;
-
+        OperationFinished = false;
         mAttackScript.init();
     }
    
@@ -256,13 +260,18 @@ public class UiController : MonoBehaviour {
     public void finishedTurn()
     {
         gameObject.GetComponent<SpriteRenderer>().color = new Color(255f, 0f, 0f, 0.5f);
-        finished = true;
+        turnFinished = true;
+    }
+
+    public void finishedFunction()
+    {
+        OperationFinished = true;
     }
 
     public void resetTurn()
     {
 		gameObject.GetComponent<SpriteRenderer>().color = new Color(255f, 0f, 0f, 1f);
-        finished = false;
+        turnFinished = false;
 		active = false;
 
     }

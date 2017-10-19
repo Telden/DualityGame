@@ -25,9 +25,9 @@ public class Attack : MonoBehaviour {
 
         //set pointer to combat machine
         mMachinePtr = GameObject.Find("GameSystem").GetComponent<CombatMachine>();
-		mMachinePtr.registerplayer(this.transform.parent.gameObject);
+		mMachinePtr.registerplayer(this.transform.parent.gameObject); //Register the character with the combat machine
 
-        mUIptr = transform.parent.gameObject.GetComponent<UiController>();
+        mUIptr = transform.parent.gameObject.GetComponent<UiController>(); //Get the unit's ui controller
 		mAttackMessage = new EventMessage(EventType.ATTACK_EVENT);
     }
 	
@@ -77,6 +77,7 @@ public class Attack : MonoBehaviour {
 			mMachinePtr.recievePlayer(this.transform.parent.gameObject);
 			if(mMachinePtr.enemyBattleFlag)
 				mMachinePtr.conductBattle(this.transform.parent.gameObject.GetComponent<BaseCharacter>().getName());
+            mUIptr.finishedFunction();
 			mUIptr.finishedTurn();
         }
     }
