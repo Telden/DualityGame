@@ -213,30 +213,30 @@ public class CombatMachine : MonoBehaviour {
 	}
 	public void registerplayer(GameObject playerObject)
 	{
-		//mPlayerArmy[mPlayerArmyIndex] = playerObject;
-		//mPlayerArmyIndex++;
-		//mPlayerMoves++;
-	}
+        mPlayerArmy[mPlayerArmyIndex] = playerObject;
+        mPlayerArmyIndex++;
+        mPlayerMoves++;
+    }
 
 	public void registerEnemy(GameObject enemyObject)
 	{
-		/*print (enemyObject.GetComponent<BaseCharacter>().getName());
-		//mEnemyArmy[mEnemyArmyIndex] = tmp;
-		mEnemyArmyIndex++;*/
+		/*print (enemyObject.GetComponent<BaseCharacter>().getName());*/
+		//mEnemyArmy[mEnemyArmyIndex] = enemyObject;
+		//mEnemyArmyIndex++;
 		mEnemyMoves++;
 	}
 
 	void EnemyTurn()
 	{
-		EnemyController iter;
+        EnemyController iter;
 
-		for(int i = 0; i < mEnemyArmyIndex; i++)
-		{
-			iter = mEnemyArmy[i].GetComponent<EnemyController>();
-			iter.initAI(mPlayerArmy, mPlayerArmyIndex);
-		}
-			
-	}
+        for (int i = 0; i < mEnemyArmyIndex; i++)
+        {
+            iter = mEnemyArmy[i].GetComponent<EnemyController>();
+            iter.initAI(mPlayerArmy, mPlayerArmyIndex);
+        }
+
+    }
 
 	void resetPlayers()
 	{

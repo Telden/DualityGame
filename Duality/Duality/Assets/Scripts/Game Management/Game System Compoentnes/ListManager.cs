@@ -11,11 +11,15 @@ public class ListManager : MonoBehaviour {
     List<GameObject> mRecruitmentButtonList; //List of the buttons in the recruitment menu
     List<GameObject> mArmyViewButtonList; //List of the buttons in the army viewer menu
 
-
+    Character_Randomization mRandomizor; //Script to the character randomizer to get the randomized unit lis
 
     // Use this for initialization
     void Start () {
-
+        mRandomizedList = new List<GameObject>();
+        mArmyList = new List<GameObject>(); 
+        mBattleList = new List<GameObject>(); 
+        mRecruitmentButtonList = new List<GameObject>();
+        mArmyViewButtonList = new List<GameObject>();
     }
 	
 	// Update is called once per frame
@@ -43,17 +47,22 @@ public class ListManager : MonoBehaviour {
 	{
         mRandomizedList.RemoveAt(index);
 	}
-
+    //Get the amount of units in the list
     public int getRandomizedUnitListSize()
     {
         return mRandomizedList.Count;
     }
+    //Get the randomized list
+    //public List<GameObject> getRandomizedList()
+    //{
+    //    return mRandomizedList;
+    //}
 
-    public void addRandomizedList(List<GameObject> nRandomizedList)
+    //Pull the randomizerd unit list into list manager
+    public void getRandomizedList()
     {
-        mRandomizedList = nRandomizedList;
+        mRandomizedList = mRandomizor.getRandomizedList();
     }
-
 
     // [RECRUITED UNIT LIST FUNCTIONS]
     /******************************************************************************/

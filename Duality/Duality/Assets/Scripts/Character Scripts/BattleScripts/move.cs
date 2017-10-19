@@ -18,10 +18,10 @@ public class move : MonoBehaviour
 
     //Line drawing variables
     private LineRenderer line;
-    Vector3 characterPos;
+    Vector2 characterPos;
     Vector2 CursorPosition;
     bool active = false;
-
+    bool mClampDistance = false;
     int message = 0;
     //Pointer to the UI controller
     UiController mUIptr;
@@ -31,6 +31,12 @@ public class move : MonoBehaviour
     //Pointer to basecharacter script
     BaseCharacter mBasecharacter;
 
+
+    Vector2 C;
+     Vector2 D;
+     Vector2 E;
+
+
     // Use this for initialization
     void Start()
     {
@@ -38,7 +44,6 @@ public class move : MonoBehaviour
         //mMovementBar.enabled = false;
         //uiMovement.enabled = false;
 
-        characterPos.z = 0;
        // message = EventType.MOEVMENT_EVENT;
         mUIptr = gameObject.GetComponent<UiController>();
 
@@ -67,7 +72,15 @@ public class move : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            gameObject.transform.position = CursorPosition;
+            if (mClampDistance)
+                gameObject.transform.position = E;
+            else
+            {
+                gameObject.transform.position = CursorPosition;
+            }
+              
+            //gameObject.transform.position = E;
+
             line.SetPosition(0, Vector3.zero);
             line.SetPosition(1, Vector3.zero);
             movementGroup.enabled = false;
@@ -107,19 +120,35 @@ public class move : MonoBehaviour
     //Update the line drawer UI
     void drawLine()
     {
-
+        
         CursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         distance = Vector2.Distance(gameObject.transform.position, CursorPosition);
         if(distance > tmpMaxMovement)
         {
+            characterPos.x = gameObject.transform.position.x;
+            characterPos.y = gameObject.transform.position.y;
+            C = CursorPosition - characterPos;
+            D = C.normalized;
+            E = characterPos + D * tmpMaxMovement;
+
+            line = GetComponent<LineRenderer>();
+            line.SetPosition(0, characterPos);
+            line.SetPosition(1, E);
+            distance = tmpMaxMovement;
+            mClampDistance = true;
 
         }
-        characterPos.x = gameObject.transform.position.x;
-        characterPos.y = gameObject.transform.position.y;
+        else
+        {
+            characterPos.x = gameObject.transform.position.x;
+            characterPos.y = gameObject.transform.position.y;
+
+            line = GetComponent<LineRenderer>();
+            line.SetPosition(0, characterPos);
+            line.SetPosition(1, CursorPosition);
+            mClampDistance = false;
+        }
         
-        line = GetComponent<LineRenderer>();
-        line.SetPosition(0, characterPos);
-        line.SetPosition(1, CursorPosition);
     }
 
 
