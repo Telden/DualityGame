@@ -8,8 +8,6 @@ using UnityEngine;
 //
 public class Character_Randomization : MonoBehaviour {
 
-    List<GameObject> mRandomizedList = new List<GameObject>();
-
     public TextAsset firstNames; //Text asset that contains all the possible first names
     public TextAsset lastNames; //Text asset that contains all the possible last names
 	public GameObject PlayerObject;
@@ -23,12 +21,6 @@ public class Character_Randomization : MonoBehaviour {
     float randomStat; //Variable to set the new stat with
     string newName = ""; //Variable to set the randomized name
 
-    bool mHasLoaded = false;
-
-	//Store the randomized units
-	GameObject[] mGenCharacterArray;
-	public int mMaxCharacters = 20;
-	int mTotalCharacters = 0;
 
    
     // Use this for initialization
@@ -192,42 +184,5 @@ public class Character_Randomization : MonoBehaviour {
         
     }
 
-	//Insert a randomly generated character into the generated characters array
-	public void insertCharacter(GameObject nCharacter)
-	{
-
-		mGenCharacterArray[mTotalCharacters] = nCharacter;
-		increaseTotalSize();
-	}
-
-	public GameObject getCharacter(int index)
-	{
-		return mGenCharacterArray[index];
-	}
-
-    public GameObject[] getCharacterArray()
-    {
-        return mGenCharacterArray;
-    }
-	//Increase the total characters integer for the created characters array
-	void increaseTotalSize()
-	{
-		mTotalCharacters++; 
-	}
-
-	//Decrase the total characters integer for the created character array
-	void decreaseTotalSize()
-	{
-		mTotalCharacters--;
-	}
-
-    public int getTotalCharacters()
-    {
-        return mTotalCharacters;
-    }
-
-    public List<GameObject> getRandomizedList()
-    {
-        return mRandomizedList;
-    }
+	
 }

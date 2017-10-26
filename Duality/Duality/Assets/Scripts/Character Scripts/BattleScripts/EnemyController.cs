@@ -12,13 +12,14 @@ public class EnemyController : MonoBehaviour {
 	//Combat  Machine pointer
 	CombatMachine mMachinePtr;
 
+    public ListManager mpListManager;
 
 	// Use this for initialization
 	void Start () {
 		parts.Stop();
 		//set pointer to combat machine
 		mMachinePtr = GameObject.Find("BattleSystem").GetComponent<CombatMachine>();
-		mMachinePtr.registerEnemy(this.transform.gameObject);
+		mMachinePtr.registerEnemy(this.gameObject);
     }
 	
 	// Update is called once per frame
@@ -38,7 +39,7 @@ public class EnemyController : MonoBehaviour {
 	//		Debug.Log ("You're now attacking this character");
 			parts.Play();
             resetColor();
-			mMachinePtr.recieveEnemy(this.gameObject);
+			mMachinePtr.recieveBattlingEnemy(this.gameObject);
 			if(mMachinePtr.playerBattleFlag)
 				mMachinePtr.conductBattle(gameObject.GetComponent<BaseCharacter>().getName());
 		}
@@ -81,21 +82,22 @@ public class EnemyController : MonoBehaviour {
 		mHover = false;
 	}
 
-	public void initAI(GameObject [] playerArmy, int max)
+	public void initAI()
 	{
 	GameObject target;
 	float closest = float.MaxValue;
 	float distance;
 	Vector2 targetpos = new Vector2 (0,0);
 	print ("ELIMINATE!!!");
-	for(int i = 0; i < max; i++)
+
+	for(int i = 0; i < mpListManager.getBattleListCount(); i++)
 	{
-		distance = Vector2.SqrMagnitude (gameObject.transform.position - playerArmy[i].transform.position);
+		distance = Vector2.SqrMagnitude (gameObject.transform.position - mpListManager.getBattleUnit(i).transform.position);
 
 		if (distance < closest)
 		{
 			closest = distance;
-			target = playerArmy[i];
+			target = mpListManager.getBattleUnit(i);
 			targetpos = target.transform.position;
 
 		}

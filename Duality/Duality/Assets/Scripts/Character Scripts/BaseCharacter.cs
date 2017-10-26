@@ -87,7 +87,7 @@ public class BaseCharacter : MonoBehaviour
     {
         mDefense = nDefense;
         if (!mLoaded)
-            mResetMagic = mDefense;
+            mResetDefense = mDefense;
     }
 
     public float getDefense()

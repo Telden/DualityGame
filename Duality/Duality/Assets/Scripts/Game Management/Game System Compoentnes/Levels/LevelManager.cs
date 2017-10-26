@@ -13,7 +13,7 @@ public class LevelManager : MonoBehaviour {
 	public MainMenu mpMainMenu;
     public Button mBackButton;
 
-    bool mActive = false;
+    //bool mActive = false;
 	// Use this for initialization
 	void Start () {
 		mMissionSelectCanvas.enabled = false;
@@ -35,7 +35,7 @@ public class LevelManager : MonoBehaviour {
 
 	public void init()
 	{
-        mActive = true;
+        //mActive = true;
 		mMissionSelectCanvas.enabled = true;
 		linkButtons();
 	}

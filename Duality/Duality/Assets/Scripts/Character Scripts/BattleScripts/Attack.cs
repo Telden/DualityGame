@@ -14,7 +14,7 @@ public class Attack : MonoBehaviour {
     string [] mTmpName;
     bool active = false;
     public bool mIsBattling = false;
-    int message = 1;
+    const  int BATTLE_MESSAGE = 1;
     //Pointer to the UI controller
     UiController mUIptr;
     //Combat  Machine pointer
@@ -102,8 +102,8 @@ public class Attack : MonoBehaviour {
             fill.enabled = false;
             active = false;
 			mUIptr.RecieveEvent(mAttackMessage);
-            mMachinePtr.recievePlayerMessage(1);
-			mMachinePtr.recievePlayer(this.transform.parent.gameObject);
+            mMachinePtr.recievePlayerMessage(BATTLE_MESSAGE);
+			mMachinePtr.recieveBattlingPlayer(this.transform.parent.gameObject);
 			if(mMachinePtr.enemyBattleFlag)
 				mMachinePtr.conductBattle(this.transform.parent.gameObject.GetComponent<BaseCharacter>().getName());
             mIsBattling = true;

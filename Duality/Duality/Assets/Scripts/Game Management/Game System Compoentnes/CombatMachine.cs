@@ -8,17 +8,18 @@ public class CombatMachine : MonoBehaviour {
     List<GameObject> mpEnemyList;
 
     //EnemyObject[] enemyArmy;
-    List<GameObject[,]> mpBattleList;
-	int mBattleRow;
-	int mBattleMember;
-    
+    List<GameObject[]> mpBattleList;
 
-	public bool playerBattleFlag = false;
+    GameObject[] mBattleArray;
+    const int BATTLE_ARRAY_SIZE = 2;
+
+    public bool playerBattleFlag = false;
 	public bool enemyBattleFlag = false;
     
     //The moves left
 	int mPlayerMoves = 0;
 	int mEnemyMoves = 0;
+    
 
     // Script to the list manager
     public ListManager mpListManager;
@@ -27,10 +28,14 @@ public class CombatMachine : MonoBehaviour {
     
 	void Start () {
         mpEnemyList = new List<GameObject>();
-        mpBattleList = new List<GameObject[,]>();
+        mpBattleList = new List<GameObject[]>();
         mPlayerMoves = mpListManager.getBattleListCount();
-
-	}
+        mBattleArray = new GameObject[BATTLE_ARRAY_SIZE];
+        for(int i = 0; i < BATTLE_ARRAY_SIZE; i++)
+        {
+            mBattleArray[i] = null;
+        }
+    }
 	
 	
 	void Update () {
@@ -41,16 +46,16 @@ public class CombatMachine : MonoBehaviour {
 		} 
 		if(playerBattleFlag && enemyBattleFlag)
 		{
-			mBattleRow++;
-			playerBattleFlag = false;
+            mpBattleList.Add(mBattleArray);
+            mBattleArray = new GameObject[BATTLE_ARRAY_SIZE];
+            for (int i = 0; i < BATTLE_ARRAY_SIZE; i++)
+            {
+                mBattleArray[i] = null;
+            }
+            playerBattleFlag = false;
 			enemyBattleFlag = false;
 		}
 	}
-
-    public void init()
-    {
-
-    }
 
     public void recievePlayerMessage(int message)
     {
@@ -71,40 +76,35 @@ public class CombatMachine : MonoBehaviour {
         }
     }
 
-
-
-    public void recievEnemyMessage()
+    public void registerEnemy(GameObject enemyObject)
     {
-
+        print (enemyObject.GetComponent<BaseCharacter>().getName());
+        mpEnemyList.Add(enemyObject);
+        mEnemyMoves++;
     }
 
-
-	public void RecieveEvent()
-	{
-		
-	}
-
-    public void recievePlayer(GameObject playerObj)
+    public void recieveBattlingPlayer(GameObject playerObj)
 	{
 		print("recieved " + playerObj.GetComponent<BaseCharacter>().getName());
-		mBattleArray[mBattleRow,mBattleMember] = playerObj;
-		if(mBattleMember == 1)
-			mBattleMember = 0;
-		else 
-			mBattleMember = 1;
+
+        if (mBattleArray[0] == null)
+            mBattleArray[0] = playerObj;
+        else
+            mBattleArray[1] = playerObj;
+
 		playerBattleFlag = true;
         
     }
-    public void recieveEnemy(GameObject enemyObj)
+    public void recieveBattlingEnemy(GameObject enemyObj)
     {
 		print("recieved " + enemyObj.name);
-		mBattleArray[mBattleRow, mBattleMember] = enemyObj;
-		if(mBattleMember == 1)
-			mBattleMember = 0;
-		else 
-			mBattleMember = 1;
 
-		enemyBattleFlag = true;
+        if (mBattleArray[0] == null)
+            mBattleArray[0] = enemyObj;
+        else
+            mBattleArray[1] = enemyObj;
+
+        enemyBattleFlag = true;
     }
 
 	public void conductBattle(string name)
@@ -116,25 +116,26 @@ public class CombatMachine : MonoBehaviour {
 
 		//Search for the attacking object
 		do{
-			search = mBattleArray[row, character].GetComponent<BaseCharacter>();
+			search = mpBattleList[row][character].GetComponent<BaseCharacter>();
 			print(search.getName());
 			if(search.getName() != name)
 			{
 				if(character == 0)
 					character = 1;
+
 				else if (character == 1)
 				{
 					character = 0;
 					row++;
 				}
 			}
-		}while(row < mBattleRow || search.getName() != name);
+		}while(row < mpBattleList.Count || search.getName() != name);
 
 		print("Done with while");
 		if(character == 0)
 		{
 			//Search for the enemy object
-			BaseCharacter enemy = mBattleArray[row, character +1].GetComponent<BaseCharacter>();
+			BaseCharacter enemy = mpBattleList[row][1].GetComponent<BaseCharacter>();
 
 			//Deal Damage to the enemy
 			float damage = search.getAttack() - enemy.getDefense();
@@ -170,11 +171,11 @@ public class CombatMachine : MonoBehaviour {
 
 		else if(character == 1)
 		{
-			//Search for the enemy object
-			BaseCharacter enemy = mBattleArray[row, character - 1].GetComponent<BaseCharacter>();
+            //Search for the enemy object
+            BaseCharacter enemy = mpBattleList[row][0].GetComponent<BaseCharacter>();
 
-			//Deal Damage to the enemy
-			float damage = search.getAttack() - enemy.getDefense();
+            //Deal Damage to the enemy
+            float damage = search.getAttack() - enemy.getDefense();
 			if(damage < 1)
 			{
 				print(enemy.getName() + " takes to damage");
@@ -209,23 +210,15 @@ public class CombatMachine : MonoBehaviour {
     }
    
 
-	public void registerEnemy(GameObject enemyObject)
-	{
-		/*print (enemyObject.GetComponent<BaseCharacter>().getName());*/
-		//mEnemyArmy[mEnemyArmyIndex] = enemyObject;
-		//mEnemyArmyIndex++;
-		mEnemyMoves++;
-	}
-
 	void EnemyTurn()
 	{
-       // EnemyController iter;
+        EnemyController iter;
 
-        //for (int i = 0; i < mEnemyArmyIndex; i++)
-        //{
-          //  iter = mEnemyArmy[i].GetComponent<EnemyController>();
-           // iter.initAI(mPlayerArmy, mPlayerArmyIndex);
-        //}
+        for (int i = 0; i < mpEnemyList.Count; i++)
+        {
+            iter = mpEnemyList[i].GetComponent<EnemyController>();
+            iter.initAI();
+        }
 
     }
 
@@ -233,12 +226,12 @@ public class CombatMachine : MonoBehaviour {
 	{
 		UiController iter;
 
-		for(int i = 0; i < mPlayerArmyIndex; i++)
+		for(int i = 0; i < mpListManager.getBattleListCount(); i++)
 		{
-			iter = mPlayerArmy[i].GetComponent<UiController>();
+			iter = mpListManager.getBattleUnit(i).GetComponent<UiController>();
 			iter.resetTurn();
 		}
-		mPlayerMoves = 5;
+        mPlayerMoves = mpListManager.getBattleListCount();
 	}
 
 
