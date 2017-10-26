@@ -22,8 +22,8 @@ GameObject:
   - component: {fileID: 114931419997065974}
   - component: {fileID: 114564134097664028}
   - component: {fileID: 114844267196692074}
-  - component: {fileID: 114313999772606240}
   - component: {fileID: 114129468641757032}
+  - component: {fileID: 114302371741669362}
   m_Layer: 0
   m_Name: GameSystem
   m_TagString: Untagged
@@ -55,20 +55,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3976bba619f26534fb17d7c4f5f46231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114313999772606240
+  mRandomizedList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  mArmyList: []
+  mBattleList: []
+  mRecruitmentButtonList: []
+  mArmyViewButtonList: []
+--- !u!114 &114302371741669362
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1891795503883778}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf62998fc460add4daad9fb36f07b0cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxPlayers: 20
   maxEnemies: 20
-  mPlayerArmy: []
+  mPlayerArmy:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   mEnemyArmy:
   - {fileID: 0}
   - {fileID: 0}

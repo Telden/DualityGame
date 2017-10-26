@@ -16,6 +16,8 @@ public class ViewArmy : MonoBehaviour {
     int mTotalCharacters;
     GameObject character;
 
+    bool mActive = false;
+
     // Use this for initialization
     void Start () {
 		
@@ -23,16 +25,19 @@ public class ViewArmy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            mpListManager.clearViewArmyButtonList();
-            mpMainmenu.reset();
-        }
+        if(mActive)
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                mActive = false;
+                mpListManager.clearViewArmyButtonList();
+                mpMainmenu.reset();
+            }
     }
 
     //Function to be called from the main menu script
     public void init()
     {
+        mActive = true;
         mTotalCharacters = mpListManager.getArmyListSize();
         showArmy();
 

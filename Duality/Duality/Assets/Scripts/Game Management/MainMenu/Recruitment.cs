@@ -18,6 +18,7 @@ public class Recruitment : MonoBehaviour {
     int mTotalUnits; //variable to store the total amount of randomized units from their list
     GameObject character;
 
+    bool mActive = false;
 
     // Use this for initialization
     void Start () {
@@ -29,9 +30,10 @@ public class Recruitment : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+       if(mActive)
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+                mActive = false;
             mpListManager.clearRecruitmentButtonList();
             mpMainmenu.reset();
         }
@@ -41,6 +43,7 @@ public class Recruitment : MonoBehaviour {
     //Function to be called from the main menu script
     public void init()
     {
+        mActive = true;
         mTotalUnits = mpListManager.getRandomizedUnitListSize();
         loadList();
     }

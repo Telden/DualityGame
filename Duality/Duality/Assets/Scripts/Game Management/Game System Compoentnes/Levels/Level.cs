@@ -7,40 +7,67 @@ public class Level : MonoBehaviour {
 
 	[SerializeField]
 	private int mLevelIndex; //Which level?
-    public Canvas mLevelPreviewCanvas;
+    public Canvas mLevelPreviewCanvas; //The overall ui canvas
+    public Canvas mMissionSelectCanvas;
 	public Image mImagePreview; //Show the layout of the level
 	[SerializeField]
 	private float[] mStartingLocations; //The different locations that the player can place units on
 	[SerializeField]
 	private int mTotalAllowed; //The total number of allowed characters on this level
 	[SerializeField]
-	private GameObject[] mSelectedUnits; //The Units that are selected for the level
                                          //Brief Discription of the level
     public ListManager mpListManager;
-
+    public LevelManager mpLevelManager;
     public GameObject mCharacterButton;
     public RectTransform mParentPanel;
-
+    public Button mStartLevelButton;
     int mTotalCharacters;
+    int mSlotsLeft;
+	bool mActive =  false;
+    public Text mTotalSelectedUI;
 
     // Use this for initialization
     void Start () {
         mLevelPreviewCanvas.enabled = false;
-	}
+        mImagePreview.enabled = false;
+        mSlotsLeft = mTotalAllowed;
+        mTotalSelectedUI.text = "Slots left: " + mSlotsLeft.ToString();
+    }
 	
 	// Update is called once per frame
 	void Update () {
-       
+            checkInput();
     }
 
     public void init()
     {
+		print("Level called");
+        mActive = true;
         mLevelPreviewCanvas.enabled = true;
         mTotalCharacters = mpListManager.getArmyListSize();
-        showArmy();
+		showArmy();
+        mImagePreview.transform.SetParent(mLevelPreviewCanvas.transform);
+        mImagePreview.enabled = true;
+        mMissionSelectCanvas.enabled = false;
+        mTotalSelectedUI.text = "Slots left: " + mSlotsLeft.ToString();
+
     }
 
-    
+    void checkInput()
+    {
+        if(mActive)
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            print("Level escape call");
+            mActive = false;
+            mLevelPreviewCanvas.enabled = false;
+            mImagePreview.enabled = false;
+            mMissionSelectCanvas.enabled = true;
+            mSlotsLeft = mTotalAllowed;
+                mpListManager.clearBattleList();
+           cleanPanel();
+        }
+    }
 
 
     public void loadLevel()
@@ -50,6 +77,7 @@ public class Level : MonoBehaviour {
 
     void showArmy()
     {
+		print ("Showing Army");
         for (int i = 0; i < mTotalCharacters; i++)
         {
             GameObject character = (GameObject)Instantiate(mCharacterButton);
@@ -69,11 +97,25 @@ public class Level : MonoBehaviour {
 
             tempButton.onClick.AddListener(() => ButtonClicked(tempInt));
         }
+
+
     }
     void ButtonClicked(int buttonNo)
     {
+        if(mSlotsLeft > 0)
+        {
+            mpListManager.addBattleUnit(mpListManager.getArmyUnit(buttonNo));
+            mParentPanel.GetChild(buttonNo).GetComponent<Button>().interactable = false;
+            mSlotsLeft--;
+            mTotalSelectedUI.text = "Slots left: " + mSlotsLeft.ToString();
+        }
+       
 
-        mpListManager.addBattleUnit(mpListManager.getArmyUnit(buttonNo));
+    }
 
+    void cleanPanel ()
+    {
+        for (int i = 0; i < mTotalCharacters; i++)
+            Destroy(mParentPanel.GetChild(i).gameObject);
     }
 }

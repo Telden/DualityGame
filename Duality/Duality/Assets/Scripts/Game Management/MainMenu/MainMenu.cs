@@ -18,20 +18,18 @@ public class MainMenu : MonoBehaviour {
     // View Army canvas
     public Canvas mViewArmyCanvas;
 
-    //Mission Select Canvas
-    public Canvas mMissionSelectCanvas;
 
     //Main Menu Functions
     public Recruitment mpRecruitment;
     public ViewArmy mpViewArmy;
-
+	public LevelManager mpLevelManager;
 
     // Use this for initialization
     void Start () {
 
        mArmyRecruitmentCanvas.enabled = false;
         mViewArmyCanvas.enabled = false;
-        mMissionSelectCanvas.enabled = false;
+       
         Button tmp = mArmyRecruit.GetComponent<Button>();
         tmp.onClick.AddListener(Recruitment);
         tmp = mArmyViewer.GetComponent<Button>();
@@ -55,7 +53,7 @@ public class MainMenu : MonoBehaviour {
         mMainMenuCanvas.enabled = true;
         mArmyRecruitmentCanvas.enabled = false;
         mViewArmyCanvas.enabled = false;
-        mMissionSelectCanvas.enabled = false;
+        
     }
     void Recruitment()
     {
@@ -76,7 +74,7 @@ public class MainMenu : MonoBehaviour {
     void missionSelect()
     {
         mMainMenuCanvas.enabled = false;
-        mMissionSelectCanvas.enabled = true;
+		mpLevelManager.init();
     }
 
     void quit()

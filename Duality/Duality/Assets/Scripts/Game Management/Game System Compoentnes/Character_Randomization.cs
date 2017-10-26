@@ -46,11 +46,6 @@ public class Character_Randomization : MonoBehaviour {
 	//Num is the number of desired characters that the game wants to be made
 	public void generateCharacter(int num)
     {
-       //if(!mHasLoaded)
-       // {
-       //     mGenCharacterArray = new GameObject[mMaxCharacters];
-       //     mHasLoaded = true;
-       // }
 
         //Load text files
         string[] fn = firstNames.text.Split("\n"[0]);
@@ -191,16 +186,10 @@ public class Character_Randomization : MonoBehaviour {
 
 				}
 			}
-            mRandomizedList.Add(newPlayer);
-           //mpListManager.addRandomizedUnit(newPlayer.gameObject);
-            //print("finished randomizing");
-           // newCharacter.mLoaded = true;
-			//mGenCharacterArray [mTotalCharacters] = newPlayer;
-			//mTotalCharacters++;
+           
          
 		}
-        // mpListManager.getRandomizedList() = mRandomizedList;
-        //mpListManager.getRandomizedList();
+        
     }
 
 	//Insert a randomly generated character into the generated characters array

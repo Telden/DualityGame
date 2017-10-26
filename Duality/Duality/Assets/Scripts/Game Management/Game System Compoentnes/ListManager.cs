@@ -109,9 +109,6 @@ public class ListManager : MonoBehaviour {
     //Clear the battle list
     public void clearBattleList()
     {
-        for (int i = 0; i < mBattleList.Count; i++)
-            Destroy(mBattleList[i]);
-
         mBattleList.Clear();
     }
 

@@ -17,7 +17,7 @@ public class EnemyController : MonoBehaviour {
 	void Start () {
 		parts.Stop();
 		//set pointer to combat machine
-		mMachinePtr = GameObject.Find("GameSystem").GetComponent<CombatMachine>();
+		mMachinePtr = GameObject.Find("BattleSystem").GetComponent<CombatMachine>();
 		mMachinePtr.registerEnemy(this.transform.gameObject);
     }
 	
@@ -83,24 +83,24 @@ public class EnemyController : MonoBehaviour {
 
 	public void initAI(GameObject [] playerArmy, int max)
 	{
-	//	GameObject target;
-	//	float closest = float.MaxValue;
-	//	float distance;
-	//	Vector2 targetpos = new Vector2 (0,0);
-	//	print ("ELIMINATE!!!");
-	//	for(int i = 0; i < max; i++)
-	//	{
-	//		distance = Vector2.SqrMagnitude (gameObject.transform.position - playerArmy[i].transform.position);
+	GameObject target;
+	float closest = float.MaxValue;
+	float distance;
+	Vector2 targetpos = new Vector2 (0,0);
+	print ("ELIMINATE!!!");
+	for(int i = 0; i < max; i++)
+	{
+		distance = Vector2.SqrMagnitude (gameObject.transform.position - playerArmy[i].transform.position);
 
-	//		if (distance < closest)
-	//		{
-	//			closest = distance;
-	//			target = playerArmy[i];
-	//			targetpos = target.transform.position;
+		if (distance < closest)
+		{
+			closest = distance;
+			target = playerArmy[i];
+			targetpos = target.transform.position;
 
-	//		}
-	//	}
-	//	gameObject.transform.position = targetpos;
+		}
+	}
+	gameObject.transform.position = targetpos;
 
 	}
 }

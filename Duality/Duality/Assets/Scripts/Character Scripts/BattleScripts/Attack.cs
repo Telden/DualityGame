@@ -29,8 +29,8 @@ public class Attack : MonoBehaviour {
         fill.enabled = false;
 
         //set pointer to combat machine
-        mMachinePtr = GameObject.Find("GameSystem").GetComponent<CombatMachine>();
-		mMachinePtr.registerplayer(this.transform.parent.gameObject); //Register the character with the combat machine
+//        mMachinePtr = GameObject.Find("BattleSystem").GetComponent<CombatMachine>();
+		//mMachinePtr.registerplayer(this.transform.parent.gameObject); //Register the character with the combat machine
 
         mUIptr = transform.parent.gameObject.GetComponent<UiController>(); //Get the unit's ui controller
 		mAttackMessage = new EventMessage(EventType.ATTACK_EVENT);
