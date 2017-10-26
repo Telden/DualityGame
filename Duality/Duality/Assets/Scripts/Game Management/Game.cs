@@ -13,7 +13,7 @@ public class Game : MonoBehaviour {
         mCharacterIndex = 0;
         DontDestroyOnLoad(gameObject.transform);
         //combatScript.enabled = false;
-        gameObject.GetComponent<Character_Randomization>().generateCharacter(mMaxCharacters);
+        //gameObject.GetComponent<Character_Randomization>().generateCharacter(mMaxCharacters);
 
     }
 	

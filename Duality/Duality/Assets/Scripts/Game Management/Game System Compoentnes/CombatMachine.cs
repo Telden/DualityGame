@@ -4,40 +4,31 @@ using UnityEngine;
 
 public class CombatMachine : MonoBehaviour {
 
-	public int maxPlayers = 100;
-	public int maxEnemies = 100;
-   
-    
-	//Player Army Values
-	public GameObject[] mPlayerArmy;
-	int mPlayerArmyIndex = 0;
-
-	//Enemy army values
-	public GameObject[] mEnemyArmy;
-	int mEnemyArmyIndex = 5;
+    //Enemy army values
+    List<GameObject> mpEnemyList;
 
     //EnemyObject[] enemyArmy;
-    GameObject [,] mBattleArray;
+    List<GameObject[,]> mpBattleList;
 	int mBattleRow;
 	int mBattleMember;
     
-    int tmpsize1 = 20;
-    int tmpsize2 = 10;
 
 	public bool playerBattleFlag = false;
 	public bool enemyBattleFlag = false;
     
+    //The moves left
 	int mPlayerMoves = 0;
 	int mEnemyMoves = 0;
 
+    // Script to the list manager
+    public ListManager mpListManager;
 
-
-
-
+   
+    
 	void Start () {
-        mBattleArray = new GameObject[tmpsize1, tmpsize2];
-		//mEnemyArmy = new GameObject[maxEnemies];
-		mPlayerArmy = new GameObject[maxPlayers];
+        mpEnemyList = new List<GameObject>();
+        mpBattleList = new List<GameObject[,]>();
+        mPlayerMoves = mpListManager.getBattleListCount();
 
 	}
 	
@@ -217,12 +208,6 @@ public class CombatMachine : MonoBehaviour {
 
     }
    
-	public void registerplayer(GameObject playerObject)
-	{
-        mPlayerArmy[mPlayerArmyIndex] = playerObject;
-        mPlayerArmyIndex++;
-        mPlayerMoves++;
-    }
 
 	public void registerEnemy(GameObject enemyObject)
 	{

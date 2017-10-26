@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -32,6 +33,8 @@ public class Level : MonoBehaviour {
         mImagePreview.enabled = false;
         mSlotsLeft = mTotalAllowed;
         mTotalSelectedUI.text = "Slots left: " + mSlotsLeft.ToString();
+        Button tmp = mStartLevelButton.GetComponent<Button>();
+        tmp.onClick.AddListener(loadLevel);
     }
 	
 	// Update is called once per frame
@@ -72,7 +75,7 @@ public class Level : MonoBehaviour {
 
     public void loadLevel()
     {
-
+        SceneManager.LoadScene(mLevelIndex);
     }
 
     void showArmy()

@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f24c9574e82feb41aacb86c6cb81ac0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mLevelIndex: 0
+  mLevelIndex: 1
   mLevelPreviewCanvas: {fileID: 758730648}
   mMissionSelectCanvas: {fileID: 1619174276}
   mImagePreview: {fileID: 890231380}

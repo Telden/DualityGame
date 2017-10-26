@@ -100,11 +100,17 @@ public class ListManager : MonoBehaviour {
 		return mBattleList[index];
 	}
 
+
     //Remove a unit from the battle list
     public void removeBattleUnit(int index)
 	{
 		mBattleList.RemoveAt(index);
 	}
+
+    public int getBattleListCount()
+    {
+        return mBattleList.Count;
+    }
 
     //Clear the battle list
     public void clearBattleList()

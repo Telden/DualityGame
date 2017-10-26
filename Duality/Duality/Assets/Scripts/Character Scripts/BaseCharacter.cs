@@ -27,7 +27,13 @@ public class BaseCharacter : MonoBehaviour
     public bool mLoaded = false;
     public bool mSelected = false;
 
-	void Update()
+
+    void Start()
+    {
+        DontDestroyOnLoad(gameObject.transform);
+    }
+
+    void Update()
 	{
 		if(isDead)
 		{
