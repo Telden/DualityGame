@@ -106,13 +106,7 @@ public class Attack : MonoBehaviour {
             active = false;
 			mUIptr.RecieveEvent(mAttackMessage);
             mMachinePtr.recievePlayerMessage(BATTLE_MESSAGE);
-			mMachinePtr.recieveBattlingPlayer(this.transform.parent.gameObject);
-			if(mMachinePtr.enemyBattleFlag)
-			{
-				mMachinePtr.addArray();
-				mMachinePtr.conductBattle(this.transform.parent.gameObject.GetComponent<BaseCharacter>().getName());
-			}
-				
+			mMachinePtr.recieveBattlingPlayer(this.transform.parent.gameObject, true);				
             mIsBattling = true;
             mUIptr.finishedFunction();
 			mUIptr.finishedTurn();
@@ -139,7 +133,7 @@ public class Attack : MonoBehaviour {
 
    void continueBattle()
     {
-        mMachinePtr.conductBattle(this.transform.parent.gameObject.GetComponent<BaseCharacter>().getName());
+       // mMachinePtr.conductBattle(this.transform.parent.gameObject.GetComponent<BaseCharacter>().getName());
     }
 
     void flee()

@@ -7,10 +7,17 @@ public class CombatMachine : MonoBehaviour {
     //Enemy army values
 	List<GameObject> mpEnemyList = new List<GameObject>();
 
-    //EnemyObject[] enemyArmy;
-    List<GameObject[]> mpBattleList;
+    //List<GameObject[]> mpBattleList;
+	[SerializeField]
+	List<BattleObject>mpBattleList;
+   
+	GameObject mPlayerUnit;
+	GameObject mEnemyObject;
+	bool mPLayerInitiating = false;
+	bool mEnemyInitiating = false;
+	int mBattleIndex;
+	string battleID;
 
-    GameObject[] mBattleArray;
     const int BATTLE_ARRAY_SIZE = 2;
 
     public bool playerBattleFlag = false;
@@ -28,13 +35,8 @@ public class CombatMachine : MonoBehaviour {
 	void Start () {
 		mpListManager = GameObject.Find("GameSystem").GetComponent<ListManager>();
        
-        mpBattleList = new List<GameObject[]>();
+		mpBattleList = new List<BattleObject>();
         mPlayerMoves = mpListManager.getBattleListCount();
-        mBattleArray = new GameObject[BATTLE_ARRAY_SIZE];
-        for(int i = 0; i < BATTLE_ARRAY_SIZE; i++)
-        {
-            mBattleArray[i] = null;
-        }
     }
 	
 	
@@ -48,6 +50,8 @@ public class CombatMachine : MonoBehaviour {
 		{
             playerBattleFlag = false;
 			enemyBattleFlag = false;
+			loadBattle();
+			conductBattle();
 
 		}
 	}
@@ -56,11 +60,6 @@ public class CombatMachine : MonoBehaviour {
     {
         switch(message)
         {
-            //Movement Event
-            case 0:
-                mPlayerMoves--;
-                break;
-            
             //Attack Event
             case 1:
                 mPlayerMoves--;
@@ -78,145 +77,99 @@ public class CombatMachine : MonoBehaviour {
         mEnemyMoves++;
     }
 
-    public void recieveBattlingPlayer(GameObject playerObj)
+	public void recieveBattlingPlayer(GameObject playerObj, bool isInitiating)
 	{
-		print("recieved " + playerObj.GetComponent<BaseCharacter>().getName());
-
-        if (mBattleArray[0] == null)
-            mBattleArray[0] = playerObj;
-        else
-            mBattleArray[1] = playerObj;
-
+		print (playerObj.GetComponent<BaseCharacter>().getName());
+		mPlayerUnit = playerObj;
+		mPLayerInitiating = isInitiating;
 		playerBattleFlag = true;
         
 	
     }
-    public void recieveBattlingEnemy(GameObject enemyObj)
+	public void recieveBattlingEnemy(GameObject enemyObj, bool isInitiating)
     {
-		print("recieved " + enemyObj.name);
+		print (enemyObj.GetComponent<BaseCharacter>().getName());
+		mEnemyObject = enemyObj;
+		mEnemyInitiating = isInitiating;
+		enemyBattleFlag = true;
 
-        if (mBattleArray[0] == null)
-            mBattleArray[0] = enemyObj;
-        else
-            mBattleArray[1] = enemyObj;
 
-        enemyBattleFlag = true;
     }
 
-	public void conductBattle(string name)
+
+	void loadBattle ()
 	{
-		print("Recieved Battle");
-		int row = 0;
-		int character = 0;
-		BaseCharacter search;
+		
+		BattleObject newBattle;
 
+		if(mPLayerInitiating)
+			battleID = mPlayerUnit.GetComponent<BaseCharacter>().getName();
+		else 
+			battleID = mEnemyObject.GetComponent<BaseCharacter>().getName();
+
+		newBattle = new BattleObject ();
+		newBattle.setBattleID(battleID);
+		newBattle.setPlayerObject(mPlayerUnit);
+		newBattle.setEnemyObject(mEnemyObject);
+		newBattle.setPlayerInitiation(mPLayerInitiating);
+		mpBattleList.Add(newBattle);
+	}
+
+
+
+	public void conductBattle()
+	{
+		print("Conducting battle");
+		int i;
 		//Search for the attacking object
-		do{
-			search = mpBattleList[row][character].GetComponent<BaseCharacter>();
-			print(search.getName());
-			if(search.getName() != name)
-			{
-				if(character == 0)
-					character = 1;
-
-				else if (character == 1)
-				{
-					character = 0;
-					row++;
-				}
-			}
-		}while( search.getName() != name);
-
-		print("Done with while");
-		if(character == 0)
+		for ( i = 0; i < mpBattleList.Count; i++)
 		{
-			//Search for the enemy object
-			BaseCharacter enemy = mpBattleList[row][1].GetComponent<BaseCharacter>();
+			if(battleID == mpBattleList[i].getBattleID()) //Find the index that the battle is contained in
+				break;
+		}
 
-			//Deal Damage to the enemy
-			float damage = search.getAttack() - enemy.getDefense();
-			if(damage < 1)
+		BaseCharacter tmpPlayer = mpBattleList[i].getPlayerObject().GetComponent<BaseCharacter>(); //Cache player base stats
+		BaseCharacter tmpEnemy = mpBattleList[i].getEnemyObject().GetComponent<BaseCharacter>(); //Cache the enemy base stats
+
+		if(mpBattleList[i].getPlayerInitiation()) //If the player is initiating, have the player deal damage first
+		{
+			if( tmpPlayer.getAttack() - tmpEnemy.getDefense()> 0)
 			{
-				print(enemy.getName() + " takes to damage");
-			}
-			else 
-			{
-				print ("Dealing " + damage + " damage to " + enemy.getName());
-				enemy.setHealth(enemy.getHealth()-damage);
+				tmpEnemy.setHealth(tmpEnemy.getHealth() - ( tmpPlayer.getAttack() - tmpEnemy.getDefense()));
 			}
 				
-
-
-			//Deal damage to the attacker
-			if(!enemy.isDead)
-			{
-				damage = enemy.getAttack() - search.getDefense();
-				if(damage < 1)
-				{
-					print(search.getName() + " takes to damage");
-				}
-				else 
-				{
-					print("Dealing " + damage + " damage to " + search.getName());
-					search.setHealth(search.getHealth()-damage);
-				}
-					
-
-			}
+			if(!tmpEnemy.isDead)
+				if( tmpEnemy.getAttack() - tmpPlayer.getDefense()> 0)
+				tmpPlayer.setHealth(tmpPlayer.getHealth() - (tmpEnemy.getAttack() - tmpPlayer.getDefense()));
 		}
-
-		else if(character == 1)
+		else //The enemy attacks first
 		{
-            //Search for the enemy object
-            BaseCharacter enemy = mpBattleList[row][0].GetComponent<BaseCharacter>();
-
-            //Deal Damage to the enemy
-            float damage = search.getAttack() - enemy.getDefense();
-			if(damage < 1)
-			{
-				print(enemy.getName() + " takes to damage");
-			}
-			else 
-			{
-				print ("Dealing " + damage + " damage to " + enemy.getName());
-				enemy.setHealth(enemy.getHealth()-damage);
-			}
-
-
-			//Deal damage to the attacker
-			if(!enemy.isDead)
-			{
-				damage = enemy.getAttack() - search.getDefense();
-				if(damage < 1)
-				{
-					print(search.getName() + " takes to damage");
-				}
-				else 
-				{
-					print("Dealing " + damage + " damage to " + search.getName());
-					search.setHealth(search.getHealth()-damage);
-				}
+			if( tmpEnemy.getAttack() - tmpPlayer.getDefense()> 0)
+				tmpPlayer.setHealth(tmpPlayer.getHealth() - (tmpEnemy.getAttack() - tmpPlayer.getDefense()));
+			if(!tmpPlayer.isDead)
+				if( tmpPlayer.getAttack() - tmpEnemy.getDefense() > 0)
+				tmpEnemy.setHealth(tmpEnemy.getHealth() - (tmpPlayer.getAttack() - tmpEnemy.getDefense()));
 		}
 	}
-}
 
-    public void battleFlee(string name)
-    {
 
-    }
-   
+	public void battleFlee(string name)
+	{
+
+	}
+
 
 	void EnemyTurn()
 	{
-        EnemyController iter;
+		EnemyController iter;
 
-        for (int i = 0; i < mpEnemyList.Count; i++)
-        {
-            iter = mpEnemyList[i].GetComponent<EnemyController>();
-            iter.initAI();
-        }
+		for (int i = 0; i < mpEnemyList.Count; i++)
+		{
+			iter = mpEnemyList[i].GetComponent<EnemyController>();
+			iter.initAI();
+		}
 
-    }
+	}
 
 	void resetPlayers()
 	{
@@ -227,16 +180,12 @@ public class CombatMachine : MonoBehaviour {
 			iter = mpListManager.getBattleUnit(i).GetComponent<UiController>();
 			iter.resetTurn();
 		}
-        mPlayerMoves = mpListManager.getBattleListCount();
+		mPlayerMoves = mpListManager.getBattleListCount();
 	}
 
-	public void addArray()
-	{
-		mpBattleList.Add(mBattleArray);
-		mBattleArray = new GameObject[BATTLE_ARRAY_SIZE];
-		//for (int i = 0; i < BATTLE_ARRAY_SIZE; i++)
-		//{
-		//	mBattleArray[i] = null;
-		//}
-	}
+
+
+
 }
+
+    
