@@ -15,6 +15,8 @@ public class BaseCharacter : MonoBehaviour
 	public float mSpeed = 10;
 	public float mMovemnt = 10;
 	public string mName;
+    [SerializeField]
+    string mClass;
 
 	float mResetHealth;
 	float mResetAttack;
@@ -150,6 +152,15 @@ public class BaseCharacter : MonoBehaviour
     public float getMaxMovement()
     {
         return mResetMovement;
+    }
+
+    public void setClass(string nClass)
+    {
+        mClass = nClass;
+    }
+    public string getClass()
+    {
+        return mClass;
     }
 	public void reset()
 	{

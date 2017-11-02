@@ -362,6 +362,24 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114844267196692074, guid: 88abf13d13bfac748b8813faf95c0f5c,
+        type: 2}
+      propertyPath: mWarriorSprite
+      value: 
+      objectReference: {fileID: 21300004, guid: f7ca31a15c454e546b550e4d6fd06c64,
+        type: 3}
+    - target: {fileID: 114844267196692074, guid: 88abf13d13bfac748b8813faf95c0f5c,
+        type: 2}
+      propertyPath: mWizardSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 74a8d3b4eeaf65e46a03df4deae80668,
+        type: 3}
+    - target: {fileID: 114844267196692074, guid: 88abf13d13bfac748b8813faf95c0f5c,
+        type: 2}
+      propertyPath: mArcherSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 58d5490cca5348544989f93aa5c8e267,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 88abf13d13bfac748b8813faf95c0f5c, type: 2}
   m_IsPrefabParent: 0
@@ -2230,7 +2248,7 @@ Prefab:
     - target: {fileID: 224122745331898474, guid: 70af745d5ef3ac84e95956fd4282efa9,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -31.77
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224823242463843436, guid: 70af745d5ef3ac84e95956fd4282efa9,
         type: 2}
@@ -2575,7 +2593,7 @@ Prefab:
     - target: {fileID: 224656968794530672, guid: 70af745d5ef3ac84e95956fd4282efa9,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 63.54
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1370903846403694, guid: 70af745d5ef3ac84e95956fd4282efa9, type: 2}
       propertyPath: m_IsActive

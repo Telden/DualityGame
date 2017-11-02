@@ -11,8 +11,11 @@ public class Character_Randomization : MonoBehaviour {
     public TextAsset firstNames; //Text asset that contains all the possible first names
     public TextAsset lastNames; //Text asset that contains all the possible last names
 	public GameObject PlayerObject;
-
     public ListManager mpListManager; //Script to the list manager 
+    public Sprite mArcherSprite;
+    public Sprite mWizardSprite;
+    public Sprite mWarriorSprite;
+
     string firstname; //The randomly selected firstname
     string lastname; //The randomly selected lastname
     int seed; //The random seed generated for selecting a random stat
@@ -64,7 +67,27 @@ public class Character_Randomization : MonoBehaviour {
 
             newName = firstname + " " + lastname;
             newCharacter.setName(newName);
-            
+
+            //Set random class 
+            seed = Random.Range(1, 4);
+            switch(seed)
+            {
+                case 1:
+                    newCharacter.setClass("Warrior");
+                    newPlayer.GetComponent<SpriteRenderer>().sprite = mWarriorSprite;
+                    break;
+                case 2:
+                    newCharacter.setClass("Archer");
+                    newPlayer.GetComponent<SpriteRenderer>().sprite = mArcherSprite;
+                    break;
+                case 3:
+                    newCharacter.setClass("Wizard");
+                    newPlayer.GetComponent<SpriteRenderer>().sprite = mWizardSprite;
+                    break;
+                default:
+                    print("4 happened ");
+                    break;
+            }
 
             // randomly select a random stat
             seed = Random.Range(1, 6);
