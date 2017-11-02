@@ -20,23 +20,16 @@ public class BattleStartScreen : MonoBehaviour {
 	void Start () {
 		Button tmp = mStartLevelButton.GetComponent<Button>();
 		tmp.onClick.AddListener(startBattle);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if(Input.GetKeyDown(KeyCode.S))
-			{
-			mpListManager = GameObject.Find("GameSystem").GetComponent<ListManager>();
-			mUnitsPosisionedleft = mpListManager.getBattleListCount();
-
-				init();
-			}
-	}
-
-	public void init()
-	{
+		mpListManager = GameObject.Find("GameSystem").GetComponent<ListManager>();
+		mUnitsPosisionedleft = mpListManager.getBattleListCount();
 		showArmy();
 	}
+
+
+	// Update is called once per frame
+	/*void Update () {
+
+	}*/
 
 	void showArmy()
 	{
@@ -89,6 +82,10 @@ public class BattleStartScreen : MonoBehaviour {
 	{
 		if(mUnitsPosisionedleft == 0)
 		mStartBattleCanvas.enabled = false;
+		for(int i = 0; i <  mpListManager.getBattleListCount(); i++)
+		{
+			mpListManager.getBattleUnit(i).GetComponent<UiController>().init();
+		}
 
 	}
 }

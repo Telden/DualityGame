@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour {
     bool targetable = false;
 	bool mHover = false;
 	public ParticleSystem parts;
-
+	public BoxCollider2D mAttackHitbox;
 	//Combat  Machine pointer
 	CombatMachine mMachinePtr;
 

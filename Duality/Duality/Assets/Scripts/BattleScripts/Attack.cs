@@ -20,7 +20,7 @@ public class Attack : MonoBehaviour {
     //Combat  Machine pointer
     CombatMachine mMachinePtr;
 	EventMessage mAttackMessage;
-
+	bool mInitialized = false;
 
     void Start () {
         mAttackHitbox = gameObject.GetComponent<BoxCollider2D>();
@@ -50,15 +50,19 @@ public class Attack : MonoBehaviour {
         {
           checkInput();    
         }
-		if(Input.GetKeyDown(KeyCode.S))
-			mMachinePtr = GameObject.Find("BattleSystem").GetComponent<CombatMachine>();
+
+			
 		
 	}
 
     //turn on the battle state
     public void init()
     {
-		
+		if(!mInitialized)
+		{
+			mMachinePtr = GameObject.Find("BattleSystem").GetComponent<CombatMachine>();
+			mInitialized = true;
+		}
         if(mIsBattling)
         {
             mAttackCanvas.enabled = true;
@@ -68,6 +72,7 @@ public class Attack : MonoBehaviour {
             mAttackHitbox.enabled = true;
             fill.enabled = true;
             active = true;
+
             detectEnemies();
         }
         

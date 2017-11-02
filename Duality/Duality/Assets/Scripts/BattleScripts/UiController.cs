@@ -35,6 +35,7 @@ public class UiController : MonoBehaviour {
     bool active = false;
     bool OperationFinished = true;
     bool turnFinished = false;
+	bool mBattleStarted = false;
     CombatMachine mMachinePtr;
 
 	BaseCharacter mBaseScript;
@@ -94,9 +95,10 @@ public class UiController : MonoBehaviour {
 
     }
 
-	void init()
+	public void init()
 	{
 		mMachinePtr = GameObject.Find("BattleSystem").GetComponent<CombatMachine>();
+		mBattleStarted = true;
 	}
 
     void checkInput()
@@ -132,35 +134,36 @@ public class UiController : MonoBehaviour {
     void OnMouseEnter()
     {
         //Debug.Log("Mouse Over");
-        if (!turnFinished) //If the unit has not finished  its turn
-        {
-            if(!mAttackScript.mIsBattling) //Is the  unit fighting?
-            {
-                if (OperationFinished) //if another ui operation is not active
-                {
-                    if (!active) //if the ui is already not active
-                    {
-                        // Debug.Log("Mouse clicked");
-                        attackMenu.enabled = true;
-                        Movement.interactable = true;
-                        Attack.interactable = true;
-                        Item.interactable = true;
-                        Stay.interactable = true;
-                        active = true;
+		if(mBattleStarted) //If the battle scene has started
+	        if (!turnFinished) //If the unit has not finished  its turn
+	        {
+	            if(!mAttackScript.mIsBattling) //Is the  unit fighting?
+	            {
+	                if (OperationFinished) //if another ui operation is not active
+	                {
+	                    if (!active) //if the ui is already not active
+	                    {
+	                        // Debug.Log("Mouse clicked");
+	                        attackMenu.enabled = true;
+	                        Movement.interactable = true;
+	                        Attack.interactable = true;
+	                        Item.interactable = true;
+	                        Stay.interactable = true;
+	                        active = true;
 
-                        //Enable battleUI
-                        statsBackground.enabled = true;
-                        uiName.enabled = true;
-                        uiHealth.enabled = true;
-                        uiAttack.enabled = true;
-                        uiDefense.enabled = true;
-                        uiMagic.enabled = true;
-                        uiMagicDefense.enabled = true;
-                        uiSpeed.enabled = true;
-                        mHealthBar.enabled = true;
-                    }
-                }
-            }
+	                        //Enable battleUI
+	                        statsBackground.enabled = true;
+	                        uiName.enabled = true;
+	                        uiHealth.enabled = true;
+	                        uiAttack.enabled = true;
+	                        uiDefense.enabled = true;
+	                        uiMagic.enabled = true;
+	                        uiMagicDefense.enabled = true;
+	                        uiSpeed.enabled = true;
+	                        mHealthBar.enabled = true;
+	                    }
+	                }
+	            }
             else
             {
                 mAttackScript.init();
@@ -292,6 +295,8 @@ public class UiController : MonoBehaviour {
     public void resetTurn()
     {
 		gameObject.GetComponent<SpriteRenderer>().color = new Color(255f, 0f, 0f, 1f);
+		if(!mAttackScript.mIsBattling)
+			parts.Stop();
         turnFinished = false;
 		active = false;
 
