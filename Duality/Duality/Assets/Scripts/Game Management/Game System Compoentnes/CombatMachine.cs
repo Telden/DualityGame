@@ -158,23 +158,60 @@ public class CombatMachine : MonoBehaviour {
 		BaseCharacter tmpPlayer = mpBattleList[i].getPlayerObject().GetComponent<BaseCharacter>(); //Cache player base stats
 		BaseCharacter tmpEnemy = mpBattleList[i].getEnemyObject().GetComponent<BaseCharacter>(); //Cache the enemy base stats
 
-		if (mpBattleList [i].getPlayerInitiation () && mpBattleList [i].getPlayerRanged ()) { //If the player is initiating and is ranged, have the player deal damage first
+		if (mpBattleList [i].getPlayerInitiation () && mpBattleList [i].getPlayerRanged () && tmpPlayer.getClass () == "Wizard") //If the player is initiating with a ranged attack and is a Wizard
+		{ 
+			print ("Magic Attack!");
+			if (tmpPlayer.getMagic () - tmpEnemy.getMagicDefense () > 0)
+				tmpEnemy.setHealth (tmpEnemy.getHealth () - (tmpPlayer.getMagic () - tmpEnemy.getMagicDefense ()));
 			
-			if (tmpPlayer.getAttack () - tmpEnemy.getDefense () > 0) {
+			if (!tmpEnemy.isDead && mpBattleList [i].getEnemyRanged ()) 
+			{ //If the enemy is not dead and also ranged
+				if (tmpEnemy.getAttack () - tmpPlayer.getDefense () > 0)
+					tmpPlayer.setHealth (tmpPlayer.getHealth () - (tmpEnemy.getAttack () - tmpPlayer.getDefense ()));
+			} 
+		}
+		else if (mpBattleList [i].getPlayerRanged () && tmpPlayer.getClass () == "Wizard") 
+		{
+			if (tmpEnemy.getMagic () - tmpPlayer.getMagicDefense () > 0)
+				tmpPlayer.setHealth (tmpPlayer.getHealth () - (tmpEnemy.getMagic () - tmpPlayer.getMagicDefense ()));
+			if (!tmpPlayer.isDead && mpBattleList [i].getEnemyRanged ()) 
+				if (tmpPlayer.getMagic () - tmpEnemy.getMagicDefense () > 0)
+					tmpEnemy.setHealth (tmpEnemy.getHealth () - (tmpPlayer.getMagic () - tmpEnemy.getMagicDefense ()));
+		}
+
+
+
+		else if (mpBattleList [i].getPlayerInitiation () && mpBattleList [i].getPlayerRanged ()) //If the player is initiating and is ranged, have the player deal damage first
+		{ 
+			
+			if (tmpPlayer.getAttack () - tmpEnemy.getDefense () > 0) 
+			{
 				tmpEnemy.setHealth (tmpEnemy.getHealth () - (tmpPlayer.getAttack () - tmpEnemy.getDefense ()));
 			}
-			if (!tmpEnemy.isDead && mpBattleList [i].getEnemyRanged ()) { //If the enemy is not dead and also ranged
+			if (!tmpEnemy.isDead && mpBattleList [i].getEnemyRanged ()) //If the enemy is not dead and also ranged
+			{ 
 				if (tmpEnemy.getAttack () - tmpPlayer.getDefense () > 0)
 					tmpPlayer.setHealth (tmpPlayer.getHealth () - (tmpEnemy.getAttack () - tmpPlayer.getDefense ()));
 			}
 
 				
-		} else if (mpBattleList [i].getEnemyRanged ()) {
+		} 
+		else if (mpBattleList [i].getEnemyRanged ()) 
+		{
 			if (tmpEnemy.getAttack () - tmpPlayer.getDefense () > 0)
 				tmpPlayer.setHealth (tmpPlayer.getHealth () - (tmpEnemy.getAttack () - tmpPlayer.getDefense ()));
 			if (!tmpPlayer.isDead && mpBattleList [i].getPlayerRanged ())
 				tmpEnemy.setHealth (tmpEnemy.getHealth () - (tmpPlayer.getAttack () - tmpEnemy.getDefense ()));
-		} else if (mpBattleList [i].getPlayerInitiation()) {
+		} 
+
+
+
+
+
+
+
+
+		else if (mpBattleList [i].getPlayerInitiation()) {
 
 			if (tmpPlayer.getAttack () - tmpEnemy.getDefense () > 0) {
 				tmpEnemy.setHealth (tmpEnemy.getHealth () - (tmpPlayer.getAttack () - tmpEnemy.getDefense ()));

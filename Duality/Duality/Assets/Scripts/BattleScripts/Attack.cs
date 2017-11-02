@@ -7,6 +7,7 @@ public class Attack : MonoBehaviour {
     public Canvas mAttackCanvas;
     public Button mFightButton;
     public Button mFleeButton;
+	public Button mMagicButton;
 	public CircleCollider2D mRangedHitbox;
     private BoxCollider2D mAttackHitbox;
     private SpriteRenderer fill;
@@ -23,6 +24,7 @@ public class Attack : MonoBehaviour {
 	bool mInitialized = false;
 	BaseCharacter mpBaseCharacterScript;
 	const float ARCHER_RANGE = 10;
+	const float MAGE_RANGE = 5;
 	bool mIsRanged= false;
 
 
@@ -94,6 +96,24 @@ public class Attack : MonoBehaviour {
 			detectEnemies ();
 		}
     }
+
+	public void magicInit()
+	{
+		if(!mInitialized)
+		{
+			mMachinePtr = GameObject.Find("BattleSystem").GetComponent<CombatMachine>();
+			mpBaseCharacterScript = this.transform.parent.gameObject.GetComponent<BaseCharacter> ();
+			if (mpBaseCharacterScript.getClass() == "Wizard")
+				mRangedHitbox.radius = MAGE_RANGE;
+			mInitialized = true;
+		}
+		mRangedHitbox.enabled = true;
+		active = true;
+		rangedAttack ();
+	}
+
+
+
 
     void checkInput()
     {

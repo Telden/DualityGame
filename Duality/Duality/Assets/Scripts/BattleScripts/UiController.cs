@@ -9,6 +9,7 @@ public class UiController : MonoBehaviour {
     public Canvas attackMenu;
     public Button Movement;
     public Button Attack;
+	public Button Magic;
     public Button Item;
     public Button Stay;
 
@@ -52,6 +53,8 @@ public class UiController : MonoBehaviour {
         tmp.onClick.AddListener(useItem);
         tmp = Stay.GetComponent<Button>();
         tmp.onClick.AddListener(playerStay);
+		tmp = Magic.GetComponent<Button> ();
+		tmp.onClick.AddListener (playerMagic);
 
         //Set up all the scripts
         mAttackScript = transform.Find("AttackHitbox").GetComponent<Attack>();
@@ -149,6 +152,13 @@ public class UiController : MonoBehaviour {
 	                        Attack.interactable = true;
 	                        Item.interactable = true;
 	                        Stay.interactable = true;
+						   // Magic.interactable = false;
+						if (mBaseScript.getClass () == "Wizard")
+							Magic.interactable = true;
+						else
+							Magic.interactable = false;
+
+
 	                        active = true;
 
 	                        //Enable battleUI
@@ -161,6 +171,9 @@ public class UiController : MonoBehaviour {
 	                        uiMagicDefense.enabled = true;
 	                        uiSpeed.enabled = true;
 	                        mHealthBar.enabled = true;
+
+
+						
 	                    }
 	                }
 	            }
@@ -189,6 +202,7 @@ public class UiController : MonoBehaviour {
         attackMenu.enabled = false;
         Movement.interactable = false;
         Attack.interactable = false;
+		Magic.interactable = false;
         Item.interactable = false;
         Stay.interactable = false;
 
@@ -216,6 +230,7 @@ public class UiController : MonoBehaviour {
         attackMenu.enabled = false;
         Movement.interactable = false;
         Attack.interactable = false;
+		Magic.interactable = false;
         Item.interactable = false;
         Stay.interactable = false;
 
@@ -232,6 +247,31 @@ public class UiController : MonoBehaviour {
         OperationFinished = false;
         mAttackScript.init();
     }
+
+	void playerMagic()
+	{
+		//print("Button works");
+		attackMenu.enabled = false;
+		Movement.interactable = false;
+		Attack.interactable = false;
+		Magic.interactable = false;
+		Item.interactable = false;
+		Stay.interactable = false;
+
+		//Disable BattleUI
+		statsBackground.enabled = false;
+		uiName.enabled = false;
+		uiHealth.enabled = false;
+		uiAttack.enabled = false;
+		uiDefense.enabled = false;
+		uiMagic.enabled = false;
+		uiMagicDefense.enabled = false;
+		uiSpeed.enabled = false;
+		mHealthBar.enabled = false;
+		OperationFinished = false;
+
+		mAttackScript.magicInit ();
+	}
    
     void useItem()
     {
@@ -239,6 +279,7 @@ public class UiController : MonoBehaviour {
         attackMenu.enabled = false;
         Movement.interactable = false;
         Attack.interactable = false;
+		Magic.interactable = false;
         Item.interactable = false;
         Stay.interactable = false;
 
@@ -263,6 +304,7 @@ public class UiController : MonoBehaviour {
         attackMenu.enabled = false;
         Movement.interactable = false;
         Attack.interactable = false;
+		Magic.interactable = false;
         Item.interactable = false;
         Stay.interactable = false;
 
