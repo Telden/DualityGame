@@ -195,10 +195,12 @@ public class Attack : MonoBehaviour {
 		mIsRanged = true;
 
 	}
-   void continueBattle()
-    {
-       // mMachinePtr.conductBattle(this.transform.parent.gameObject.GetComponent<BaseCharacter>().getName());
-    }
+	public void beingAttacked()
+	{
+		mMachinePtr = GameObject.Find("BattleSystem").GetComponent<CombatMachine>();
+		mMachinePtr.recieveBattlingPlayer(this.transform.parent.gameObject, false, mIsRanged);				
+		mIsBattling = true;
+	}
 
     public void flee()
     {

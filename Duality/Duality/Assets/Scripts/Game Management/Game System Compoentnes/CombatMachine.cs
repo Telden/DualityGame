@@ -51,8 +51,7 @@ public class CombatMachine : MonoBehaviour {
 		} 
 		if(playerBattleFlag && enemyBattleFlag)
 		{
-            playerBattleFlag = false;
-			enemyBattleFlag = false;
+           
 			loadBattle();
 			conductBattle();
 
@@ -104,6 +103,9 @@ public class CombatMachine : MonoBehaviour {
 
 	void loadBattle ()
 	{
+		playerBattleFlag = false;
+		enemyBattleFlag = false;
+
 		bool battleFound = false;
 
 
@@ -257,13 +259,13 @@ public class CombatMachine : MonoBehaviour {
 
 	void EnemyTurn()
 	{
-		/*EnemyController iter;
+		EnemyController iter;
 
 		for (int i = 0; i < mpEnemyList.Count; i++)
 		{
 			iter = mpEnemyList[i].GetComponent<EnemyController>();
 			iter.initAI();
-		}*/
+		}
 
 	}
 
@@ -279,9 +281,27 @@ public class CombatMachine : MonoBehaviour {
 		mPlayerMoves = mpListManager.getBattleListCount();
 	}
 
+	public bool battleExist(string Name)
+	{
+		bool test = false;
+		for (int i = 0; i < mpBattleList.Count; i++)
+		{
+			if(mpBattleList[i].getPlayerObject().GetComponent<BaseCharacter>().getName() == Name)
+			{
+				test = true;
+				break;
+			}
+		}
 
+		return test;
+				
+	}
 
-
+	public void initiateBattle()
+	{
+		loadBattle();
+		conductBattle();
+	}
 }
 
     

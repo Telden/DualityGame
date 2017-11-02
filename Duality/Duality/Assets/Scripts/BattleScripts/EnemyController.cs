@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour {
 
     bool targetable = false;
 	bool mHover = false;
+	bool mIsBattling = false;
 	public ParticleSystem parts;
 	public BoxCollider2D mAttackHitbox;
 	//Combat  Machine pointer
@@ -42,6 +43,7 @@ public class EnemyController : MonoBehaviour {
             resetColor();
 			mMachinePtr.recieveBattlingEnemy(this.gameObject, false, false);
 			targetable = false;
+			mIsBattling = true;
 		}
 	}
     public void Highlight()
@@ -84,25 +86,72 @@ public class EnemyController : MonoBehaviour {
 
 	public void initAI()
 	{
-	GameObject target;
-	float closest = float.MaxValue;
-	float distance;
-	Vector2 targetpos = new Vector2 (0,0);
-	print ("ELIMINATE!!!");
-
-	for(int i = 0; i < mpListManager.getBattleListCount(); i++)
-	{
-		distance = Vector2.SqrMagnitude (gameObject.transform.position - mpListManager.getBattleUnit(i).transform.position);
-
-		if (distance < closest)
+		GameObject target = this.gameObject;
+		float closest = float.MaxValue;
+		float distance;
+		Vector2 targetpos = new Vector2 (0,0);
+		Vector2 vectorGap = new Vector2 (0,0);
+		Vector2 characterPos = new Vector2 (0,0);
+		bool test = false;
+		//print ("ELIMINATE!!!");
+		if(!mIsBattling)
 		{
-			closest = distance;
-			target = mpListManager.getBattleUnit(i);
-			targetpos = target.transform.position;
+			
+			for(int i = 0; i < mpListManager.getBattleListCount(); i++)
+			{
+				if(!mMachinePtr.battleExist(mpListManager.getBattleUnit(i).GetComponent<BaseCharacter>().getName()))
+				{
+					target = mpListManager.getBattleUnit(i);
+					distance = Vector2.SqrMagnitude (gameObject.transform.position - mpListManager.getBattleUnit(i).transform.position);
+					if (distance > 10)
+					{
+						targetpos.x = target.transform.position.x;
+						targetpos.y = target.transform.position.y;
+						characterPos.x = gameObject.transform.position.x;
+						characterPos.y = gameObject.transform.position.y;
+						vectorGap = targetpos - characterPos;
+						vectorGap = vectorGap.normalized;
+						gameObject.transform.position = characterPos + vectorGap * 10;
+						test = true;
+						break;
+					}
+					else
+					{
+						gameObject.transform.position = target.transform.position;
+						test = true;
+						break;
+					}
+						
+
+				
+						
+						
+				}
+					
+			}
+			if(test)
+			{
+				mMachinePtr.recieveBattlingEnemy(this.gameObject, true, false);
+				target.GetComponentInChildren<Attack>().beingAttacked();
+				mMachinePtr.initiateBattle();
+			}
+
+
+
+			/*gameObject.transform.position = target;
+
+
+
+
+
+			if (distance < closest)
+			{
+				closest = distance;
+				target = mpListManager.getBattleUnit(i);
+				targetpos = target.transform.position;*/
+
+			//}
 
 		}
-	}
-	gameObject.transform.position = targetpos;
-
 	}
 }
