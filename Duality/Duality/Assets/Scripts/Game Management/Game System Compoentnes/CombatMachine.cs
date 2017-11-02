@@ -22,6 +22,9 @@ public class CombatMachine : MonoBehaviour {
 
     public bool playerBattleFlag = false;
 	public bool enemyBattleFlag = false;
+
+	bool mPLayerBattleRanged = false;
+	bool mEnemyBattleRanged = false;
     
     //The moves left
 	int mPlayerMoves = 0;
@@ -77,20 +80,22 @@ public class CombatMachine : MonoBehaviour {
         mEnemyMoves++;
     }
 
-	public void recieveBattlingPlayer(GameObject playerObj, bool isInitiating)
+	public void recieveBattlingPlayer(GameObject playerObj, bool isInitiating, bool isRanged)
 	{
 		print (playerObj.GetComponent<BaseCharacter>().getName());
 		mPlayerUnit = playerObj;
 		mPLayerInitiating = isInitiating;
+		mPLayerBattleRanged = isRanged;
 		playerBattleFlag = true;
         
 	
     }
-	public void recieveBattlingEnemy(GameObject enemyObj, bool isInitiating)
+	public void recieveBattlingEnemy(GameObject enemyObj, bool isInitiating, bool isRanged)
     {
 		print (enemyObj.GetComponent<BaseCharacter>().getName());
 		mEnemyObject = enemyObj;
 		mEnemyInitiating = isInitiating;
+		mEnemyBattleRanged = isRanged;
 		enemyBattleFlag = true;
 
 
@@ -99,20 +104,42 @@ public class CombatMachine : MonoBehaviour {
 
 	void loadBattle ()
 	{
-		
-		BattleObject newBattle;
+		bool battleFound = false;
+
 
 		if(mPLayerInitiating)
 			battleID = mPlayerUnit.GetComponent<BaseCharacter>().getName();
 		else 
 			battleID = mEnemyObject.GetComponent<BaseCharacter>().getName();
 
-		newBattle = new BattleObject ();
-		newBattle.setBattleID(battleID);
-		newBattle.setPlayerObject(mPlayerUnit);
-		newBattle.setEnemyObject(mEnemyObject);
-		newBattle.setPlayerInitiation(mPLayerInitiating);
-		mpBattleList.Add(newBattle);
+	
+
+
+		for (int i = 0; i < mpBattleList.Count; i++)
+		{
+			if (battleID == mpBattleList [i].getBattleID ()) 
+			{
+				battleFound = true;
+				break;
+			}
+				
+		}
+
+		if (!battleFound) 
+		{
+			BattleObject newBattle;
+
+
+			newBattle = new BattleObject ();
+			newBattle.setBattleID(battleID);
+			newBattle.setPlayerObject(mPlayerUnit);
+			newBattle.setEnemyObject(mEnemyObject);
+			newBattle.setPlayerInitiation(mPLayerInitiating);
+			newBattle.setPlayerRanged (mPLayerBattleRanged);
+			newBattle.setEnemyRanged (mEnemyBattleRanged);
+			mpBattleList.Add(newBattle);
+		}
+
 	}
 
 
@@ -131,25 +158,40 @@ public class CombatMachine : MonoBehaviour {
 		BaseCharacter tmpPlayer = mpBattleList[i].getPlayerObject().GetComponent<BaseCharacter>(); //Cache player base stats
 		BaseCharacter tmpEnemy = mpBattleList[i].getEnemyObject().GetComponent<BaseCharacter>(); //Cache the enemy base stats
 
-		if(mpBattleList[i].getPlayerInitiation()) //If the player is initiating, have the player deal damage first
-		{
-			if( tmpPlayer.getAttack() - tmpEnemy.getDefense()> 0)
-			{
-				tmpEnemy.setHealth(tmpEnemy.getHealth() - ( tmpPlayer.getAttack() - tmpEnemy.getDefense()));
+		if (mpBattleList [i].getPlayerInitiation () && mpBattleList [i].getPlayerRanged ()) { //If the player is initiating and is ranged, have the player deal damage first
+			
+			if (tmpPlayer.getAttack () - tmpEnemy.getDefense () > 0) {
+				tmpEnemy.setHealth (tmpEnemy.getHealth () - (tmpPlayer.getAttack () - tmpEnemy.getDefense ()));
 			}
+			if (!tmpEnemy.isDead && mpBattleList [i].getEnemyRanged ()) { //If the enemy is not dead and also ranged
+				if (tmpEnemy.getAttack () - tmpPlayer.getDefense () > 0)
+					tmpPlayer.setHealth (tmpPlayer.getHealth () - (tmpEnemy.getAttack () - tmpPlayer.getDefense ()));
+			}
+
 				
-			if(!tmpEnemy.isDead)
-				if( tmpEnemy.getAttack() - tmpPlayer.getDefense()> 0)
-				tmpPlayer.setHealth(tmpPlayer.getHealth() - (tmpEnemy.getAttack() - tmpPlayer.getDefense()));
+		} else if (mpBattleList [i].getEnemyRanged ()) {
+			if (tmpEnemy.getAttack () - tmpPlayer.getDefense () > 0)
+				tmpPlayer.setHealth (tmpPlayer.getHealth () - (tmpEnemy.getAttack () - tmpPlayer.getDefense ()));
+			if (!tmpPlayer.isDead && mpBattleList [i].getPlayerRanged ())
+				tmpEnemy.setHealth (tmpEnemy.getHealth () - (tmpPlayer.getAttack () - tmpEnemy.getDefense ()));
+		} else if (mpBattleList [i].getPlayerInitiation()) {
+
+			if (tmpPlayer.getAttack () - tmpEnemy.getDefense () > 0) {
+				tmpEnemy.setHealth (tmpEnemy.getHealth () - (tmpPlayer.getAttack () - tmpEnemy.getDefense ()));
+			}
+
+			if (!tmpEnemy.isDead)
+			if (tmpEnemy.getAttack () - tmpPlayer.getDefense () > 0)
+				tmpPlayer.setHealth (tmpPlayer.getHealth () - (tmpEnemy.getAttack () - tmpPlayer.getDefense ()));
 		}
-		else //The enemy attacks first
-		{
-			if( tmpEnemy.getAttack() - tmpPlayer.getDefense()> 0)
-				tmpPlayer.setHealth(tmpPlayer.getHealth() - (tmpEnemy.getAttack() - tmpPlayer.getDefense()));
-			if(!tmpPlayer.isDead)
-				if( tmpPlayer.getAttack() - tmpEnemy.getDefense() > 0)
-				tmpEnemy.setHealth(tmpEnemy.getHealth() - (tmpPlayer.getAttack() - tmpEnemy.getDefense()));
-		}
+
+		else { //The enemy attacks first
+				if (tmpEnemy.getAttack () - tmpPlayer.getDefense () > 0)
+					tmpPlayer.setHealth (tmpPlayer.getHealth () - (tmpEnemy.getAttack () - tmpPlayer.getDefense ()));
+				if (!tmpPlayer.isDead)
+				if (tmpPlayer.getAttack () - tmpEnemy.getDefense () > 0)
+					tmpEnemy.setHealth (tmpEnemy.getHealth () - (tmpPlayer.getAttack () - tmpEnemy.getDefense ()));
+			}
 	}
 
 

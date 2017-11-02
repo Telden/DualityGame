@@ -40,7 +40,7 @@ public class EnemyController : MonoBehaviour {
 	//		Debug.Log ("You're now attacking this character");
 			parts.Play();
             resetColor();
-			mMachinePtr.recieveBattlingEnemy(this.gameObject, false);				
+			mMachinePtr.recieveBattlingEnemy(this.gameObject, false, false);				
 		}
 	}
     public void Highlight()

@@ -8,6 +8,8 @@ public class BattleObject : MonoBehaviour {
 	private GameObject mPlayerObject; //The player object
 	private GameObject mEnemyObject; //The enemy object
 	private bool mPLayerInitiating; //Is the player unit initiating?
+	private bool mPlayerRanged; //Is the player attacking at range?
+	private bool mEnemyRanged; //Is the enemy attacking at range?
 
 	public void setBattleID(string nID)
 	{
@@ -47,5 +49,25 @@ public class BattleObject : MonoBehaviour {
 	public bool getPlayerInitiation()
 	{
 		return mPLayerInitiating;
+	}
+
+	public void setPlayerRanged(bool nRanged)
+	{
+		mPlayerRanged = nRanged;
+	}
+
+	public bool getPlayerRanged()
+	{
+		return mPlayerRanged;
+	}
+
+	public void setEnemyRanged(bool nRanged)
+	{
+		mEnemyRanged = nRanged;
+	}
+
+	public bool getEnemyRanged()
+	{
+		return mEnemyRanged;
 	}
 }

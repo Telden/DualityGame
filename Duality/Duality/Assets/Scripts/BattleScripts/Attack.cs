@@ -23,6 +23,10 @@ public class Attack : MonoBehaviour {
 	bool mInitialized = false;
 	BaseCharacter mpBaseCharacterScript;
 	const float ARCHER_RANGE = 10;
+	bool mIsRanged= false;
+
+
+
     void Start () {
         mAttackHitbox = gameObject.GetComponent<BoxCollider2D>();
         mAttackHitbox.enabled = false;
@@ -83,6 +87,12 @@ public class Attack : MonoBehaviour {
 			rangedAttack ();
 		} else
 			print ("Wizard");
+		{
+			mAttackHitbox.enabled = true;
+			fill.enabled = true;
+			active = true;
+			detectEnemies ();
+		}
     }
 
     void checkInput()
@@ -118,7 +128,7 @@ public class Attack : MonoBehaviour {
             active = false;
 			mUIptr.RecieveEvent(mAttackMessage);
             mMachinePtr.recievePlayerMessage(BATTLE_MESSAGE);
-			mMachinePtr.recieveBattlingPlayer(this.transform.parent.gameObject, true);				
+			mMachinePtr.recieveBattlingPlayer(this.transform.parent.gameObject, true, mIsRanged);				
             mIsBattling = true;
             mUIptr.finishedFunction();
 			mUIptr.finishedTurn();
@@ -141,6 +151,7 @@ public class Attack : MonoBehaviour {
             
         }
 		mAttackHitbox.enabled = false;
+		mIsRanged = false;
     }
 	void rangedAttack()
 	{
@@ -159,6 +170,8 @@ public class Attack : MonoBehaviour {
 
 		}
 		mRangedHitbox.enabled = false;
+		mIsRanged = true;
+
 	}
    void continueBattle()
     {
