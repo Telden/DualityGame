@@ -12,8 +12,6 @@ public class Level : MonoBehaviour {
     public Canvas mMissionSelectCanvas;
 	public Image mImagePreview; //Show the layout of the level
 	[SerializeField]
-	private float[] mStartingLocations; //The different locations that the player can place units on
-	[SerializeField]
 	private int mTotalAllowed; //The total number of allowed characters on this level
 	[SerializeField]
                                          //Brief Discription of the level
@@ -80,7 +78,7 @@ public class Level : MonoBehaviour {
 
     void showArmy()
     {
-		print ("Showing Army");
+
         for (int i = 0; i < mTotalCharacters; i++)
         {
             GameObject character = (GameObject)Instantiate(mCharacterButton);

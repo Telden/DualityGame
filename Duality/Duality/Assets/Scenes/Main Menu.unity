@@ -253,7 +253,6 @@ MonoBehaviour:
   mLevelPreviewCanvas: {fileID: 758730648}
   mMissionSelectCanvas: {fileID: 1619174276}
   mImagePreview: {fileID: 890231380}
-  mStartingLocations: []
   mTotalAllowed: 5
   mpListManager: {fileID: 118561404}
   mpLevelManager: {fileID: 828903268}
@@ -2231,7 +2230,7 @@ Prefab:
     - target: {fileID: 224122745331898474, guid: 70af745d5ef3ac84e95956fd4282efa9,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -31.77
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224823242463843436, guid: 70af745d5ef3ac84e95956fd4282efa9,
         type: 2}
@@ -2576,7 +2575,7 @@ Prefab:
     - target: {fileID: 224656968794530672, guid: 70af745d5ef3ac84e95956fd4282efa9,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 63.54
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1370903846403694, guid: 70af745d5ef3ac84e95956fd4282efa9, type: 2}
       propertyPath: m_IsActive

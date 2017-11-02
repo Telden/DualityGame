@@ -627,7 +627,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1969862544799216}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -137.92719, y: -4.6610074, z: 0}
+  m_LocalPosition: {x: -19.275763, y: -1.6285267, z: 0}
   m_LocalScale: {x: 3.7452612, y: 3.7452612, z: 3.7452612}
   m_Children:
   - {fileID: 224800122676849788}
@@ -1428,6 +1428,7 @@ MonoBehaviour:
   mAttackCanvas: {fileID: 223841011779948082}
   mFightButton: {fileID: 114582467358830544}
   mFleeButton: {fileID: 114699115542140452}
+  mIsBattling: 0
 --- !u!114 &114643889687536322
 MonoBehaviour:
   m_ObjectHideFlags: 1

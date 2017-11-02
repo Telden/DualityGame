@@ -5,7 +5,7 @@ using UnityEngine;
 public class CombatMachine : MonoBehaviour {
 
     //Enemy army values
-    List<GameObject> mpEnemyList;
+	List<GameObject> mpEnemyList = new List<GameObject>();
 
     //EnemyObject[] enemyArmy;
     List<GameObject[]> mpBattleList;
@@ -22,12 +22,12 @@ public class CombatMachine : MonoBehaviour {
     
 
     // Script to the list manager
-    public ListManager mpListManager;
+    ListManager mpListManager;
 
-   
     
 	void Start () {
-        mpEnemyList = new List<GameObject>();
+		mpListManager = GameObject.Find("GameSystem").GetComponent<ListManager>();
+       
         mpBattleList = new List<GameObject[]>();
         mPlayerMoves = mpListManager.getBattleListCount();
         mBattleArray = new GameObject[BATTLE_ARRAY_SIZE];
@@ -46,14 +46,9 @@ public class CombatMachine : MonoBehaviour {
 		} 
 		if(playerBattleFlag && enemyBattleFlag)
 		{
-            mpBattleList.Add(mBattleArray);
-            mBattleArray = new GameObject[BATTLE_ARRAY_SIZE];
-            for (int i = 0; i < BATTLE_ARRAY_SIZE; i++)
-            {
-                mBattleArray[i] = null;
-            }
             playerBattleFlag = false;
 			enemyBattleFlag = false;
+
 		}
 	}
 
@@ -94,6 +89,7 @@ public class CombatMachine : MonoBehaviour {
 
 		playerBattleFlag = true;
         
+	
     }
     public void recieveBattlingEnemy(GameObject enemyObj)
     {
@@ -129,7 +125,7 @@ public class CombatMachine : MonoBehaviour {
 					row++;
 				}
 			}
-		}while(row < mpBattleList.Count || search.getName() != name);
+		}while( search.getName() != name);
 
 		print("Done with while");
 		if(character == 0)
@@ -234,5 +230,13 @@ public class CombatMachine : MonoBehaviour {
         mPlayerMoves = mpListManager.getBattleListCount();
 	}
 
-
+	public void addArray()
+	{
+		mpBattleList.Add(mBattleArray);
+		mBattleArray = new GameObject[BATTLE_ARRAY_SIZE];
+		//for (int i = 0; i < BATTLE_ARRAY_SIZE; i++)
+		//{
+		//	mBattleArray[i] = null;
+		//}
+	}
 }

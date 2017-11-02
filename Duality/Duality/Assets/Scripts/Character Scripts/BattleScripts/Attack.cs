@@ -50,12 +50,15 @@ public class Attack : MonoBehaviour {
         {
           checkInput();    
         }
+		if(Input.GetKeyDown(KeyCode.S))
+			mMachinePtr = GameObject.Find("BattleSystem").GetComponent<CombatMachine>();
 		
 	}
 
     //turn on the battle state
     public void init()
     {
+		
         if(mIsBattling)
         {
             mAttackCanvas.enabled = true;
@@ -105,7 +108,11 @@ public class Attack : MonoBehaviour {
             mMachinePtr.recievePlayerMessage(BATTLE_MESSAGE);
 			mMachinePtr.recieveBattlingPlayer(this.transform.parent.gameObject);
 			if(mMachinePtr.enemyBattleFlag)
+			{
+				mMachinePtr.addArray();
 				mMachinePtr.conductBattle(this.transform.parent.gameObject.GetComponent<BaseCharacter>().getName());
+			}
+				
             mIsBattling = true;
             mUIptr.finishedFunction();
 			mUIptr.finishedTurn();

@@ -56,7 +56,7 @@ public class UiController : MonoBehaviour {
         mAttackScript = transform.Find("AttackHitbox").GetComponent<Attack>();
         mMoveScript = gameObject.GetComponent<move>();
 		mBaseScript = gameObject.GetComponent<BaseCharacter>();
-		mMachinePtr = GameObject.Find("GameSystem").GetComponent<CombatMachine>();
+
 
         //Make sure the buttons are not interactible yet
         attackMenu.enabled = false;
@@ -76,10 +76,6 @@ public class UiController : MonoBehaviour {
         uiSpeed.enabled = false;
         mHealthBar.enabled = false;
 
-
-        //create pointer  to combat manager
-        mMachinePtr = GameObject.Find("GameSystem").GetComponent<CombatMachine>();
-
 		parts.Stop();
     }
 
@@ -93,10 +89,16 @@ public class UiController : MonoBehaviour {
                   checkInput();
 			      updateUI();
                 }
-        
-
+		if(Input.GetKeyDown(KeyCode.S))
+        	init();
 
     }
+
+	void init()
+	{
+		mMachinePtr = GameObject.Find("BattleSystem").GetComponent<CombatMachine>();
+	}
+
     void checkInput()
     {
         

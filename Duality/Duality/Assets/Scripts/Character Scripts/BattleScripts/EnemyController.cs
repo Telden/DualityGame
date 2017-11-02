@@ -12,13 +12,14 @@ public class EnemyController : MonoBehaviour {
 	//Combat  Machine pointer
 	CombatMachine mMachinePtr;
 
-    public ListManager mpListManager;
+    ListManager mpListManager;
 
 	// Use this for initialization
 	void Start () {
 		parts.Stop();
 		//set pointer to combat machine
 		mMachinePtr = GameObject.Find("BattleSystem").GetComponent<CombatMachine>();
+		mpListManager = GameObject.Find("GameSystem").GetComponent<ListManager>();
 		mMachinePtr.registerEnemy(this.gameObject);
     }
 	
@@ -41,7 +42,11 @@ public class EnemyController : MonoBehaviour {
             resetColor();
 			mMachinePtr.recieveBattlingEnemy(this.gameObject);
 			if(mMachinePtr.playerBattleFlag)
+			{
+				mMachinePtr.addArray();
 				mMachinePtr.conductBattle(gameObject.GetComponent<BaseCharacter>().getName());
+			}
+				
 		}
 	}
     public void Highlight()
