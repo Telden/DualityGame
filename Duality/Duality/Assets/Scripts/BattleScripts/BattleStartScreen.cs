@@ -51,7 +51,8 @@ public class BattleStartScreen : MonoBehaviour {
 			character.transform.GetChild(5).GetComponent<Text>().text = "Magic Defense: " + mpListManager.getBattleUnit(i).GetComponent<BaseCharacter>().getMagicDefense();
 			character.transform.GetChild(6).GetComponent<Text>().text = "Speed: " + mpListManager.getBattleUnit(i).GetComponent<BaseCharacter>().getSpeed();
 			character.transform.GetChild(7).GetComponent<Text>().text = "Movement: " + mpListManager.getBattleUnit(i).GetComponent<BaseCharacter>().getMovement();
-			int tempInt = i;
+            character.transform.GetChild(8).GetComponent<Text>().text = "Class: " + mpListManager.getRandomizedUnit(i).GetComponent<BaseCharacter>().getClass();
+            int tempInt = i;
 
 			tempButton.onClick.AddListener(() => ButtonClicked(tempInt));
 		}

@@ -146,6 +146,7 @@ MonoBehaviour:
   mSpeed: 10
   mMovemnt: 10
   mName: Enemy Grunt
+  mClass: 
   mLoaded: 0
   mSelected: 0
 --- !u!114 &114512724866738616
@@ -3508,7 +3509,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b1647ee1ccdb04d4da69b0a2fb4469bc, type: 3}
-  m_Color: {r: 0, g: 0.25517225, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
