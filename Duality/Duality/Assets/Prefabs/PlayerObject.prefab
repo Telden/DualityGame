@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4086818072221730}
   - component: {fileID: 212958404615334316}
   - component: {fileID: 61032028362133542}
+  - component: {fileID: 58583435371947356}
   - component: {fileID: 114629043239386036}
   - component: {fileID: 199362969744475144}
   - component: {fileID: 198211700014929902}
@@ -627,7 +628,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1969862544799216}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -135.77058, y: -3.910113, z: 0}
+  m_LocalPosition: {x: 656.9064, y: 516.9013, z: 0}
   m_LocalScale: {x: 3.7452612, y: 3.7452612, z: 3.7452612}
   m_Children:
   - {fileID: 224800122676849788}
@@ -637,6 +638,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &58583435371947356
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1093329294933126}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!61 &61032028362133542
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -1429,6 +1445,7 @@ MonoBehaviour:
   mAttackCanvas: {fileID: 223841011779948082}
   mFightButton: {fileID: 114582467358830544}
   mFleeButton: {fileID: 114699115542140452}
+  mRangedHitbox: {fileID: 58583435371947356}
   mIsBattling: 0
 --- !u!114 &114643889687536322
 MonoBehaviour:
@@ -2173,7 +2190,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1625475820
+  randomSeed: -1421891941
   InitialModule:
     serializedVersion: 3
     enabled: 1

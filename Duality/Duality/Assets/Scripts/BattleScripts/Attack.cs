@@ -7,7 +7,7 @@ public class Attack : MonoBehaviour {
     public Canvas mAttackCanvas;
     public Button mFightButton;
     public Button mFleeButton;
-
+	public CircleCollider2D mRangedHitbox;
     private BoxCollider2D mAttackHitbox;
     private SpriteRenderer fill;
     Collider2D[] results;
@@ -21,13 +21,14 @@ public class Attack : MonoBehaviour {
     CombatMachine mMachinePtr;
 	EventMessage mAttackMessage;
 	bool mInitialized = false;
-
+	BaseCharacter mpBaseCharacterScript;
+	const float ARCHER_RANGE = 10;
     void Start () {
         mAttackHitbox = gameObject.GetComponent<BoxCollider2D>();
         mAttackHitbox.enabled = false;
         fill = gameObject.GetComponent<SpriteRenderer>();
         fill.enabled = false;
-
+		mRangedHitbox.enabled = false;
         //set pointer to combat machine
 //        mMachinePtr = GameObject.Find("BattleSystem").GetComponent<CombatMachine>();
 		//mMachinePtr.registerplayer(this.transform.parent.gameObject); //Register the character with the combat machine
@@ -61,21 +62,27 @@ public class Attack : MonoBehaviour {
 		if(!mInitialized)
 		{
 			mMachinePtr = GameObject.Find("BattleSystem").GetComponent<CombatMachine>();
+			mpBaseCharacterScript = this.transform.parent.gameObject.GetComponent<BaseCharacter> ();
+			if (mpBaseCharacterScript.getClass() == "Archer")
+				mRangedHitbox.radius = ARCHER_RANGE;
 			mInitialized = true;
 		}
-        if(mIsBattling)
-        {
-            mAttackCanvas.enabled = true;
-        }
-        else
-        {
-            mAttackHitbox.enabled = true;
-            fill.enabled = true;
-            active = true;
+		/*if (mIsBattling) {
+			mAttackCanvas.enabled = true;*/
+		if (mpBaseCharacterScript.getClass () == "Warrior") {
+			print ("Attack  Warrior");
+			mAttackHitbox.enabled = true;
+			fill.enabled = true;
+			active = true;
 
-            detectEnemies();
-        }
-        
+			detectEnemies ();
+		} else if (mpBaseCharacterScript.getClass () == "Archer") {
+			print ("Archer");
+			mRangedHitbox.enabled = true;
+			active = true;
+			rangedAttack ();
+		} else
+			print ("Wizard");
     }
 
     void checkInput()
@@ -135,7 +142,24 @@ public class Attack : MonoBehaviour {
         }
 		mAttackHitbox.enabled = false;
     }
+	void rangedAttack()
+	{
+		int i = 0;
+		results = Physics2D.OverlapCircleAll (mRangedHitbox.transform.position, mRangedHitbox.radius);
+		mTmpName = new string[results.Length];
+		foreach(Collider2D c in results)
+		{
+			//     print(c.name);
+			if(c.tag == "Enemy")
+			{
+				mTmpName[i] = c.name;
+				i++;
+				GameObject.Find(c.name).GetComponent<EnemyController>().Highlight();
+			}
 
+		}
+		mRangedHitbox.enabled = false;
+	}
    void continueBattle()
     {
        // mMachinePtr.conductBattle(this.transform.parent.gameObject.GetComponent<BaseCharacter>().getName());
