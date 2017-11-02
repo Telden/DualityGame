@@ -49,6 +49,7 @@ public class CombatMachine : MonoBehaviour {
 			EnemyTurn();
 			resetPlayers();
 		} 
+
 		if(playerBattleFlag && enemyBattleFlag)
 		{
            
@@ -171,6 +172,8 @@ public class CombatMachine : MonoBehaviour {
 				if (tmpEnemy.getAttack () - tmpPlayer.getDefense () > 0)
 					tmpPlayer.setHealth (tmpPlayer.getHealth () - (tmpEnemy.getAttack () - tmpPlayer.getDefense ()));
 			} 
+			else if(tmpEnemy.isDead)
+				removeAndDelete(mpBattleList[i].getEnemyObject());
 		}
 		else if (mpBattleList [i].getPlayerRanged () && tmpPlayer.getClass () == "Wizard") 
 		{
@@ -195,6 +198,8 @@ public class CombatMachine : MonoBehaviour {
 				if (tmpEnemy.getAttack () - tmpPlayer.getDefense () > 0)
 					tmpPlayer.setHealth (tmpPlayer.getHealth () - (tmpEnemy.getAttack () - tmpPlayer.getDefense ()));
 			}
+			else if(tmpEnemy.isDead)
+				removeAndDelete(mpBattleList[i].getEnemyObject());
 
 				
 		} 
@@ -220,16 +225,18 @@ public class CombatMachine : MonoBehaviour {
 			}
 
 			if (!tmpEnemy.isDead)
-			if (tmpEnemy.getAttack () - tmpPlayer.getDefense () > 0)
+				if (tmpEnemy.getAttack () - tmpPlayer.getDefense () > 0)
 				tmpPlayer.setHealth (tmpPlayer.getHealth () - (tmpEnemy.getAttack () - tmpPlayer.getDefense ()));
+			else if(tmpEnemy.isDead)
+				removeAndDelete(mpBattleList[i].getEnemyObject());
 		}
 
 		else { //The enemy attacks first
 				if (tmpEnemy.getAttack () - tmpPlayer.getDefense () > 0)
 					tmpPlayer.setHealth (tmpPlayer.getHealth () - (tmpEnemy.getAttack () - tmpPlayer.getDefense ()));
 				if (!tmpPlayer.isDead)
-				if (tmpPlayer.getAttack () - tmpEnemy.getDefense () > 0)
-					tmpEnemy.setHealth (tmpEnemy.getHealth () - (tmpPlayer.getAttack () - tmpEnemy.getDefense ()));
+					if (tmpPlayer.getAttack () - tmpEnemy.getDefense () > 0)
+				tmpEnemy.setHealth (tmpEnemy.getHealth () - (tmpPlayer.getAttack () - tmpEnemy.getDefense ()));
 			}
 	}
 
@@ -301,6 +308,15 @@ public class CombatMachine : MonoBehaviour {
 	{
 		loadBattle();
 		conductBattle();
+	}
+
+	void removeAndDelete(GameObject obj)
+	{
+		mpEnemyList.Remove(obj);
+		Destroy(obj);
+		if(mpEnemyList.Count == 0)
+			print("Player Wins!");
+
 	}
 }
 

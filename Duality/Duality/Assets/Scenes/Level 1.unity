@@ -560,6 +560,10 @@ Prefab:
       propertyPath: mName
       value: Rick
       objectReference: {fileID: 0}
+    - target: {fileID: 1559582390483876, guid: 5f8fd680c8091cd4798e9ecbbdac46b0, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f8fd680c8091cd4798e9ecbbdac46b0, type: 2}
   m_IsPrefabParent: 0
@@ -614,6 +618,10 @@ Prefab:
     - target: {fileID: 212018656109073884, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
         type: 2}
       propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1559582390483876, guid: 5f8fd680c8091cd4798e9ecbbdac46b0, type: 2}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -671,6 +679,10 @@ Prefab:
         type: 2}
       propertyPath: randomSeed
       value: 1701563106
+      objectReference: {fileID: 0}
+    - target: {fileID: 1559582390483876, guid: 5f8fd680c8091cd4798e9ecbbdac46b0, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f8fd680c8091cd4798e9ecbbdac46b0, type: 2}
@@ -1011,6 +1023,10 @@ Prefab:
         type: 2}
       propertyPath: mName
       value: Carl
+      objectReference: {fileID: 0}
+    - target: {fileID: 1559582390483876, guid: 5f8fd680c8091cd4798e9ecbbdac46b0, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f8fd680c8091cd4798e9ecbbdac46b0, type: 2}

@@ -434,7 +434,7 @@ public class UiController : MonoBehaviour {
 			parts.Stop();
         turnFinished = false;
 		active = false;
-
+		mMoveScript.reset();
     }
 
 	public void RecieveEvent(EventMessage Message)
