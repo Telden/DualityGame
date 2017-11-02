@@ -225,6 +225,9 @@ public class UiController : MonoBehaviour {
     {
         //if (turnFinished)
         //    statsBackground.enabled = false;
+		//battleMenuCanvas.enabled = false;
+		//active = false;
+
     }
 
     void moveCharacter()
@@ -389,18 +392,21 @@ public class UiController : MonoBehaviour {
 	void battleMenuAttack()
 	{
 		battleMenuCanvas.enabled = false;
+		active = false;
 		mAttackScript.init();
 	}
 
 	void battleMenuMagic()
 	{
 		battleMenuCanvas.enabled = false;
+		active = false;
 		mAttackScript.magicInit ();
 	}
 
 	void battleMenuFlee()
 	{
 		battleMenuCanvas.enabled = false;
+		active = false;
 		mAttackScript.flee();
 	}
 
