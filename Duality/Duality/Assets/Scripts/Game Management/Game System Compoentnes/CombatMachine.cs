@@ -232,21 +232,38 @@ public class CombatMachine : MonoBehaviour {
 	}
 
 
-	public void battleFlee(string name)
+	public void battleFlee(BaseCharacter playerObj)
 	{
+		float totalEnemySpeed = 0;
+		float escapeChance  = 100;
+		int seed;
 
+		for (int i = 0; i < mpBattleList.Count; i++)
+		{
+			if(mpBattleList[i].getPlayerObject().GetComponent<BaseCharacter>().getName() == playerObj.getName())
+				totalEnemySpeed += mpBattleList[i].getEnemyObject().GetComponent<BaseCharacter>().getSpeed();
+		}
+
+		totalEnemySpeed -= playerObj.getSpeed();
+		escapeChance -= totalEnemySpeed;
+
+		seed = Random.Range(0, 100);
+		if (seed > escapeChance)
+			print("unsuccsessful flee");
+		else
+			print("Successful flee");
 	}
 
 
 	void EnemyTurn()
 	{
-		EnemyController iter;
+		/*EnemyController iter;
 
 		for (int i = 0; i < mpEnemyList.Count; i++)
 		{
 			iter = mpEnemyList[i].GetComponent<EnemyController>();
 			iter.initAI();
-		}
+		}*/
 
 	}
 

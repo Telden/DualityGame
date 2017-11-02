@@ -13,6 +13,13 @@ public class UiController : MonoBehaviour {
     public Button Item;
     public Button Stay;
 
+
+	//Battle Menu
+	public Canvas battleMenuCanvas;
+	public Button battleFlee;
+	public Button battleAttack;
+	public Button BattleMagic;
+
     public Text uiName;
     public Text uiHealth;
     public Text uiAttack;
@@ -56,6 +63,13 @@ public class UiController : MonoBehaviour {
 		tmp = Magic.GetComponent<Button> ();
 		tmp.onClick.AddListener (playerMagic);
 
+		tmp = battleFlee.GetComponent<Button> ();
+		tmp.onClick.AddListener(battleMenuFlee);
+		tmp = battleAttack.GetComponent<Button> ();
+		tmp.onClick.AddListener(battleMenuAttack);
+		tmp = BattleMagic.GetComponent<Button> ();
+		tmp.onClick.AddListener(battleMenuMagic);
+
         //Set up all the scripts
         mAttackScript = transform.Find("AttackHitbox").GetComponent<Attack>();
         mMoveScript = gameObject.GetComponent<move>();
@@ -64,10 +78,13 @@ public class UiController : MonoBehaviour {
 
         //Make sure the buttons are not interactible yet
         attackMenu.enabled = false;
+		battleMenuCanvas.enabled = false;
         Movement.interactable = false;
         Attack.interactable = false;
         Item.interactable = false;
         Stay.interactable = false;
+		Magic.interactable = false;
+	
 
         //Disable the battleUI
         statsBackground.enabled = false;
@@ -114,6 +131,7 @@ public class UiController : MonoBehaviour {
             Attack.interactable = false;
             Item.interactable = false;
             Stay.interactable = false;
+
             active = false;
 
 
@@ -136,7 +154,7 @@ public class UiController : MonoBehaviour {
 
     void OnMouseEnter()
     {
-        //Debug.Log("Mouse Over");
+        Debug.Log("Mouse Over");
 		if(mBattleStarted) //If the battle scene has started
 	        if (!turnFinished) //If the unit has not finished  its turn
 	        {
@@ -176,18 +194,31 @@ public class UiController : MonoBehaviour {
 						
 	                    }
 	                }
-	            }
-            else
-            {
-                mAttackScript.init();
-            }
+
+				}
+			else if(!active)
+			{
+				battleMenuCanvas.enabled = true;					
+				attackMenu.enabled = false;
+				if (mBaseScript.getClass () != "Wizard")
+					BattleMagic.interactable = false;
+
+				active = true;
+
+				//Enable battleUI
+				statsBackground.enabled = true;
+				uiName.enabled = true;
+				uiHealth.enabled = true;
+				uiAttack.enabled = true;
+				uiDefense.enabled = true;
+				uiMagic.enabled = true;
+				uiMagicDefense.enabled = true;
+				uiSpeed.enabled = true;
+				mHealthBar.enabled = true;
+	        }
+
             
-        }
-      // else
-        {
-           
-        }
-        
+        }        
     }
 
    void OnMouseExit()
@@ -234,6 +265,7 @@ public class UiController : MonoBehaviour {
         Item.interactable = false;
         Stay.interactable = false;
 
+
         //Disable BattleUI
         statsBackground.enabled = false;
         uiName.enabled = false;
@@ -244,6 +276,8 @@ public class UiController : MonoBehaviour {
         uiMagicDefense.enabled = false;
         uiSpeed.enabled = false;
         mHealthBar.enabled = false;
+
+
         OperationFinished = false;
         mAttackScript.init();
     }
@@ -268,9 +302,37 @@ public class UiController : MonoBehaviour {
 		uiMagicDefense.enabled = false;
 		uiSpeed.enabled = false;
 		mHealthBar.enabled = false;
+
 		OperationFinished = false;
 
 		mAttackScript.magicInit ();
+	}
+
+	void playerFlee()
+	{
+		//print("Button works");
+		attackMenu.enabled = false;
+		Movement.interactable = false;
+		Attack.interactable = false;
+		Magic.interactable = false;
+		Item.interactable = false;
+		Stay.interactable = false;
+
+
+		//Disable BattleUI
+		statsBackground.enabled = false;
+		uiName.enabled = false;
+		uiHealth.enabled = false;
+		uiAttack.enabled = false;
+		uiDefense.enabled = false;
+		uiMagic.enabled = false;
+		uiMagicDefense.enabled = false;
+		uiSpeed.enabled = false;
+		mHealthBar.enabled = false;
+
+		OperationFinished = false;
+
+		mAttackScript.flee();
 	}
    
     void useItem()
@@ -323,6 +385,31 @@ public class UiController : MonoBehaviour {
         finishedTurn();
     }
 
+
+	void battleMenuAttack()
+	{
+		battleMenuCanvas.enabled = false;
+		mAttackScript.init();
+	}
+
+	void battleMenuMagic()
+	{
+		battleMenuCanvas.enabled = false;
+		mAttackScript.magicInit ();
+	}
+
+	void battleMenuFlee()
+	{
+		battleMenuCanvas.enabled = false;
+		mAttackScript.flee();
+	}
+
+
+
+
+
+
+
     public void finishedTurn()
     {
         gameObject.GetComponent<SpriteRenderer>().color = new Color(255f, 0f, 0f, 0.5f);
@@ -336,7 +423,7 @@ public class UiController : MonoBehaviour {
 
     public void resetTurn()
     {
-		gameObject.GetComponent<SpriteRenderer>().color = new Color(255f, 0f, 0f, 1f);
+		gameObject.GetComponent<SpriteRenderer>().color = new Color(255f, 255f, 255f, 1f);
 		if(!mAttackScript.mIsBattling)
 			parts.Stop();
         turnFinished = false;

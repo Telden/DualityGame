@@ -40,13 +40,14 @@ public class EnemyController : MonoBehaviour {
 	//		Debug.Log ("You're now attacking this character");
 			parts.Play();
             resetColor();
-			mMachinePtr.recieveBattlingEnemy(this.gameObject, false, false);				
+			mMachinePtr.recieveBattlingEnemy(this.gameObject, false, false);
+			targetable = false;
 		}
 	}
     public void Highlight()
     {
 
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 1f);
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(255f, 255f, 255f, 1f);
 		targetable = true;
 
 
@@ -55,7 +56,7 @@ public class EnemyController : MonoBehaviour {
     {
 //		Debug.Log ("Reseting color");
 		gameObject.GetComponent<SpriteRenderer> ().color = new Color (0f, 0f, 255f, 1f);
-		targetable = false;
+		//targetable = false;
        
     }
 	public void recieveMessage()

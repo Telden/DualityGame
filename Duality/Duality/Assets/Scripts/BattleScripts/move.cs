@@ -86,6 +86,7 @@ public class move : MonoBehaviour
             mLine.SetPosition(1, Vector3.zero);
             movementGroup.enabled = false;
             mActive = false;
+			mUIptr.finishedFunction();
         }
         else if (Input.GetKeyDown(KeyCode.Minus))
         {

@@ -4,28 +4,38 @@ using UnityEngine.UI;
 using UnityEngine;
 
 public class Attack : MonoBehaviour {
-    public Canvas mAttackCanvas;
-    public Button mFightButton;
-    public Button mFleeButton;
-	public Button mMagicButton;
 	public CircleCollider2D mRangedHitbox;
     private BoxCollider2D mAttackHitbox;
     private SpriteRenderer fill;
+
     Collider2D[] results;
     string [] mTmpName;
+
     bool active = false;
     public bool mIsBattling = false;
-    const  int BATTLE_MESSAGE = 1;
-    //Pointer to the UI controller
-    UiController mUIptr;
-    //Combat  Machine pointer
-    CombatMachine mMachinePtr;
-	EventMessage mAttackMessage;
 	bool mInitialized = false;
-	BaseCharacter mpBaseCharacterScript;
+	bool mIsRanged= false;
+
+
 	const float ARCHER_RANGE = 10;
 	const float MAGE_RANGE = 5;
-	bool mIsRanged= false;
+
+	EventMessage mAttackMessage;
+    const  int BATTLE_MESSAGE = 1;
+
+    //Pointer to the UI controller
+    UiController mUIptr;
+
+    //Combat  Machine pointer
+    CombatMachine mMachinePtr;
+
+	BaseCharacter mpBaseCharacterScript;
+
+
+
+
+
+
 
 
 
@@ -35,20 +45,8 @@ public class Attack : MonoBehaviour {
         fill = gameObject.GetComponent<SpriteRenderer>();
         fill.enabled = false;
 		mRangedHitbox.enabled = false;
-        //set pointer to combat machine
-//        mMachinePtr = GameObject.Find("BattleSystem").GetComponent<CombatMachine>();
-		//mMachinePtr.registerplayer(this.transform.parent.gameObject); //Register the character with the combat machine
-
-        mUIptr = transform.parent.gameObject.GetComponent<UiController>(); //Get the unit's ui controller
+               mUIptr = transform.parent.gameObject.GetComponent<UiController>(); //Get the unit's ui controller
 		mAttackMessage = new EventMessage(EventType.ATTACK_EVENT);
-
-        // Attack UI elements
-        Button tmp = mFightButton.GetComponent<Button>();
-        tmp.onClick.AddListener(continueBattle);
-        tmp = mFleeButton.GetComponent<Button>();
-        tmp.onClick.AddListener(flee);
-
-        mAttackCanvas.enabled = false;
     }
 	
 
@@ -73,8 +71,7 @@ public class Attack : MonoBehaviour {
 				mRangedHitbox.radius = ARCHER_RANGE;
 			mInitialized = true;
 		}
-		/*if (mIsBattling) {
-			mAttackCanvas.enabled = true;*/
+
 		if (mpBaseCharacterScript.getClass () == "Warrior") {
 			print ("Attack  Warrior");
 			mAttackHitbox.enabled = true;
@@ -87,9 +84,10 @@ public class Attack : MonoBehaviour {
 			mRangedHitbox.enabled = true;
 			active = true;
 			rangedAttack ();
-		} else
-			print ("Wizard");
+		} 
+		else						
 		{
+			print ("Wizard");
 			mAttackHitbox.enabled = true;
 			fill.enabled = true;
 			active = true;
@@ -122,12 +120,7 @@ public class Attack : MonoBehaviour {
         if(Input.GetKeyUp(KeyCode.Escape))
         {
             print("escape key pressed");
-            if(mIsBattling)
-            {
-                mAttackCanvas.enabled = false;
-            }
-            else
-            {
+            
                 mAttackHitbox.enabled = false;
                 fill.enabled = false;
                 active = false;
@@ -138,7 +131,8 @@ public class Attack : MonoBehaviour {
                         GameObject.Find(mTmpName[i]).GetComponent<EnemyController>().resetColor();
                     }
                 }
-            }
+			mIsBattling = false;
+			mUIptr.finishedFunction();
             
         }
         else if (Input.GetMouseButtonDown(0) && !mIsBattling)
@@ -150,6 +144,14 @@ public class Attack : MonoBehaviour {
             mMachinePtr.recievePlayerMessage(BATTLE_MESSAGE);
 			mMachinePtr.recieveBattlingPlayer(this.transform.parent.gameObject, true, mIsRanged);				
             mIsBattling = true;
+
+			for (int i = 0; i < mTmpName.Length; i++)
+			{
+				if (mTmpName[i] != null)
+				{
+					GameObject.Find(mTmpName[i]).GetComponent<EnemyController>().resetColor();
+				}
+			}
             mUIptr.finishedFunction();
 			mUIptr.finishedTurn();
         }
@@ -198,9 +200,10 @@ public class Attack : MonoBehaviour {
        // mMachinePtr.conductBattle(this.transform.parent.gameObject.GetComponent<BaseCharacter>().getName());
     }
 
-    void flee()
+    public void flee()
     {
         mIsBattling = false;
-        mMachinePtr.battleFlee(this.transform.parent.gameObject.GetComponent<BaseCharacter>().getName());
+		mMachinePtr.battleFlee(this.transform.parent.gameObject.GetComponent<BaseCharacter>());
+		mUIptr.finishedFunction();
     }
 }
