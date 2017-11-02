@@ -24,6 +24,7 @@ public class Level : MonoBehaviour {
     int mSlotsLeft;
 	bool mActive =  false;
     public Text mTotalSelectedUI;
+	bool mInitialized = false;
 
     // Use this for initialization
     void Start () {
@@ -42,6 +43,10 @@ public class Level : MonoBehaviour {
 
     public void init()
     {
+		if(!mInitialized)
+		{
+			mpListManager = GameObject.Find("GameSystem").GetComponent<ListManager>();
+		}
 		print("Level called");
         mActive = true;
         mLevelPreviewCanvas.enabled = true;
@@ -73,7 +78,7 @@ public class Level : MonoBehaviour {
 
     public void loadLevel()
     {
-        SceneManager.LoadScene(mLevelIndex);
+        SceneManager.LoadScene(mLevelIndex + 1);
     }
 
     void showArmy()

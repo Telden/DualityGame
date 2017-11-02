@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class Game : MonoBehaviour {
@@ -15,12 +16,18 @@ public class Game : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	/*void Update () {
         if (Input.GetKeyDown(KeyCode.L))
         {
             gameObject.GetComponent<Character_Randomization>().generateCharacter(mMaxCharacters);
         }
 
-    }
+    }*/
+
+	public void init()
+	{
+		gameObject.GetComponent<Character_Randomization>().generateCharacter(mMaxCharacters);
+		SceneManager.LoadScene(1);
+	}
 
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 public class ViewArmy : MonoBehaviour {
     
     public MainMenu mpMainmenu;//Script to Main Menu
-    public ListManager mpListManager; //Script to the list manager 
+   ListManager mpListManager; //Script to the list manager 
 
 
     // Ui Elements
@@ -17,7 +17,7 @@ public class ViewArmy : MonoBehaviour {
     GameObject character;
 
     bool mActive = false;
-
+	bool mInitialized = false;
     // Use this for initialization
     void Start () {
 		
@@ -37,6 +37,11 @@ public class ViewArmy : MonoBehaviour {
     //Function to be called from the main menu script
     public void init()
     {
+		if(!mInitialized)
+		{
+			mpListManager = GameObject.Find("GameSystem").GetComponent<ListManager>();
+		}
+
         mActive = true;
         mTotalCharacters = mpListManager.getArmyListSize();
         showArmy();

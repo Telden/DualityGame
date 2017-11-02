@@ -7,7 +7,7 @@ public class Recruitment : MonoBehaviour {
     //REFERENCE http://answers.unity3d.com/questions/875588/unity-ui-dynamic-buttons.html
 
     //Script to the randomized units
-    public ListManager mpListManager; //Script to the list manager 
+    ListManager mpListManager; //Script to the list manager 
     //Script to Main Menu
     public MainMenu mpMainmenu; //Script to the main 
     // UI elements
@@ -16,6 +16,7 @@ public class Recruitment : MonoBehaviour {
     public Text mSlotsLeft; //Ui text of the amount of army slots left
     public int mSlots; //number representation of the number of slots left
     int mTotalUnits; //variable to store the total amount of randomized units from their list
+	bool mInitialized = false;
     GameObject character;
 
     bool mActive = false;
@@ -43,6 +44,10 @@ public class Recruitment : MonoBehaviour {
     //Function to be called from the main menu script
     public void init()
     {
+		if(!mInitialized)
+		{
+			mpListManager = GameObject.Find("GameSystem").GetComponent<ListManager>();
+		}
         mActive = true;
         mTotalUnits = mpListManager.getRandomizedUnitListSize();
         loadList();
