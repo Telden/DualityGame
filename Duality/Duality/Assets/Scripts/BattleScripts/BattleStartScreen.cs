@@ -82,11 +82,12 @@ public class BattleStartScreen : MonoBehaviour {
 	void startBattle()
 	{
 		if(mUnitsPosisionedleft == 0)
-		mStartBattleCanvas.enabled = false;
-		for(int i = 0; i <  mpListManager.getBattleListCount(); i++)
 		{
-			mpListManager.getBattleUnit(i).GetComponent<UiController>().init();
+			mStartBattleCanvas.enabled = false;
+			gameObject.GetComponent<UiController>().mBattleStarted =  true;
 		}
+
+
 
 	}
 }

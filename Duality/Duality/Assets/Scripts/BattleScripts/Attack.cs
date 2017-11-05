@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour {
 	public CircleCollider2D mRangedHitbox;
-    private BoxCollider2D mAttackHitbox;
-    private SpriteRenderer fill;
+    public BoxCollider2D mAttackHitbox;
+    public SpriteRenderer fill;
 
     Collider2D[] results;
     string [] mTmpName;
@@ -14,7 +14,7 @@ public class Attack : MonoBehaviour {
     bool active = false;
     public bool mIsBattling = false;
 	bool mInitialized = false;
-	bool mIsRanged= false;
+	bool mIsRanged = false;
 
 
 	const float ARCHER_RANGE = 10;
@@ -28,24 +28,14 @@ public class Attack : MonoBehaviour {
 
     //Combat  Machine pointer
     CombatMachine mMachinePtr;
-
 	BaseCharacter mpBaseCharacterScript;
 
 
-
-
-
-
-
-
-
     void Start () {
-        mAttackHitbox = gameObject.GetComponent<BoxCollider2D>();
         mAttackHitbox.enabled = false;
-        fill = gameObject.GetComponent<SpriteRenderer>();
         fill.enabled = false;
 		mRangedHitbox.enabled = false;
-               mUIptr = transform.parent.gameObject.GetComponent<UiController>(); //Get the unit's ui controller
+               
 		mAttackMessage = new EventMessage(EventType.ATTACK_EVENT);
     }
 	
@@ -66,6 +56,7 @@ public class Attack : MonoBehaviour {
 		if(!mInitialized)
 		{
 			mMachinePtr = GameObject.Find("BattleSystem").GetComponent<CombatMachine>();
+			mUIptr = GameObject.Find("BattleSystem").GetComponent<UiController>(); 
 			mpBaseCharacterScript = this.transform.parent.gameObject.GetComponent<BaseCharacter> ();
 			if (mpBaseCharacterScript.getClass() == "Archer")
 				mRangedHitbox.radius = ARCHER_RANGE;
@@ -100,6 +91,7 @@ public class Attack : MonoBehaviour {
 		if(!mInitialized)
 		{
 			mMachinePtr = GameObject.Find("BattleSystem").GetComponent<CombatMachine>();
+			mUIptr = GameObject.Find("BattleSystem").GetComponent<UiController>(); 
 			mpBaseCharacterScript = this.transform.parent.gameObject.GetComponent<BaseCharacter> ();
 			if (mpBaseCharacterScript.getClass() == "Wizard")
 				mRangedHitbox.radius = MAGE_RANGE;
@@ -140,7 +132,6 @@ public class Attack : MonoBehaviour {
             mAttackHitbox.enabled = false;
             fill.enabled = false;
             active = false;
-			mUIptr.RecieveEvent(mAttackMessage);
             mMachinePtr.recievePlayerMessage(BATTLE_MESSAGE);
 			mMachinePtr.recieveBattlingPlayer(this.transform.parent.gameObject, true, mIsRanged);				
             mIsBattling = true;

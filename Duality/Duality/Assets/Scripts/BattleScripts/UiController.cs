@@ -10,9 +10,7 @@ public class UiController : MonoBehaviour {
     public Button Movement;
     public Button Attack;
 	public Button Magic;
-    public Button Item;
     public Button Stay;
-
 
 	//Battle Menu
 	public Canvas battleMenuCanvas;
@@ -20,6 +18,7 @@ public class UiController : MonoBehaviour {
 	public Button battleAttack;
 	public Button BattleMagic;
 
+	// Stats Background
     public Text uiName;
     public Text uiHealth;
     public Text uiAttack;
@@ -27,6 +26,7 @@ public class UiController : MonoBehaviour {
     public Text uiMagic;
     public Text uiMagicDefense;
     public Text uiSpeed;
+	public Text uiClass;
     public Image statsBackground;
     public Image mHealthBar;
     
@@ -35,18 +35,20 @@ public class UiController : MonoBehaviour {
     //Scripts for the buttons
     private Attack mAttackScript;
     private move mMoveScript;
-
-	//Particle System
-	public ParticleSystem parts;
+	CombatMachine mMachinePtr;
+	BaseCharacter mBaseScript;
 
     //
     bool active = false;
     bool OperationFinished = true;
     bool turnFinished = false;
-	bool mBattleStarted = false;
-    CombatMachine mMachinePtr;
+	public bool mBattleStarted = false;
 
-	BaseCharacter mBaseScript;
+
+	//Current user of the ui 
+	GameObject mCurrentPlayerUnit;
+	GameObject mCurrentEnemy;
+   
 
     // Use this for initialization
     void Start()
@@ -56,403 +58,63 @@ public class UiController : MonoBehaviour {
         tmp.onClick.AddListener(moveCharacter);
         tmp = Attack.GetComponent<Button>();
         tmp.onClick.AddListener(playerAttack);
-        tmp = Item.GetComponent<Button>();
-        tmp.onClick.AddListener(useItem);
         tmp = Stay.GetComponent<Button>();
         tmp.onClick.AddListener(playerStay);
 		tmp = Magic.GetComponent<Button> ();
 		tmp.onClick.AddListener (playerMagic);
 
+		//When in battle have only these  buttons appear
 		tmp = battleFlee.GetComponent<Button> ();
-		tmp.onClick.AddListener(battleMenuFlee);
+		tmp.onClick.AddListener(playerFlee);
 		tmp = battleAttack.GetComponent<Button> ();
-		tmp.onClick.AddListener(battleMenuAttack);
+		tmp.onClick.AddListener(playerAttack);
 		tmp = BattleMagic.GetComponent<Button> ();
-		tmp.onClick.AddListener(battleMenuMagic);
-
-        //Set up all the scripts
-        mAttackScript = transform.Find("AttackHitbox").GetComponent<Attack>();
-        mMoveScript = gameObject.GetComponent<move>();
-		mBaseScript = gameObject.GetComponent<BaseCharacter>();
+		tmp.onClick.AddListener(playerMagic);
 
 
-        //Make sure the buttons are not interactible yet
+
+
+        //Make sure the ui does not appear yet
         attackMenu.enabled = false;
+
 		battleMenuCanvas.enabled = false;
-        Movement.interactable = false;
-        Attack.interactable = false;
-        Item.interactable = false;
-        Stay.interactable = false;
-		Magic.interactable = false;
-	
 
         //Disable the battleUI
         statsBackground.enabled = false;
-        uiName.enabled = false;
-        uiHealth.enabled = false;
-        uiAttack.enabled = false;
-        uiDefense.enabled = false;
-        uiMagic.enabled = false;
-        uiMagicDefense.enabled = false;
-        uiSpeed.enabled = false;
-        mHealthBar.enabled = false;
 
-		parts.Stop();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-		//uiHealthBar.transform.position = gameObject.transform.position;
-       // if(!finished)
+		
             if (active)
                 {
                   checkInput();
-			      updateUI();
+				  mHealthBar.fillAmount = updateHealthBar();
                 }
-		if(Input.GetKeyDown(KeyCode.S))
-        	init();
+
 
     }
 
-	public void init()
+	void checkInput()
 	{
-		mMachinePtr = GameObject.Find("BattleSystem").GetComponent<CombatMachine>();
-		mBattleStarted = true;
-	}
 
-    void checkInput()
-    {
-        
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            attackMenu.enabled = false;
-            Movement.interactable = false;
-            Attack.interactable = false;
-            Item.interactable = false;
-            Stay.interactable = false;
-
-            active = false;
-
-
-            //Disable BattleUI
-            statsBackground.enabled = false;
-            uiName.enabled = false;
-            uiHealth.enabled = false;
-            uiAttack.enabled = false;
-            uiDefense.enabled = false;
-            uiMagic.enabled = false;
-            uiMagicDefense.enabled = false;
-            uiSpeed.enabled = false;
-            mHealthBar.enabled = false;
-        }
-        if (Input.GetKeyDown(KeyCode.Minus))
-        {
-            mBaseScript.setHealth(mBaseScript.getHealth() - 2);
-        }
-    }
-
-    void OnMouseEnter()
-    {
-        Debug.Log("Mouse Over");
-		if(mBattleStarted) //If the battle scene has started
-	        if (!turnFinished) //If the unit has not finished  its turn
-	        {
-	            if(!mAttackScript.mIsBattling) //Is the  unit fighting?
-	            {
-	                if (OperationFinished) //if another ui operation is not active
-	                {
-	                    if (!active) //if the ui is already not active
-	                    {
-	                        // Debug.Log("Mouse clicked");
-	                        attackMenu.enabled = true;
-	                        Movement.interactable = true;
-	                        Attack.interactable = true;
-	                        Item.interactable = true;
-	                        Stay.interactable = true;
-						   // Magic.interactable = false;
-						if (mBaseScript.getClass () == "Wizard")
-							Magic.interactable = true;
-						else
-							Magic.interactable = false;
-
-
-	                        active = true;
-
-	                        //Enable battleUI
-	                        statsBackground.enabled = true;
-	                        uiName.enabled = true;
-	                        uiHealth.enabled = true;
-	                        uiAttack.enabled = true;
-	                        uiDefense.enabled = true;
-	                        uiMagic.enabled = true;
-	                        uiMagicDefense.enabled = true;
-	                        uiSpeed.enabled = true;
-	                        mHealthBar.enabled = true;
-
-
-						
-	                    }
-	                }
-
-				}
-			else if(!active)
-			{
-				battleMenuCanvas.enabled = true;					
-				attackMenu.enabled = false;
-				if (mBaseScript.getClass () != "Wizard")
-					BattleMagic.interactable = false;
-
-				active = true;
-
-				//Enable battleUI
-				statsBackground.enabled = true;
-				uiName.enabled = true;
-				uiHealth.enabled = true;
-				uiAttack.enabled = true;
-				uiDefense.enabled = true;
-				uiMagic.enabled = true;
-				uiMagicDefense.enabled = true;
-				uiSpeed.enabled = true;
-				mHealthBar.enabled = true;
-	        }
-
-            
-        }        
-    }
-
-   void OnMouseExit()
-    {
-        //if (turnFinished)
-        //    statsBackground.enabled = false;
-		//battleMenuCanvas.enabled = false;
-		//active = false;
-
-    }
-
-    void moveCharacter()
-    {
-        //print("Moving character");
-        attackMenu.enabled = false;
-        Movement.interactable = false;
-        Attack.interactable = false;
-		Magic.interactable = false;
-        Item.interactable = false;
-        Stay.interactable = false;
-
-        //Disable BattleUI
-        statsBackground.enabled = false;
-        uiName.enabled = false;
-        uiHealth.enabled = false;
-        uiAttack.enabled = false;
-        uiDefense.enabled = false;
-        uiMagic.enabled = false;
-        uiMagicDefense.enabled = false;
-        uiSpeed.enabled = false;
-        mHealthBar.enabled = false;
-
-        active = false;
-        OperationFinished = false;
-        mMoveScript.init();
-
-        
-    }
-
-    void playerAttack()
-    {
-        //print("Button works");
-        attackMenu.enabled = false;
-        Movement.interactable = false;
-        Attack.interactable = false;
-		Magic.interactable = false;
-        Item.interactable = false;
-        Stay.interactable = false;
-
-
-        //Disable BattleUI
-        statsBackground.enabled = false;
-        uiName.enabled = false;
-        uiHealth.enabled = false;
-        uiAttack.enabled = false;
-        uiDefense.enabled = false;
-        uiMagic.enabled = false;
-        uiMagicDefense.enabled = false;
-        uiSpeed.enabled = false;
-        mHealthBar.enabled = false;
-
-
-        OperationFinished = false;
-        mAttackScript.init();
-    }
-
-	void playerMagic()
-	{
-		//print("Button works");
-		attackMenu.enabled = false;
-		Movement.interactable = false;
-		Attack.interactable = false;
-		Magic.interactable = false;
-		Item.interactable = false;
-		Stay.interactable = false;
-
-		//Disable BattleUI
-		statsBackground.enabled = false;
-		uiName.enabled = false;
-		uiHealth.enabled = false;
-		uiAttack.enabled = false;
-		uiDefense.enabled = false;
-		uiMagic.enabled = false;
-		uiMagicDefense.enabled = false;
-		uiSpeed.enabled = false;
-		mHealthBar.enabled = false;
-
-		OperationFinished = false;
-
-		mAttackScript.magicInit ();
-	}
-
-	void playerFlee()
-	{
-		//print("Button works");
-		attackMenu.enabled = false;
-		Movement.interactable = false;
-		Attack.interactable = false;
-		Magic.interactable = false;
-		Item.interactable = false;
-		Stay.interactable = false;
-
-
-		//Disable BattleUI
-		statsBackground.enabled = false;
-		uiName.enabled = false;
-		uiHealth.enabled = false;
-		uiAttack.enabled = false;
-		uiDefense.enabled = false;
-		uiMagic.enabled = false;
-		uiMagicDefense.enabled = false;
-		uiSpeed.enabled = false;
-		mHealthBar.enabled = false;
-
-		OperationFinished = false;
-
-		mAttackScript.flee();
-	}
-   
-    void useItem()
-    {
-        //print("Button works");
-        attackMenu.enabled = false;
-        Movement.interactable = false;
-        Attack.interactable = false;
-		Magic.interactable = false;
-        Item.interactable = false;
-        Stay.interactable = false;
-
-        //Disable BattleUI
-        statsBackground.enabled = false;
-        uiName.enabled = false;
-        uiHealth.enabled = false;
-        uiAttack.enabled = false;
-        uiDefense.enabled = false;
-        uiMagic.enabled = false;
-        uiMagicDefense.enabled = false;
-        uiSpeed.enabled = false;
-        mHealthBar.enabled = false;
-
-        //use an item 
-        finishedTurn();
-    }
-
-    void playerStay()
-    {
-        //print("Button works");
-        attackMenu.enabled = false;
-        Movement.interactable = false;
-        Attack.interactable = false;
-		Magic.interactable = false;
-        Item.interactable = false;
-        Stay.interactable = false;
-
-        //Disable BattleUI
-        statsBackground.enabled = false;
-        uiName.enabled = false;
-        uiHealth.enabled = false;
-        uiAttack.enabled = false;
-        uiDefense.enabled = false;
-        uiMagic.enabled = false;
-        uiMagicDefense.enabled = false;
-        uiSpeed.enabled = false;
-        mHealthBar.enabled = false;
-
-        mMachinePtr.recievePlayerMessage(4);
-        finishedTurn();
-    }
-
-
-	void battleMenuAttack()
-	{
-		battleMenuCanvas.enabled = false;
-		active = false;
-		mAttackScript.init();
-	}
-
-	void battleMenuMagic()
-	{
-		battleMenuCanvas.enabled = false;
-		active = false;
-		mAttackScript.magicInit ();
-	}
-
-	void battleMenuFlee()
-	{
-		battleMenuCanvas.enabled = false;
-		active = false;
-		mAttackScript.flee();
-	}
-
-
-
-
-
-
-
-    public void finishedTurn()
-    {
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(255f, 0f, 0f, 0.5f);
-        turnFinished = true;
-    }
-
-    public void finishedFunction()
-    {
-        OperationFinished = true;
-    }
-
-    public void resetTurn()
-    {
-		gameObject.GetComponent<SpriteRenderer>().color = new Color(255f, 255f, 255f, 1f);
-		if(!mAttackScript.mIsBattling)
-			parts.Stop();
-        turnFinished = false;
-		active = false;
-		mMoveScript.reset();
-    }
-
-	public void RecieveEvent(EventMessage Message)
-	{
-		if(Message.myType == EventType.ATTACK_EVENT)
+		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			parts.Play();
-			finishedTurn();
+			disableUi();
+			active = false;
 		}
-
-		else if(Message.myType == EventType.MOEVMENT_EVENT)
-		{
-			//do something
-		}
-		
 	}
-	void updateUI()
+
+	public void init(GameObject unitObj, bool isBattling)
 	{
+		mCurrentPlayerUnit = unitObj;
+		mAttackScript = mCurrentPlayerUnit.GetComponent<Attack>();
+		mMoveScript = mCurrentPlayerUnit.GetComponent<move>();
+		mBaseScript = mCurrentPlayerUnit.GetComponent<BaseCharacter>();
+
 		uiName.text = "Name: " + mBaseScript.getName();
 		uiHealth.text = "Health: " + mBaseScript.getHealth().ToString();
 		uiAttack.text = "Attack: " + mBaseScript.getAttack().ToString();
@@ -460,13 +122,96 @@ public class UiController : MonoBehaviour {
 		uiMagic.text = "Magic: " + mBaseScript.getMagic().ToString();
 		uiMagicDefense.text = "Magic Defense: " + mBaseScript.getMagicDefense().ToString();
 		uiSpeed.text = "Speed: " + mBaseScript.getSpeed().ToString();
-       //+ mBaseScript.getMovement().ToString();
-        mHealthBar.fillAmount = updateHealthBar();
-       
+		uiClass.text = "Class: " + mBaseScript.getClass();
+
+		if(!isBattling)
+		{
+			attackMenu.enabled = true;
+			statsBackground.enabled = true;
+			mHealthBar.enabled = true;
+		}
+
+		else
+		{
+			battleMenuCanvas.enabled = true;
+			statsBackground.enabled = true;
+			mHealthBar.enabled = true;
+		}
+
+	}
+
+	void disableUi()
+	{
+		attackMenu.enabled = false;
+		battleMenuCanvas.enabled = false;
+		statsBackground.enabled = false;
+		mHealthBar.enabled = false;
+	}
+		
+	/*************************************** PLAYER BUTTON FUNCTIONS *******************************/
 
 
-
+    void moveCharacter()
+    {
+        disableUi();
+        active = false;
+        OperationFinished = false;
+        mMoveScript.init();
+	    
     }
+
+    void playerAttack()
+    {
+		disableUi();
+		active = false;
+		OperationFinished = false;
+        mAttackScript.init();
+    }
+
+	void playerMagic()
+	{
+		disableUi();
+		active = false;
+		OperationFinished = false;
+		mAttackScript.magicInit ();
+	}
+
+	void playerStay()
+	{
+		disableUi();
+		active = false;
+		mMachinePtr.recievePlayerMessage(4);
+		finishedTurn();
+	}
+
+	void playerFlee()
+	{
+		disableUi();
+		active = false;
+		OperationFinished = false;
+		mAttackScript.flee();
+	}
+     		
+	public void finishedFunction()
+	{
+		OperationFinished = true;
+	}
+
+    public void finishedTurn()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(255f, 0f, 0f, 0.5f);
+        turnFinished = true;
+    }
+
+   
+    public void resetTurn()
+    {
+		gameObject.GetComponent<SpriteRenderer>().color = new Color(255f, 255f, 255f, 1f);
+        turnFinished = false;
+		active = false;
+		mMoveScript.reset();
+    }
+
 
     private float updateHealthBar()
     {
