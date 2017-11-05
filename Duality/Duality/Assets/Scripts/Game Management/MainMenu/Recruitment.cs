@@ -18,6 +18,7 @@ public class Recruitment : MonoBehaviour {
     int mTotalUnits; //variable to store the total amount of randomized units from their list
 	bool mInitialized = false;
     GameObject character;
+	public Button mExitButton;
 
     bool mActive = false;
 
@@ -27,6 +28,7 @@ public class Recruitment : MonoBehaviour {
 		//mSelectedUnits = new GameObject[mSlots];
         //mCharacterIndex = 0;
         mSlotsLeft.text = "Slots Left: " + mSlots.ToString();
+		mExitButton.onClick.AddListener(exitMenu);
     }
 	
 	// Update is called once per frame
@@ -86,12 +88,19 @@ public class Recruitment : MonoBehaviour {
         {
             Debug.Log("Button clicked = " + buttonNo);
             mpListManager.addArmyUnit(mpListManager.getRandomizedUnit(buttonNo)); //Add a reference to the unit to the army list
-            mpListManager.removeRandomizedUnit(buttonNo); //Remove the reference of the unit from the randomized unit list
+            //mpListManager.removeRandomizedUnit(buttonNo); //Remove the reference of the unit from the randomized unit list
             mpListManager.getRecruitmentButton(buttonNo).GetComponent<Button>().interactable = false; //Turn off the button
             mSlots--; //reduce the number of slots availible to the player
             mSlotsLeft.text = "Slots Left: " + mSlots.ToString(); //Update slot text ui
         }
        
     }
+
+	public void exitMenu()
+	{
+		mActive = false;
+		mpListManager.clearRecruitmentButtonList();
+		mpMainmenu.reset();
+	}
 
 }

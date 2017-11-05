@@ -562,7 +562,43 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1559582390483876, guid: 5f8fd680c8091cd4798e9ecbbdac46b0, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212018656109073884, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 37417185dede0874b807b94e0b833a3a,
+        type: 3}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mAttack
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mMagic
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mDefense
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mMagicDefense
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mMovemnt
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f8fd680c8091cd4798e9ecbbdac46b0, type: 2}
@@ -622,7 +658,48 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1559582390483876, guid: 5f8fd680c8091cd4798e9ecbbdac46b0, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212018656109073884, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 37417185dede0874b807b94e0b833a3a,
+        type: 3}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mHealth
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mAttack
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mMagic
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mDefense
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mMagicDefense
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mMovemnt
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f8fd680c8091cd4798e9ecbbdac46b0, type: 2}
@@ -682,7 +759,48 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1559582390483876, guid: 5f8fd680c8091cd4798e9ecbbdac46b0, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212018656109073884, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 37417185dede0874b807b94e0b833a3a,
+        type: 3}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mHealth
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mAttack
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mMagic
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mDefense
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mMagicDefense
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mMovemnt
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f8fd680c8091cd4798e9ecbbdac46b0, type: 2}
@@ -1026,7 +1144,48 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1559582390483876, guid: 5f8fd680c8091cd4798e9ecbbdac46b0, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212018656109073884, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 37417185dede0874b807b94e0b833a3a,
+        type: 3}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mHealth
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mAttack
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mMagic
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mDefense
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mMagicDefense
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mMovemnt
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f8fd680c8091cd4798e9ecbbdac46b0, type: 2}
@@ -1673,6 +1832,47 @@ Prefab:
         type: 2}
       propertyPath: mName
       value: Bob
+      objectReference: {fileID: 0}
+    - target: {fileID: 212018656109073884, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 37417185dede0874b807b94e0b833a3a,
+        type: 3}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mAttack
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mMagic
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mDefense
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mMagicDefense
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mMovemnt
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mHealth
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f8fd680c8091cd4798e9ecbbdac46b0, type: 2}

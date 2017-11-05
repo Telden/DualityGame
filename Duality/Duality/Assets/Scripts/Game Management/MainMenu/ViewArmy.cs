@@ -15,12 +15,13 @@ public class ViewArmy : MonoBehaviour {
     public RectTransform mParentPanel;
     int mTotalCharacters;
     GameObject character;
+	public Button mExitButton;
 
     bool mActive = false;
 	bool mInitialized = false;
     // Use this for initialization
     void Start () {
-		
+		mExitButton.onClick.AddListener(exitMenu);
 	}
 	
 	// Update is called once per frame
@@ -81,5 +82,11 @@ public class ViewArmy : MonoBehaviour {
         
     }
 
+	public void exitMenu()
+	{
+		mActive = false;
+		mpListManager.clearViewArmyButtonList();
+		mpMainmenu.reset();
+	}
 
 }

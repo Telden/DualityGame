@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class CombatMachine : MonoBehaviour {
@@ -304,6 +305,12 @@ public class CombatMachine : MonoBehaviour {
 				
 	}
 
+	void loadMainMenu()
+	{
+		mpListManager.clearBattleList();
+		SceneManager.LoadScene(1);
+	}
+
 	public void initiateBattle()
 	{
 		loadBattle();
@@ -315,8 +322,11 @@ public class CombatMachine : MonoBehaviour {
 		mpEnemyList.Remove(obj);
 		Destroy(obj);
 		if(mpEnemyList.Count == 0)
+		{
 			print("Player Wins!");
-
+			Invoke("loadMainMenu", 5);
+		}
+			
 	}
 }
 

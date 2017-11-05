@@ -1,27 +1,39 @@
 fileFormatVersion: 2
-guid: 6c5a3173c3c99944fa665ab6b3f38436
-timeCreated: 1509591862
+guid: 37417185dede0874b807b94e0b833a3a
+timeCreated: 1509659194
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: FFRK_Warrior_sprites_0
-    21300002: FFRK_Warrior_sprites_1
-    21300004: FFRK_Warrior_sprites_2
-    21300006: FFRK_Warrior_sprites_3
-    21300008: FFRK_Warrior_sprites_4
-    21300010: FFRK_Warrior_sprites_5
-    21300012: FFRK_Warrior_sprites_6
-    21300014: FFRK_Warrior_sprites_7
-    21300016: FFRK_Warrior_sprites_8
-    21300018: FFRK_Warrior_sprites_9
-    21300020: FFRK_Warrior_sprites_10
-    21300022: FFRK_Warrior_sprites_11
-    21300024: FFRK_Warrior_sprites_12
-    21300026: FFRK_Warrior_sprites_13
-    21300028: FFRK_Warrior_sprites_14
-    21300030: FFRK_Warrior_sprites_15
-    21300032: FFRK_Warrior_sprites_16
-    21300034: FFRK_Warrior_sprites_17
+    21300000: ross_berserker_axe_0
+    21300002: ross_berserker_axe_1
+    21300004: ross_berserker_axe_2
+    21300006: ross_berserker_axe_3
+    21300008: ross_berserker_axe_4
+    21300010: ross_berserker_axe_5
+    21300012: ross_berserker_axe_6
+    21300014: ross_berserker_axe_7
+    21300016: ross_berserker_axe_8
+    21300018: ross_berserker_axe_9
+    21300020: ross_berserker_axe_10
+    21300022: ross_berserker_axe_11
+    21300024: ross_berserker_axe_12
+    21300026: ross_berserker_axe_13
+    21300028: ross_berserker_axe_14
+    21300030: ross_berserker_axe_15
+    21300032: ross_berserker_axe_16
+    21300034: ross_berserker_axe_17
+    21300036: ross_berserker_axe_18
+    21300038: ross_berserker_axe_19
+    21300040: ross_berserker_axe_20
+    21300042: ross_berserker_axe_21
+    21300044: ross_berserker_axe_22
+    21300046: ross_berserker_axe_23
+    21300048: ross_berserker_axe_24
+    21300050: ross_berserker_axe_25
+    21300052: ross_berserker_axe_26
+    21300054: ross_berserker_axe_27
+    21300056: ross_berserker_axe_28
+    21300058: ross_berserker_axe_29
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -63,7 +75,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 200
+  spritePixelsToUnits: 50
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -149,13 +161,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FFRK_Warrior_sprites_0
+      name: ross_berserker_axe_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 70
-        width: 17
-        height: 26
+        x: 9
+        y: 164
+        width: 32
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,13 +175,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: FFRK_Warrior_sprites_1
+      name: ross_berserker_axe_1
       rect:
         serializedVersion: 2
-        x: 41
-        y: 70
-        width: 18
-        height: 25
+        x: 46
+        y: 156
+        width: 51
+        height: 73
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -177,13 +189,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: FFRK_Warrior_sprites_2
+      name: ross_berserker_axe_2
       rect:
         serializedVersion: 2
-        x: 75
-        y: 70
-        width: 17
-        height: 26
+        x: 99
+        y: 157
+        width: 55
+        height: 72
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,13 +203,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: FFRK_Warrior_sprites_3
+      name: ross_berserker_axe_3
       rect:
         serializedVersion: 2
-        x: 108
-        y: 70
-        width: 17
-        height: 22
+        x: 161
+        y: 161
+        width: 71
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -205,13 +217,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: FFRK_Warrior_sprites_4
+      name: ross_berserker_axe_4
       rect:
         serializedVersion: 2
-        x: 141
-        y: 70
-        width: 18
-        height: 26
+        x: 239
+        y: 165
+        width: 70
+        height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -219,13 +231,83 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: FFRK_Warrior_sprites_5
+      name: ross_berserker_axe_5
       rect:
         serializedVersion: 2
-        x: 170
-        y: 70
+        x: 320
+        y: 162
+        width: 65
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ross_berserker_axe_6
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 156
+        width: 31
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ross_berserker_axe_7
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 94
+        width: 50
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ross_berserker_axe_8
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 98
+        width: 54
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ross_berserker_axe_9
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 85
+        width: 57
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ross_berserker_axe_10
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 120
         width: 26
-        height: 18
+        height: 37
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -233,13 +315,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: FFRK_Warrior_sprites_6
+      name: ross_berserker_axe_11
       rect:
         serializedVersion: 2
-        x: 8
-        y: 37
-        width: 17
-        height: 26
+        x: 223
+        y: 121
+        width: 28
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -247,40 +329,12 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: FFRK_Warrior_sprites_7
+      name: ross_berserker_axe_12
       rect:
         serializedVersion: 2
-        x: 41
-        y: 37
-        width: 18
-        height: 26
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: FFRK_Warrior_sprites_8
-      rect:
-        serializedVersion: 2
-        x: 75
-        y: 37
-        width: 17
-        height: 26
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: FFRK_Warrior_sprites_9
-      rect:
-        serializedVersion: 2
-        x: 108
-        y: 37
-        width: 17
+        x: 257
+        y: 122
+        width: 37
         height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -289,13 +343,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: FFRK_Warrior_sprites_10
+      name: ross_berserker_axe_13
       rect:
         serializedVersion: 2
-        x: 141
-        y: 37
-        width: 18
-        height: 25
+        x: 304
+        y: 120
+        width: 33
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -303,13 +357,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: FFRK_Warrior_sprites_11
+      name: ross_berserker_axe_14
       rect:
         serializedVersion: 2
-        x: 175
-        y: 37
-        width: 17
-        height: 25
+        x: 347
+        y: 118
+        width: 32
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -317,13 +371,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: FFRK_Warrior_sprites_12
+      name: ross_berserker_axe_15
       rect:
         serializedVersion: 2
-        x: 9
-        y: 4
-        width: 17
-        height: 25
+        x: 389
+        y: 119
+        width: 26
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -331,13 +385,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: FFRK_Warrior_sprites_13
+      name: ross_berserker_axe_16
       rect:
         serializedVersion: 2
-        x: 46
-        y: 12
-        width: 10
-        height: 12
+        x: 423
+        y: 114
+        width: 28
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -345,13 +399,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: FFRK_Warrior_sprites_14
+      name: ross_berserker_axe_17
       rect:
         serializedVersion: 2
-        x: 79
-        y: 12
-        width: 11
-        height: 12
+        x: 458
+        y: 116
+        width: 29
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -359,13 +413,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: FFRK_Warrior_sprites_15
+      name: ross_berserker_axe_18
       rect:
         serializedVersion: 2
-        x: 112
-        y: 12
-        width: 12
-        height: 12
+        x: 192
+        y: 78
+        width: 27
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -373,13 +427,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: FFRK_Warrior_sprites_16
+      name: ross_berserker_axe_19
       rect:
         serializedVersion: 2
-        x: 146
-        y: 12
-        width: 11
-        height: 10
+        x: 225
+        y: 78
+        width: 28
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -387,13 +441,139 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: FFRK_Warrior_sprites_17
+      name: ross_berserker_axe_20
       rect:
         serializedVersion: 2
-        x: 180
-        y: 12
-        width: 11
-        height: 12
+        x: 260
+        y: 83
+        width: 38
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ross_berserker_axe_21
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 84
+        width: 33
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ross_berserker_axe_22
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 84
+        width: 32
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ross_berserker_axe_23
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 83
+        width: 26
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ross_berserker_axe_24
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 79
+        width: 28
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ross_berserker_axe_25
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 86
+        width: 30
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ross_berserker_axe_26
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 10
+        width: 56
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ross_berserker_axe_27
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 8
+        width: 55
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ross_berserker_axe_28
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 8
+        width: 34
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ross_berserker_axe_29
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 9
+        width: 37
+        height: 59
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
