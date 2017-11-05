@@ -57,7 +57,7 @@ public class Attack : MonoBehaviour {
 		{
 			mMachinePtr = GameObject.Find("BattleSystem").GetComponent<CombatMachine>();
 			mUIptr = GameObject.Find("BattleSystem").GetComponent<UiController>(); 
-			mpBaseCharacterScript = this.transform.parent.gameObject.GetComponent<BaseCharacter> ();
+			mpBaseCharacterScript = gameObject.GetComponent<BaseCharacter> ();
 			if (mpBaseCharacterScript.getClass() == "Archer")
 				mRangedHitbox.radius = ARCHER_RANGE;
 			mInitialized = true;
@@ -133,7 +133,7 @@ public class Attack : MonoBehaviour {
             fill.enabled = false;
             active = false;
             mMachinePtr.recievePlayerMessage(BATTLE_MESSAGE);
-			mMachinePtr.recieveBattlingPlayer(this.transform.parent.gameObject, true, mIsRanged);				
+			mMachinePtr.recieveBattlingPlayer(this.gameObject, true, mIsRanged);				
             mIsBattling = true;
 
 			for (int i = 0; i < mTmpName.Length; i++)
@@ -143,8 +143,6 @@ public class Attack : MonoBehaviour {
 					GameObject.Find(mTmpName[i]).GetComponent<EnemyController>().resetColor();
 				}
 			}
-            mUIptr.finishedFunction();
-			mUIptr.finishedTurn();
         }
     }
     void detectEnemies()

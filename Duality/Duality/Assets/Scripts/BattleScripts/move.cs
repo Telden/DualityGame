@@ -31,12 +31,7 @@ public class move : MonoBehaviour
     bool mInitialized; //Determine if this has been the first activation  of the button
     
     //Scripts
-    UiController mUIptr; //Pointer to the UI controller
-
-    //TEMPORARY Variables
-    public Text tmpDistance; //TEMPORARY: Shows the distance between the unit and the mouse
-    public Text movementText; //Temporary: Shows the amount of movement left 
-    
+    UiController mUIptr; //Pointer to the UI controller 
 
 
     // Use this for initialization
@@ -78,7 +73,6 @@ public class move : MonoBehaviour
             mMaxMovement = mMovement;  //Update the max amount of movement left 
             movementGroup.enabled = false; //Disable the UI
             mActive = false;
-            mUIptr.finishedFunction();
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -167,10 +161,7 @@ public class move : MonoBehaviour
                 mMovement = 0;
             else if (mMovement > mMaxMovement)
                 mMovement = mMaxMovement;
-        }
-        movementText.text = "Movement " + mMovement.ToString();
-        tmpDistance.text = "Distance: " + mDistance.ToString();
-       
+        }       
     }
     //Update the movement bar with the amount of movement left
     private float updateMovementbar()

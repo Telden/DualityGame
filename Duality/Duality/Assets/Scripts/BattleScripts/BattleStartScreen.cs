@@ -9,7 +9,7 @@ public class BattleStartScreen : MonoBehaviour {
     public List<GameObject> mpSpawnLocations;
 	[SerializeField]
 	GameObject mSelectedUnit;
-
+	UiController mpUI;
 	ListManager mpListManager;
 	public GameObject mCharacterButton;
 	public RectTransform mParentPanel;
@@ -21,6 +21,7 @@ public class BattleStartScreen : MonoBehaviour {
 		Button tmp = mStartLevelButton.GetComponent<Button>();
 		tmp.onClick.AddListener(startBattle);
 		mpListManager = GameObject.Find("GameSystem").GetComponent<ListManager>();
+		mpUI = GameObject.Find("BattleSystem").GetComponent<UiController>(); 
 		mUnitsPosisionedleft = mpListManager.getBattleListCount();
 		showArmy();
 	}
@@ -81,13 +82,8 @@ public class BattleStartScreen : MonoBehaviour {
 
 	void startBattle()
 	{
-		if(mUnitsPosisionedleft == 0)
-		{
-			mStartBattleCanvas.enabled = false;
-			gameObject.GetComponent<UiController>().mBattleStarted =  true;
-		}
 
-
-
+		mStartBattleCanvas.enabled = false;
+		mpUI.mBattleStarted =  true;
 	}
 }

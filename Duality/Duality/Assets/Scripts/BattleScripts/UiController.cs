@@ -19,6 +19,7 @@ public class UiController : MonoBehaviour {
 	public Button BattleMagic;
 
 	// Stats Background
+	public Canvas mStatsCanvas;
     public Text uiName;
     public Text uiHealth;
     public Text uiAttack;
@@ -27,7 +28,6 @@ public class UiController : MonoBehaviour {
     public Text uiMagicDefense;
     public Text uiSpeed;
 	public Text uiClass;
-    public Image statsBackground;
     public Image mHealthBar;
     
 	public Slider uiHealthBar;
@@ -53,7 +53,6 @@ public class UiController : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        //Setting all the buttons off so that they do not show until the player moves over the character
         Button tmp = Movement.GetComponent<Button>();
         tmp.onClick.AddListener(moveCharacter);
         tmp = Attack.GetComponent<Button>();
@@ -63,7 +62,7 @@ public class UiController : MonoBehaviour {
 		tmp = Magic.GetComponent<Button> ();
 		tmp.onClick.AddListener (playerMagic);
 
-		//When in battle have only these  buttons appear
+
 		tmp = battleFlee.GetComponent<Button> ();
 		tmp.onClick.AddListener(playerFlee);
 		tmp = battleAttack.GetComponent<Button> ();
@@ -76,11 +75,8 @@ public class UiController : MonoBehaviour {
 
         //Make sure the ui does not appear yet
         attackMenu.enabled = false;
-
 		battleMenuCanvas.enabled = false;
-
-        //Disable the battleUI
-        statsBackground.enabled = false;
+		mStatsCanvas.enabled = false;
 
 
     }
@@ -127,16 +123,16 @@ public class UiController : MonoBehaviour {
 		if(!isBattling)
 		{
 			attackMenu.enabled = true;
-			statsBackground.enabled = true;
-			mHealthBar.enabled = true;
+			mStatsCanvas.enabled = true;
 		}
 
 		else
 		{
 			battleMenuCanvas.enabled = true;
-			statsBackground.enabled = true;
-			mHealthBar.enabled = true;
+			mStatsCanvas.enabled = true;
 		}
+		mCurrentPlayerUnit.GetComponent<SpriteRenderer>().color = new Color(255f, 255f, 0f, 1f);
+		active = true;
 
 	}
 
@@ -144,8 +140,8 @@ public class UiController : MonoBehaviour {
 	{
 		attackMenu.enabled = false;
 		battleMenuCanvas.enabled = false;
-		statsBackground.enabled = false;
-		mHealthBar.enabled = false;
+		mStatsCanvas.enabled = false;
+		mCurrentPlayerUnit.GetComponent<SpriteRenderer>().color = new Color(255f, 255f, 255f, 1f);
 	}
 		
 	/*************************************** PLAYER BUTTON FUNCTIONS *******************************/
@@ -192,6 +188,11 @@ public class UiController : MonoBehaviour {
 		mAttackScript.flee();
 	}
      		
+
+
+	/************************************************************************************/
+
+
 	public void finishedFunction()
 	{
 		OperationFinished = true;

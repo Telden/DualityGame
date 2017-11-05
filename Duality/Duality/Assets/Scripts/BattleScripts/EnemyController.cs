@@ -8,7 +8,6 @@ public class EnemyController : MonoBehaviour {
     bool targetable = false;
 	bool mHover = false;
 	bool mIsBattling = false;
-	public ParticleSystem parts;
 	public BoxCollider2D mAttackHitbox;
 	//Combat  Machine pointer
 	CombatMachine mMachinePtr;
@@ -17,7 +16,6 @@ public class EnemyController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		parts.Stop();
 		//set pointer to combat machine
 		mMachinePtr = GameObject.Find("BattleSystem").GetComponent<CombatMachine>();
 		mpListManager = GameObject.Find("GameSystem").GetComponent<ListManager>();
@@ -39,7 +37,6 @@ public class EnemyController : MonoBehaviour {
 		if (Input.GetMouseButtonDown (0))
 		{
 	//		Debug.Log ("You're now attacking this character");
-			parts.Play();
             resetColor();
 			mMachinePtr.recieveBattlingEnemy(this.gameObject, false, false);
 			targetable = false;
