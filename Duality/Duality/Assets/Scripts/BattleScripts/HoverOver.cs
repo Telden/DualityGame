@@ -9,11 +9,13 @@ public class HoverOver : MonoBehaviour
 	bool mIsInitialized = false;
 	private UiController mpUI;
 	private Attack mpAttackScript;
+	private BaseCharacter mpBaseCharacter;
 
     // Use this for initialization
     void Start()
     {
 		mpAttackScript = gameObject.GetComponent<Attack>();
+		mpBaseCharacter = gameObject.GetComponent<BaseCharacter>();
 
     }
 
@@ -44,7 +46,7 @@ public class HoverOver : MonoBehaviour
 	}
     void checkInput()
     {
-		if (Input.GetMouseButtonDown(0) && mClickable)
+		if (Input.GetMouseButtonDown(0) && mClickable && !mpBaseCharacter.mTurnFinished )
         {
 			mpUI.init(this.gameObject, mpAttackScript.mIsBattling);
         }

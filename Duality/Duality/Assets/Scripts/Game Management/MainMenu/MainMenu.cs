@@ -68,7 +68,7 @@ public class MainMenu : MonoBehaviour {
     {
         mMainMenuCanvas.enabled = false;
         mViewArmyCanvas.enabled = true;
-        mpViewArmy.init();
+        //mpViewArmy.init();
     }
 
     void missionSelect()

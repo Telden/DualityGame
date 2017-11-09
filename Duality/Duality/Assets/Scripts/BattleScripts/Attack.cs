@@ -187,7 +187,7 @@ public class Attack : MonoBehaviour {
 	public void beingAttacked()
 	{
 		mMachinePtr = GameObject.Find("BattleSystem").GetComponent<CombatMachine>();
-		mMachinePtr.recieveBattlingPlayer(this.transform.parent.gameObject, false, mIsRanged);				
+		mMachinePtr.recieveBattlingPlayer(this.gameObject, false, mIsRanged);				
 		mIsBattling = true;
 	}
 

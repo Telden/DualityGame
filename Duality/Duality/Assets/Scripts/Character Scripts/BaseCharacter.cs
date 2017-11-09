@@ -29,10 +29,14 @@ public class BaseCharacter : MonoBehaviour
     public bool mLoaded = false;
     public bool mSelected = false;
 
+	public bool mTurnFinished = false;
+
+	private move mpMoveScript;
 
     void Start()
     {
         DontDestroyOnLoad(gameObject.transform);
+		mpMoveScript = gameObject.GetComponent<move>();
     }
 
     void Update()
@@ -51,6 +55,7 @@ public class BaseCharacter : MonoBehaviour
         if(!mLoaded)
         {
             mResetHealth = mHealth;
+			mLoaded = true;
         }
             
     }
@@ -173,4 +178,16 @@ public class BaseCharacter : MonoBehaviour
 		mMovemnt = mResetMovement;
 	}
 
+	public void finishedTurn()
+	{
+		gameObject.GetComponent<SpriteRenderer>().color = new Color(255f, 0f, 0f, 0.5f);
+		mTurnFinished = true;
+	}
+
+	public void resetTurn()
+	{
+		gameObject.GetComponent<SpriteRenderer>().color = new Color(255f, 255f, 255f, 1f);
+		mTurnFinished = false;
+		mpMoveScript.reset();
+	}
 }

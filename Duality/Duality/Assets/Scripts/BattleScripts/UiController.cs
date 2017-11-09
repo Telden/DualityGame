@@ -102,37 +102,51 @@ public class UiController : MonoBehaviour {
 			disableUi();
 			active = false;
 		}
+		if(Input.GetKeyDown(KeyCode.R))
+		{
+			mBaseScript.setHealth(mBaseScript.getHealth() - 2);
+		}
 	}
+
+	public void battleInit()
+	{
+		mMachinePtr = GameObject.Find("BattleSystem").GetComponent<CombatMachine>();
+	}
+
 
 	public void init(GameObject unitObj, bool isBattling)
 	{
-		mCurrentPlayerUnit = unitObj;
-		mAttackScript = mCurrentPlayerUnit.GetComponent<Attack>();
-		mMoveScript = mCurrentPlayerUnit.GetComponent<move>();
-		mBaseScript = mCurrentPlayerUnit.GetComponent<BaseCharacter>();
-
-		uiName.text = "Name: " + mBaseScript.getName();
-		uiHealth.text = "Health: " + mBaseScript.getHealth().ToString();
-		uiAttack.text = "Attack: " + mBaseScript.getAttack().ToString();
-		uiDefense.text = "Defense: " + mBaseScript.getDefense().ToString();
-		uiMagic.text = "Magic: " + mBaseScript.getMagic().ToString();
-		uiMagicDefense.text = "Magic Defense: " + mBaseScript.getMagicDefense().ToString();
-		uiSpeed.text = "Speed: " + mBaseScript.getSpeed().ToString();
-		uiClass.text = "Class: " + mBaseScript.getClass();
-
-		if(!isBattling)
+		if(!active)
 		{
-			attackMenu.enabled = true;
-			mStatsCanvas.enabled = true;
+			mCurrentPlayerUnit = unitObj;
+			mAttackScript = mCurrentPlayerUnit.GetComponent<Attack>();
+			mMoveScript = mCurrentPlayerUnit.GetComponent<move>();
+			mBaseScript = mCurrentPlayerUnit.GetComponent<BaseCharacter>();
+
+			uiName.text = "Name: " + mBaseScript.getName();
+			uiHealth.text = "Health: " + mBaseScript.getHealth().ToString();
+			uiAttack.text = "Attack: " + mBaseScript.getAttack().ToString();
+			uiDefense.text = "Defense: " + mBaseScript.getDefense().ToString();
+			uiMagic.text = "Magic: " + mBaseScript.getMagic().ToString();
+			uiMagicDefense.text = "Magic Defense: " + mBaseScript.getMagicDefense().ToString();
+			uiSpeed.text = "Speed: " + mBaseScript.getSpeed().ToString();
+			uiClass.text = "Class: " + mBaseScript.getClass();
+
+			if(!isBattling)
+			{
+				attackMenu.enabled = true;
+				mStatsCanvas.enabled = true;
+			}
+
+			else
+			{
+				battleMenuCanvas.enabled = true;
+				mStatsCanvas.enabled = true;
+			}
+			mCurrentPlayerUnit.GetComponent<SpriteRenderer>().color = new Color(255f, 255f, 0f, 1f);
+			active = true;
 		}
 
-		else
-		{
-			battleMenuCanvas.enabled = true;
-			mStatsCanvas.enabled = true;
-		}
-		mCurrentPlayerUnit.GetComponent<SpriteRenderer>().color = new Color(255f, 255f, 0f, 1f);
-		active = true;
 
 	}
 
@@ -177,7 +191,7 @@ public class UiController : MonoBehaviour {
 		disableUi();
 		active = false;
 		mMachinePtr.recievePlayerMessage(4);
-		finishedTurn();
+		mBaseScript.finishedTurn();
 	}
 
 	void playerFlee()
@@ -198,24 +212,12 @@ public class UiController : MonoBehaviour {
 		OperationFinished = true;
 	}
 
-    public void finishedTurn()
-    {
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(255f, 0f, 0f, 0.5f);
-        turnFinished = true;
-    }
 
-   
-    public void resetTurn()
-    {
-		gameObject.GetComponent<SpriteRenderer>().color = new Color(255f, 255f, 255f, 1f);
-        turnFinished = false;
-		active = false;
-		mMoveScript.reset();
-    }
 
 
     private float updateHealthBar()
     {
+		uiHealth.text = "Health: " + mBaseScript.getHealth().ToString();
         return (mBaseScript.getHealth() - 0) * (1 - 0) / (mBaseScript.getMaxHealth() - 0) + 0;
     }
 

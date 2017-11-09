@@ -30,7 +30,7 @@ public class CombatMachine : MonoBehaviour {
     //The moves left
 	int mPlayerMoves = 0;
 	int mEnemyMoves = 0;
-    
+	bool mHasStarted = false;
 
     // Script to the list manager
     ListManager mpListManager;
@@ -40,12 +40,12 @@ public class CombatMachine : MonoBehaviour {
 		mpListManager = GameObject.Find("GameSystem").GetComponent<ListManager>();
        
 		mpBattleList = new List<BattleObject>();
-        mPlayerMoves = mpListManager.getBattleListCount();
+       
     }
 	
-	
+
 	void Update () {
-		if (mPlayerMoves == 0) {
+		if (mPlayerMoves == 0 && mHasStarted) {
 			//Switch to enemy phase
 			EnemyTurn();
 			resetPlayers();
@@ -59,6 +59,14 @@ public class CombatMachine : MonoBehaviour {
 
 		}
 	}
+
+	public void init()
+	{
+		mPlayerMoves = mpListManager.getBattleListCount();
+		mHasStarted = true;
+	}
+
+
 
     public void recievePlayerMessage(int message)
     {
@@ -279,11 +287,11 @@ public class CombatMachine : MonoBehaviour {
 
 	void resetPlayers()
 	{
-		UiController iter;
+		BaseCharacter iter;
 
 		for(int i = 0; i < mpListManager.getBattleListCount(); i++)
 		{
-			iter = mpListManager.getBattleUnit(i).GetComponent<UiController>();
+			iter = mpListManager.getBattleUnit(i).GetComponent<BaseCharacter>();
 			iter.resetTurn();
 		}
 		mPlayerMoves = mpListManager.getBattleListCount();

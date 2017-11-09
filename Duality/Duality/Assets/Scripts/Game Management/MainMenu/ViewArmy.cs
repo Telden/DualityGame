@@ -36,7 +36,7 @@ public class ViewArmy : MonoBehaviour {
     }
 
     //Function to be called from the main menu script
-    public void init()
+   /* public void init()
     {
 		if(!mInitialized)
 		{
@@ -45,13 +45,13 @@ public class ViewArmy : MonoBehaviour {
 
         mActive = true;
         mTotalCharacters = mpListManager.getArmyListSize();
-        showArmy();
+        //showArmy();
 
     }
 
     //Load and create all of the character buttons
-    void showArmy()
-    {
+    //void showArmy()
+    /*{
         
         for (int i = 0; i < mTotalCharacters; i++)
         {
@@ -74,7 +74,7 @@ public class ViewArmy : MonoBehaviour {
 
             tempButton.onClick.AddListener(() => ButtonClicked(tempInt));
         }
-    }
+    }*/
 
     void ButtonClicked(int buttonNo)
     {

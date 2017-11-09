@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class SpawnPointScript : MonoBehaviour {
 
-	public BattleStartScreen mpBattleScreen;
+	public LoadCharacters mpLoadCharacters;
 	ListManager mpListManager;
 	bool mIsHoveredOver = false;
 	Color mResetColor;
 	[SerializeField]
 	GameObject mSelectedUnit;
+	public GameObject mSpawnPoints;
 
 	// Use this for initialization
 	void Start () {
@@ -43,9 +44,10 @@ public class SpawnPointScript : MonoBehaviour {
 		{
 			if(Input.GetMouseButtonDown(0))
 			{
-				mpBattleScreen.getSelectedUnit().transform.position = gameObject.transform.position;
+				mpLoadCharacters.getSelectedUnit().transform.position = gameObject.transform.position;
 				gameObject.GetComponent<SpriteRenderer>().enabled = false;
 				gameObject.GetComponent<BoxCollider2D>().enabled = false;
+				//mSpawnPoints.SetActive(false);
 			}
 		}
 	}
