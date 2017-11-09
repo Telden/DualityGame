@@ -275,6 +275,11 @@ Prefab:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 1.14
       objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mClass
+      value: Warrior
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f8fd680c8091cd4798e9ecbbdac46b0, type: 2}
   m_IsPrefabParent: 0
@@ -385,6 +390,11 @@ Prefab:
         type: 2}
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 1.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mClass
+      value: Warrior
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f8fd680c8091cd4798e9ecbbdac46b0, type: 2}
@@ -590,6 +600,11 @@ Prefab:
         type: 2}
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 1.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mClass
+      value: Warrior
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f8fd680c8091cd4798e9ecbbdac46b0, type: 2}
@@ -884,7 +899,7 @@ Prefab:
     - target: {fileID: 224011621542463128, guid: 70af745d5ef3ac84e95956fd4282efa9,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0.3812782
+      value: 0.76185846
       objectReference: {fileID: 0}
     - target: {fileID: 224011621542463128, guid: 70af745d5ef3ac84e95956fd4282efa9,
         type: 2}
@@ -894,7 +909,7 @@ Prefab:
     - target: {fileID: 224011621542463128, guid: 70af745d5ef3ac84e95956fd4282efa9,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0.6187219
+      value: 0.99930215
       objectReference: {fileID: 0}
     - target: {fileID: 224568134287746772, guid: 70af745d5ef3ac84e95956fd4282efa9,
         type: 2}
@@ -1299,12 +1314,12 @@ Prefab:
     - target: {fileID: 224656968794530672, guid: 70af745d5ef3ac84e95956fd4282efa9,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -237.29999
+      value: -997.9999
       objectReference: {fileID: 0}
     - target: {fileID: 224656968794530672, guid: 70af745d5ef3ac84e95956fd4282efa9,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 1998.7897
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114687218993980892, guid: 70af745d5ef3ac84e95956fd4282efa9,
         type: 2}
@@ -1523,6 +1538,11 @@ Prefab:
         type: 2}
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 1.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 114472703507785506, guid: 5f8fd680c8091cd4798e9ecbbdac46b0,
+        type: 2}
+      propertyPath: mClass
+      value: Warrior
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f8fd680c8091cd4798e9ecbbdac46b0, type: 2}

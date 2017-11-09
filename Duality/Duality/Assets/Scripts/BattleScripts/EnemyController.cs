@@ -11,14 +11,16 @@ public class EnemyController : MonoBehaviour {
 	public BoxCollider2D mAttackHitbox;
 	//Combat  Machine pointer
 	CombatMachine mMachinePtr;
-
+	UiController mpUI;
     ListManager mpListManager;
-
+	bool mUiActive = false;
 	// Use this for initialization
 	void Start () {
 		//set pointer to combat machine
 		mMachinePtr = GameObject.Find("BattleSystem").GetComponent<CombatMachine>();
+		mpUI = GameObject.Find("BattleSystem").GetComponent<UiController>();
 		mpListManager = GameObject.Find("GameSystem").GetComponent<ListManager>();
+
 		mMachinePtr.registerEnemy(this.gameObject);
     }
 	
@@ -65,7 +67,8 @@ public class EnemyController : MonoBehaviour {
 
 	void OnMouseEnter()
 	{
-		
+		mUiActive = mpUI.initEnemyUI(this.gameObject, mIsBattling);
+
 		if (targetable) 
 		{
 			gameObject.GetComponent<SpriteRenderer> ().color = new Color (0f, 255f, 0f, 1f);
@@ -76,6 +79,14 @@ public class EnemyController : MonoBehaviour {
 
 	void OnMouseExit()
 	{
+		if(mUiActive)
+		{
+			mpUI.exitUI();
+			mUiActive = false;
+		}
+		 	
+		gameObject.GetComponent<SpriteRenderer> ().color = new Color (255f, 255f, 255f, 1f);
+
 		if(targetable)
 			gameObject.GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 1f);
 		mHover = false;

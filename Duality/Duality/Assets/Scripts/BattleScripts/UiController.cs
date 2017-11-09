@@ -151,6 +151,30 @@ public class UiController : MonoBehaviour {
 
 	}
 
+	public bool initEnemyUI(GameObject unitObj, bool isBattling)
+	{
+		if(!active && mBattleStarted)
+		{
+			mCurrentEnemy = unitObj;
+			mBaseScript = mCurrentEnemy.GetComponent<BaseCharacter>();
+
+			uiName.text = "Name: " + mBaseScript.getName();
+			uiHealth.text = "Health: " + mBaseScript.getHealth().ToString();
+			uiAttack.text = "Attack: " + mBaseScript.getAttack().ToString();
+			uiDefense.text = "Defense: " + mBaseScript.getDefense().ToString();
+			uiMagic.text = "Magic: " + mBaseScript.getMagic().ToString();
+			uiMagicDefense.text = "Magic Defense: " + mBaseScript.getMagicDefense().ToString();
+			uiSpeed.text = "Speed: " + mBaseScript.getSpeed().ToString();
+			uiClass.text = "Class: " + mBaseScript.getClass();
+			mCurrentEnemy.GetComponent<SpriteRenderer>().color = new Color(255f, 255f, 0f, 1f);
+			active = true;
+			mStatsCanvas.enabled = true;
+			return true;
+		}
+
+		return false;
+	}
+
 	void disableUi()
 	{
 		attackMenu.enabled = false;
@@ -223,4 +247,11 @@ public class UiController : MonoBehaviour {
     }
 
    
+	public void exitUI()
+	{
+		attackMenu.enabled = false;
+		battleMenuCanvas.enabled = false;
+		mStatsCanvas.enabled = false;
+		active = false;
+	}
 }
