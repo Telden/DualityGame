@@ -55,7 +55,7 @@ public class EnemyController : MonoBehaviour {
     {
 //		Debug.Log ("Reseting color");
 		gameObject.GetComponent<SpriteRenderer> ().color = new Color (255f, 255f, 255f, 1f);
-		//targetable = false;
+		targetable = false;
        
     }
 	public void recieveMessage()
@@ -151,4 +151,7 @@ public class EnemyController : MonoBehaviour {
 
 		}
 	}
+
+
+
 }

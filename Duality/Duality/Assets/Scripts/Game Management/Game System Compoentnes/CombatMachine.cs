@@ -31,7 +31,7 @@ public class CombatMachine : MonoBehaviour {
 	int mPlayerMoves = 0;
 	int mEnemyMoves = 0;
 	bool mHasStarted = false;
-
+	string [] resetNames;
     // Script to the list manager
     ListManager mpListManager;
 
@@ -53,7 +53,7 @@ public class CombatMachine : MonoBehaviour {
 
 		if(playerBattleFlag && enemyBattleFlag)
 		{
-           
+			resetEnemyTargets();
 			loadBattle();
 			conductBattle();
 
@@ -89,14 +89,14 @@ public class CombatMachine : MonoBehaviour {
         mEnemyMoves++;
     }
 
-	public void recieveBattlingPlayer(GameObject playerObj, bool isInitiating, bool isRanged)
+	public void recieveBattlingPlayer(GameObject playerObj, bool isInitiating, bool isRanged, string [] mpNames)
 	{
 		print (playerObj.GetComponent<BaseCharacter>().getName());
 		mPlayerUnit = playerObj;
 		mPLayerInitiating = isInitiating;
 		mPLayerBattleRanged = isRanged;
 		playerBattleFlag = true;
-        
+		resetNames = mpNames;
 	
     }
 	public void recieveBattlingEnemy(GameObject enemyObj, bool isInitiating, bool isRanged)
@@ -336,6 +336,18 @@ public class CombatMachine : MonoBehaviour {
 		}
 			
 	}
+
+	void resetEnemyTargets()
+	{
+		for (int i = 0; i < resetNames.Length; i++)
+		{
+			if (resetNames[i] != null)
+			{
+				GameObject.Find(resetNames[i]).GetComponent<EnemyController>().resetColor();
+			}
+		}
+	}
+
 }
 
     

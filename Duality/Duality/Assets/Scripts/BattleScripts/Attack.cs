@@ -133,16 +133,16 @@ public class Attack : MonoBehaviour {
             fill.enabled = false;
             active = false;
             mMachinePtr.recievePlayerMessage(BATTLE_MESSAGE);
-			mMachinePtr.recieveBattlingPlayer(this.gameObject, true, mIsRanged);				
+			mMachinePtr.recieveBattlingPlayer(this.gameObject, true, mIsRanged, mTmpName);				
             mIsBattling = true;
 
-			for (int i = 0; i < mTmpName.Length; i++)
+		/*	for (int i = 0; i < mTmpName.Length; i++)
 			{
 				if (mTmpName[i] != null)
 				{
 					GameObject.Find(mTmpName[i]).GetComponent<EnemyController>().resetColor();
 				}
-			}
+			}*/
         }
     }
     void detectEnemies()
@@ -187,7 +187,7 @@ public class Attack : MonoBehaviour {
 	public void beingAttacked()
 	{
 		mMachinePtr = GameObject.Find("BattleSystem").GetComponent<CombatMachine>();
-		mMachinePtr.recieveBattlingPlayer(this.gameObject, false, mIsRanged);				
+		mMachinePtr.recieveBattlingPlayer(this.gameObject, false, mIsRanged, mTmpName);				
 		mIsBattling = true;
 	}
 

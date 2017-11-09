@@ -105,6 +105,7 @@ public class UiController : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.R))
 		{
 			mBaseScript.setHealth(mBaseScript.getHealth() - 2);
+			mBattleStarted = true;
 		}
 	}
 
@@ -116,7 +117,7 @@ public class UiController : MonoBehaviour {
 
 	public void init(GameObject unitObj, bool isBattling)
 	{
-		if(!active)
+		if(!active && mBattleStarted)
 		{
 			mCurrentPlayerUnit = unitObj;
 			mAttackScript = mCurrentPlayerUnit.GetComponent<Attack>();
