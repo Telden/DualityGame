@@ -30,6 +30,7 @@ public class HoverOver : MonoBehaviour
 
     void OnMouseEnter()
     {
+		print("mouse over");
 		if(!mIsInitialized)
 		{
 			mpUI = GameObject.Find("BattleSystem").GetComponent<UiController>(); 

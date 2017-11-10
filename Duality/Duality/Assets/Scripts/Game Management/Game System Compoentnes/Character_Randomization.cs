@@ -11,7 +11,12 @@ public class Character_Randomization : MonoBehaviour {
     public TextAsset firstNames; //Text asset that contains all the possible first names
     public TextAsset lastNames; //Text asset that contains all the possible last names
 	public GameObject PlayerObject;
-    public ListManager mpListManager; //Script to the list manager 
+    public ListManager mpListManager; //Script to the list manager
+
+	public RuntimeAnimatorController mArcherAnimation;
+	public RuntimeAnimatorController mWizardAnimation;
+	public RuntimeAnimatorController mWarrioAnimation;
+
     public Sprite mArcherSprite;
     public Sprite mWizardSprite;
     public Sprite mWarriorSprite;
@@ -74,15 +79,15 @@ public class Character_Randomization : MonoBehaviour {
             {
                 case 1:
                     newCharacter.setClass("Warrior");
-                    newPlayer.GetComponent<SpriteRenderer>().sprite = mWarriorSprite;
+				newPlayer.GetComponent<Animator>().runtimeAnimatorController = mWarrioAnimation;
                     break;
                 case 2:
                     newCharacter.setClass("Archer");
-                    newPlayer.GetComponent<SpriteRenderer>().sprite = mArcherSprite;
+				newPlayer.GetComponent<Animator>().runtimeAnimatorController = mArcherAnimation;
                     break;
                 case 3:
                     newCharacter.setClass("Wizard");
-                    newPlayer.GetComponent<SpriteRenderer>().sprite = mWizardSprite;
+				newPlayer.GetComponent<Animator>().runtimeAnimatorController = mWizardAnimation;
                     break;
                 default:
                     print("4 happened ");

@@ -6,6 +6,7 @@ using UnityEngine;
 public class CombatMachine : MonoBehaviour {
 
     //Enemy army values
+	[SerializeField]
 	List<GameObject> mpEnemyList = new List<GameObject>();
 
     //List<GameObject[]> mpBattleList;
@@ -234,8 +235,11 @@ public class CombatMachine : MonoBehaviour {
 			}
 
 			if (!tmpEnemy.isDead)
+			{
 				if (tmpEnemy.getAttack () - tmpPlayer.getDefense () > 0)
-				tmpPlayer.setHealth (tmpPlayer.getHealth () - (tmpEnemy.getAttack () - tmpPlayer.getDefense ()));
+					tmpPlayer.setHealth (tmpPlayer.getHealth () - (tmpEnemy.getAttack () - tmpPlayer.getDefense ()));
+			}
+				
 			else if(tmpEnemy.isDead)
 				removeAndDelete(mpBattleList[i].getEnemyObject());
 		}
@@ -316,7 +320,7 @@ public class CombatMachine : MonoBehaviour {
 	void loadMainMenu()
 	{
 		mpListManager.clearBattleList();
-		SceneManager.LoadScene(1);
+		SceneManager.LoadScene(0);
 	}
 
 	public void initiateBattle()

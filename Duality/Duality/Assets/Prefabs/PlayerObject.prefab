@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 114474102764684300}
   - component: {fileID: 120573187814951560}
   - component: {fileID: 114673785654929976}
+  - component: {fileID: 95197062413934656}
   m_Layer: 0
   m_Name: PlayerObject
   m_TagString: Untagged
@@ -158,7 +159,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1969862544799216}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 362.86072, y: 596.71594, z: 0}
+  m_LocalPosition: {x: -1.01, y: -9, z: 0}
   m_LocalScale: {x: 3.7452612, y: 3.7452612, z: 3.7452612}
   m_Children:
   - {fileID: 224534473327614568}
@@ -231,6 +232,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.56438506, y: 0.56438506}
   m_EdgeRadius: 0
+--- !u!95 &95197062413934656
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1969862544799216}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114197566030887668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -328,6 +346,7 @@ MonoBehaviour:
   mClass: 
   mLoaded: 0
   mSelected: 0
+  mTurnFinished: 0
 --- !u!114 &114474102764684300
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -92,7 +92,7 @@ public class Attack : MonoBehaviour {
 		{
 			mMachinePtr = GameObject.Find("BattleSystem").GetComponent<CombatMachine>();
 			mUIptr = GameObject.Find("BattleSystem").GetComponent<UiController>(); 
-			mpBaseCharacterScript = this.transform.parent.gameObject.GetComponent<BaseCharacter> ();
+			mpBaseCharacterScript = this.gameObject.GetComponent<BaseCharacter> ();
 			if (mpBaseCharacterScript.getClass() == "Wizard")
 				mRangedHitbox.radius = MAGE_RANGE;
 			mInitialized = true;
@@ -135,14 +135,8 @@ public class Attack : MonoBehaviour {
             mMachinePtr.recievePlayerMessage(BATTLE_MESSAGE);
 			mMachinePtr.recieveBattlingPlayer(this.gameObject, true, mIsRanged, mTmpName);				
             mIsBattling = true;
+			mpBaseCharacterScript.finishedTurn();
 
-		/*	for (int i = 0; i < mTmpName.Length; i++)
-			{
-				if (mTmpName[i] != null)
-				{
-					GameObject.Find(mTmpName[i]).GetComponent<EnemyController>().resetColor();
-				}
-			}*/
         }
     }
     void detectEnemies()
