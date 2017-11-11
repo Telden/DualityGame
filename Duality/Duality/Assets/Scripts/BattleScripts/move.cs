@@ -25,6 +25,11 @@ public class move : MonoBehaviour
     Vector2 mCharacterPos; //The unit's 2D position
     Vector2 mCursorPosition; //The mouse's 2D position
 
+	Vector2 mPlayerPos;
+	Vector2 mTargetPos;
+	float interval = 0.1f;
+	[SerializeField]
+	float mTime = 0;
 
     bool mActive = false; //determine if the movement script should be funcitoning
     bool mClampDistance = false; //Used if the mouse is farther apart than the movement allowed by the player
@@ -53,6 +58,18 @@ public class move : MonoBehaviour
             checkInput();
         }
 
+		if(mPlayerPos != mTargetPos)
+		{
+			Vector2 tmp = Vector2.Lerp(transform.position, mTargetPos, mTime);
+			transform.position = tmp;
+			mTime += interval * Time.deltaTime;
+
+			if(transform.position.x >= mTargetPos.x -1 && transform.position.x <= mTargetPos.x || transform.position.x <= mTargetPos.x + 1 && transform.position.x >= mTargetPos.x )
+				gameObject.transform.position = mTargetPos;
+		}
+		else
+			mTime = 0;
+
     }
 
     void checkInput()
@@ -61,10 +78,16 @@ public class move : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             if (mClampDistance)
-                gameObject.transform.position = mRadiusPosition; //If the mouse is farther than the movement left, moves to the position with the maximum movment
+			{
+				mTargetPos = mRadiusPosition; //If the mouse is farther than the movement left, moves to the position with the maximum movment
+				mPlayerPos.x = transform.position.x;
+				mPlayerPos.y = transform.position.y;
+
+			}
+				
             else
             {
-                gameObject.transform.position = mCursorPosition; //If the mouse is less than the movememnt left move to the mouse position
+				mTargetPos = mCursorPosition; //If the mouse is less than the movememnt left move to the mouse position
             }
              
 
@@ -82,10 +105,7 @@ public class move : MonoBehaviour
             mActive = false;
 			mUIptr.finishedFunction();
         }
-        else if (Input.GetKeyDown(KeyCode.Minus))
-        {
-            updateDistance();
-        }
+
     }
 
     public void init()
