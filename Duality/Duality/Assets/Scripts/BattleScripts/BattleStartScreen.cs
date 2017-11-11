@@ -4,10 +4,10 @@ using UnityEngine.UI;
 using UnityEngine;
 
 public class BattleStartScreen : MonoBehaviour {
-
-    public Canvas mStartBattleCanvas;
-	public Canvas mScrollableListCanvas;
 	UiController mpUI;
+	ListManager mpListManager;
+	public Canvas mStartBattleCanvas;
+	public Canvas mScrollableListCanvas;
 	public Button mStartLevelButton;
 	public CombatMachine mpCombatMachine;
 	public LoadCharacters mpLoadCharacters;
@@ -16,6 +16,7 @@ public class BattleStartScreen : MonoBehaviour {
 	void Start () {
 		Button tmp = mStartLevelButton.GetComponent<Button>();
 		mpUI = GameObject.Find("BattleSystem").GetComponent<UiController>(); 
+		mpListManager = GameObject.Find("GameSystem").GetComponent<ListManager>();
 		tmp.onClick.AddListener(startBattle);
 
 
@@ -31,6 +32,11 @@ public class BattleStartScreen : MonoBehaviour {
 			mScrollableListCanvas.enabled = false;
 			mStartBattleCanvas.enabled = false;
 			mpUI.mBattleStarted =  true;
+
+			for(int i = 0; i < mpListManager.getBattleListCount(); i++)
+			{
+				mpListManager.getBattleUnit(i).GetComponent<HoverOver>().mBattleStarted = true;
+			}
 		}
 
 	}

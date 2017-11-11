@@ -11,12 +11,14 @@ public class UiController : MonoBehaviour {
     public Button Attack;
 	public Button Magic;
     public Button Stay;
+	public Button Exit;
 
 	//Battle Menu
 	public Canvas battleMenuCanvas;
 	public Button battleFlee;
 	public Button battleAttack;
 	public Button BattleMagic;
+	public Button battleExit;
 
 	// Stats Background
 	public Canvas mStatsCanvas;
@@ -61,6 +63,7 @@ public class UiController : MonoBehaviour {
         tmp.onClick.AddListener(playerStay);
 		tmp = Magic.GetComponent<Button> ();
 		tmp.onClick.AddListener (playerMagic);
+		Exit.GetComponent<Button>().onClick.AddListener(disableUi);
 
 
 		tmp = battleFlee.GetComponent<Button> ();
@@ -69,6 +72,7 @@ public class UiController : MonoBehaviour {
 		tmp.onClick.AddListener(playerAttack);
 		tmp = BattleMagic.GetComponent<Button> ();
 		tmp.onClick.AddListener(playerMagic);
+		battleExit.GetComponent<Button>().onClick.AddListener(disableUi);
 
 
 
@@ -133,7 +137,13 @@ public class UiController : MonoBehaviour {
 			uiSpeed.text = "Speed: " + mBaseScript.getSpeed().ToString();
 			uiClass.text = "Class: " + mBaseScript.getClass();
 
-			if(!isBattling)
+			if(mBaseScript.mTurnFinished)
+			{
+				mStatsCanvas.enabled = true;
+				return;
+			}
+
+			else if(!isBattling)
 			{
 				attackMenu.enabled = true;
 				mStatsCanvas.enabled = true;
@@ -150,6 +160,8 @@ public class UiController : MonoBehaviour {
 
 
 	}
+
+
 
 	public bool initEnemyUI(GameObject unitObj, bool isBattling)
 	{
@@ -175,12 +187,18 @@ public class UiController : MonoBehaviour {
 		return false;
 	}
 
-	void disableUi()
+	public void disableUi()
 	{
+		active = false;
 		attackMenu.enabled = false;
 		battleMenuCanvas.enabled = false;
 		mStatsCanvas.enabled = false;
-		mCurrentPlayerUnit.GetComponent<SpriteRenderer>().color = new Color(255f, 255f, 255f, 1f);
+		if(!mBaseScript.mTurnFinished)
+		{
+			mCurrentPlayerUnit.GetComponent<SpriteRenderer>().color = new Color(255f, 255f, 255f, 1f);
+			mCurrentPlayerUnit.GetComponent<HoverOver>().mActive = false;
+		}
+
 	}
 		
 	/*************************************** PLAYER BUTTON FUNCTIONS *******************************/
